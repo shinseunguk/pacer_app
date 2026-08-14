@@ -62,6 +62,34 @@ flutter test         # 단위·위젯 테스트
 
 ---
 
+## 환경 / Flavor
+- 환경 분리: **dev / prod**(필요 시 staging). 진입점 또는 `--dart-define`으로 구성.
+- 환경별 주입값: API base URL, 소셜 키(카카오 등). 코드에 **하드코딩 금지**.
+- 실행 예: `flutter run --dart-define-from-file=env/dev.json` (env/*.json은 `.gitignore`, 예시는 `env/dev.example.json`).
+- 빌드 대상: iOS/Android 각각 dev/prod 번들 ID·앱 아이콘 구분 검토.
+
+## 국제화 (l10n)
+- `flutter_localizations` + `intl`, ARB 파일(`lib/l10n/app_ko.arb`, `app_en.arb`).
+- 지원 로케일: **한국어(기본) / 영어**. (앱 UI 로컬라이즈 — 면접 "진행 언어" 선택과는 별개 개념)
+- 모든 사용자 노출 문자열은 ARB를 통해서만. 화면에 문자열 하드코딩 금지.
+
+## 네이티브 플랫폼 채널
+> 기획서 명시 기능이자 포트폴리오 목표. 최소 하나는 실제 네이티브로 구현한다.
+
+- 대상: **홈 위젯**(오늘 남은 무료 질문·스트릭) / **Live Activity**(면접 진행 2/5) / **로컬 푸시**(면접 리마인더).
+- `MethodChannel` 네이밍: `com.pacer.pacer_app/<feature>` (예: `/widget`, `/live_activity`, `/notification`).
+- 네이티브 구현은 `ios/`·`android/`에, Dart 래퍼는 `core/native/`에 둔다.
+
+## 테스트·네이밍·금지 상세
+- **테스트 우선순위**: UseCase > Notifier(상태) > Repository > 위젯. Mock은 `mocktail`.
+- **네이밍**: Provider `<name>Provider`, 화면 `<Feature>Screen`, Notifier `<Feature>Notifier`, UseCase `<Verb><Noun>UseCase`.
+- **금지**:
+  - `print` 사용 금지 → `logger` 사용. **릴리스 빌드에서 민감정보(답변·토큰) 로그 금지**.
+  - null assertion `!` 남용 금지 → `?.`·early return·기본값 사용.
+  - 전역 가변 상태 금지. 비즈니스 로직을 위젯에 직접 작성 금지(→ Notifier/UseCase).
+
+---
+
 ## 커밋 규칙
 전역 `commit-convention` + 상위 `Pacer/CLAUDE.md` 워크플로우를 따른다.
 
