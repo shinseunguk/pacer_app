@@ -1,0 +1,175 @@
+{
+  "@@locale": "en",
+  "appName": "Pacer",
+  "appTagline": "Don't run the interview alone",
+  "commonNext": "Next",
+  "commonRetry": "Retry",
+  "commonStart": "Start",
+  "commonCancel": "Cancel",
+  "commonConfirm": "OK",
+  "commonSkip": "Skip",
+  "commonLoadFailed": "Couldn't load this.",
+  "loginKakao": "Start with Kakao",
+  "loginApple": "Start with Apple",
+  "loginDevMock": "Continue with a test account (dev)",
+  "loginTermsNotice": "By signing in you agree to the Terms of Service and Privacy Policy.",
+  "loginFailed": "Sign-in failed. Please try again.",
+  "onboardingNicknameTitle": "What should we call you?",
+  "onboardingNicknameDescription": "The interviewer will use this name. You can change it later.",
+  "onboardingNicknameHint": "Nickname (2-12 characters)",
+  "onboardingNicknameEmpty": "Please enter a nickname.",
+  "onboardingNicknameTooLong": "Nicknames can be up to 20 characters.",
+  "consentTitle": "Please accept the terms",
+  "consentAll": "Accept all",
+  "consentTerms": "[Required] Terms of Service",
+  "consentPrivacy": "[Required] Personal data collection and use",
+  "consentLlm": "[Required] AI processing of interview content",
+  "consentLlmDescription": "Job posts, career details and answers you enter are sent to an AI model to generate questions and feedback.",
+  "consentMarketing": "[Optional] Marketing updates",
+  "consentRequired": "You need to accept every required item to start.",
+  "homeGreeting": "Hello, {nickname}",
+  "@homeGreeting": {
+    "placeholders": {
+      "nickname": {
+        "type": "String"
+      }
+    }
+  },
+  "homeQuotaRemaining": "{remaining} questions left today",
+  "@homeQuotaRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "homeStartInterview": "Start a new interview",
+  "homeRecentTitle": "Recent interviews",
+  "homeHistory": "History",
+  "homeEmptyHistory": "No interviews yet. Start your first one.",
+  "homeSignOut": "Sign out",
+  "prepTitle": "Interview setup",
+  "prepSourcePaste": "Paste a job post",
+  "prepSourceTemplate": "Start from a role",
+  "prepPostingLabel": "Job posting",
+  "prepPostingHint": "Paste the responsibilities and requirements.",
+  "prepPostingEmpty": "Please enter the job posting.",
+  "prepSelectJob": "Choose a role",
+  "prepSelectJobEmpty": "Pick a role or type your own.",
+  "prepSelectedJob": "Selected role: {role}",
+  "@prepSelectedJob": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "jobTitle": "Choose a role",
+  "jobCustomLabel": "Not listed? Type it in",
+  "jobCustomHint": "e.g. Robotics software",
+  "jobCustomApply": "Use this role",
+  "applicantTitle": "About you",
+  "applicantDescription": "Adding your experience makes the questions more tailored. (optional)",
+  "applicantHint": "e.g. 3 years building payment backends...",
+  "setupTitle": "Interview options",
+  "setupType": "Interview type",
+  "setupTypeGeneral": "Standard",
+  "setupTypePressure": "Pressure",
+  "setupDifficulty": "Difficulty",
+  "setupDifficultyLow": "Easy",
+  "setupDifficultyMid": "Medium",
+  "setupDifficultyHigh": "Hard",
+  "setupQuestionCount": "Base questions",
+  "setupQuestionCountValue": "{count} questions",
+  "@setupQuestionCountValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "setupShowScore": "Show scores in the report",
+  "setupStart": "Start interview",
+  "interviewTitle": "Interview",
+  "interviewProgress": "Question {current}/{total}",
+  "@interviewProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "interviewInputHint": "Type your answer",
+  "interviewSend": "Send",
+  "interviewSkip": "I don't know",
+  "interviewSkipped": "Skipped (no answer)",
+  "interviewPause": "Pause",
+  "interviewPausedNotice": "This interview is paused. Tap resume to continue.",
+  "interviewResume": "Resume",
+  "interviewFinish": "Finish and see the report",
+  "interviewSendFailed": "Couldn't send that. Your answer is kept — please try again.",
+  "reportTitle": "Final report",
+  "reportPass": "Pass",
+  "reportFail": "Fail",
+  "reportScoreHidden": "Scores are hidden for this interview.",
+  "reportCriteriaTitle": "Scores by criterion",
+  "reportReasonTitle": "Why",
+  "reportHome": "Back to home",
+  "reportTranscript": "View transcript",
+  "criterionLogic": "Logic",
+  "criterionJobFit": "Job fit",
+  "criterionStructure": "Structure",
+  "criterionKeyword": "Domain terms",
+  "historyTitle": "History",
+  "historyEmpty": "No records yet. Start your first interview.",
+  "historyInProgress": "In progress",
+  "transcriptTitle": "Transcript",
+  "transcriptModelAnswer": "Model answer",
+  "legalTitle": "Legal",
+  "legalVersion": "Version {version} · effective {date}",
+  "legalView": "View",
+  "@legalVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "loginSubcopy": "Your interview history and progress stay safe in your account.",
+  "loginNoticeTerms": "By continuing you agree to the Terms of Service and Privacy Policy.",
+  "loginNoticeAi": "What you enter is sent for AI analysis.",
+  "legalTerms": "Terms of Service",
+  "legalPrivacy": "Privacy Policy",
+  "homeSubcopy": "Ready to get a step ahead today?",
+  "homeStreak": "Day streak",
+  "homeStreakDays": "{days} days",
+  "homeQuotaTitle": "Base questions today",
+  "homeQuotaNote": "Follow-ups don't count · resets at midnight",
+  "homeHeroBadge": "Ready?",
+  "homeHeroTitle": "Start a new interview",
+  "homeHeroSubtitle": "Paste a job post and run a tailored interview",
+  "homeHeroAction": "Enter job post",
+  "homeSectionRecent": "Recent interviews",
+  "homeSeeAll": "See all",
+  "tabHome": "Home",
+  "tabHistory": "History",
+  "tabProfile": "My",
+  "@homeStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingNicknameRule": "2-12 characters: Korean, letters, numbers or emoji",
+  "onboardingNicknameTaken": "That nickname is already taken.",
+  "profileEditNickname": "Edit nickname",
+  "commonSave": "Save",
+  "profileNicknameChanged": "Nickname updated."
+}

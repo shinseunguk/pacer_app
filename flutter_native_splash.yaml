@@ -1,0 +1,15 @@
+# 네이티브 스플래시(S00) — 앱 테마와 같은 다크 배경 + 브랜드 마크.
+# 재생성: dart run flutter_native_splash:create
+flutter_native_splash:
+  color: '#0E0E12'
+  image: assets/brand/splash_mark.png
+  color_dark: '#0E0E12'
+  image_dark: assets/brand/splash_mark.png
+  android_12:
+    color: '#0E0E12'
+    image: assets/brand/splash_mark.png
+    color_dark: '#0E0E12'
+    image_dark: assets/brand/splash_mark.png
+  android: true
+  ios: true
+  web: false
