@@ -69,7 +69,7 @@ class SocialSignInButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
             side: bordered
-                ? const BorderSide(color: AppColors.line2)
+                ? BorderSide(color: context.colors.line2)
                 : BorderSide.none,
           ),
         ),

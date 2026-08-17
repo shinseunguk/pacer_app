@@ -117,14 +117,14 @@ class _StatusIcon extends StatelessWidget {
         padding: EdgeInsets.all(14),
         child: AppSpinner(size: 18),
       ),
-      NicknameStatus.available => const Icon(
+      NicknameStatus.available => Icon(
         Icons.check_circle,
-        color: AppColors.success,
+        color: context.colors.success,
         size: 20,
       ),
-      NicknameStatus.taken || NicknameStatus.invalid => const Icon(
+      NicknameStatus.taken || NicknameStatus.invalid => Icon(
         Icons.error_outline,
-        color: AppColors.pressure,
+        color: context.colors.pressure,
         size: 20,
       ),
       _ => const SizedBox.shrink(),
@@ -155,7 +155,7 @@ class _HelperRow extends StatelessWidget {
           child: Text(
             message,
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
-              color: isError ? AppColors.pressure : AppColors.text3,
+              color: isError ? context.colors.pressure : context.colors.text3,
             ),
           ),
         ),
@@ -163,7 +163,7 @@ class _HelperRow extends StatelessWidget {
         Text(
           '$length/$nicknameMaxLength',
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-            color: overLimit ? AppColors.pressure : AppColors.text3,
+            color: overLimit ? context.colors.pressure : context.colors.text3,
             fontFeatures: kNumberFeatures,
           ),
         ),

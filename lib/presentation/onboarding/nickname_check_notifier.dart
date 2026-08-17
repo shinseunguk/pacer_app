@@ -38,7 +38,8 @@ class NicknameCheckState {
 
   /// "다음"으로 넘어갈 수 있는 상태인가.
   bool get canSubmit =>
-      status == NicknameStatus.available || status == NicknameStatus.checkFailed;
+      status == NicknameStatus.available ||
+      status == NicknameStatus.checkFailed;
 
   bool get isError =>
       status == NicknameStatus.invalid || status == NicknameStatus.taken;

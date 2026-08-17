@@ -129,7 +129,7 @@ class _PassBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppL10n.of(context);
-    final color = isPass ? AppColors.success : AppColors.pressure;
+    final color = isPass ? context.colors.success : context.colors.pressure;
 
     return Align(
       alignment: Alignment.centerLeft,
@@ -139,7 +139,7 @@ class _PassBadge extends StatelessWidget {
           vertical: AppSpacing.sm,
         ),
         decoration: BoxDecoration(
-          color: AppColors.surface2,
+          color: context.colors.surface2,
           border: Border.all(color: color),
           borderRadius: BorderRadius.circular(AppSpacing.radius),
         ),
@@ -168,7 +168,7 @@ class _OverallScore extends StatelessWidget {
           '$score',
           style: Theme.of(context).textTheme.headlineMedium?.copyWith(
             fontSize: 56,
-            color: AppColors.accent,
+            color: context.colors.accent,
           ),
         ),
         Padding(
@@ -208,7 +208,7 @@ class _CriterionRow extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSpacing.xs),
             child: LinearProgressIndicator(
               value: score.score / 100,
-              backgroundColor: AppColors.surface2,
+              backgroundColor: context.colors.surface2,
               minHeight: 6,
             ),
           ),

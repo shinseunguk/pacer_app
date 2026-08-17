@@ -34,22 +34,22 @@ class ChatBubble extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: switch (message.type) {
-            MessageType.baseQuestion => AppColors.surface,
-            MessageType.followUp => AppColors.surface2,
-            MessageType.answer => AppColors.accent,
-            MessageType.skip => AppColors.surface2,
+            MessageType.baseQuestion => context.colors.surface,
+            MessageType.followUp => context.colors.surface2,
+            MessageType.answer => context.colors.accent,
+            MessageType.skip => context.colors.surface2,
           },
           borderRadius: BorderRadius.circular(AppSpacing.radius),
           border: Border.all(
             color: message.type == MessageType.followUp
-                ? AppColors.accent
-                : AppColors.line,
+                ? context.colors.accent
+                : context.colors.line,
           ),
         ),
         child: Text(
           text,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: isSkip ? AppColors.text2 : AppColors.text,
+            color: isSkip ? context.colors.text2 : context.colors.text,
             fontStyle: isSkip ? FontStyle.italic : FontStyle.normal,
           ),
         ),
@@ -70,9 +70,9 @@ class TypingIndicator extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: AppSpacing.sm),
         padding: const EdgeInsets.all(AppSpacing.md),
         decoration: BoxDecoration(
-          color: AppColors.surface,
+          color: context.colors.surface,
           borderRadius: BorderRadius.circular(AppSpacing.radius),
-          border: Border.all(color: AppColors.line),
+          border: Border.all(color: context.colors.line),
         ),
         child: const AppSpinner(size: 18),
       ),

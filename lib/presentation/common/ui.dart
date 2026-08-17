@@ -27,9 +27,9 @@ class PacerCard extends StatelessWidget {
     final content = Container(
       padding: padding,
       decoration: BoxDecoration(
-        color: AppColors.surface,
+        color: context.colors.surface,
         borderRadius: BorderRadius.circular(radius),
-        border: Border.all(color: AppColors.line),
+        border: Border.all(color: context.colors.line),
       ),
       child: child,
     );
@@ -61,11 +61,14 @@ class Pill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (fg, bg) = switch (tone) {
-      PillTone.accent => (AppColors.accent, AppColors.accentSoft),
-      PillTone.success => (AppColors.success, AppColors.successSoft),
-      PillTone.warm => (AppColors.warm, AppColors.warmSoft),
-      PillTone.pressure => (AppColors.pressure, AppColors.pressureSoft),
-      PillTone.neutral => (AppColors.text2, AppColors.surface2),
+      PillTone.accent => (context.colors.accent, context.colors.accentSoft),
+      PillTone.success => (context.colors.success, context.colors.successSoft),
+      PillTone.warm => (context.colors.warm, context.colors.warmSoft),
+      PillTone.pressure => (
+        context.colors.pressure,
+        context.colors.pressureSoft,
+      ),
+      PillTone.neutral => (context.colors.text2, context.colors.surface2),
     };
 
     return Container(
@@ -122,14 +125,14 @@ class SectionLabel extends StatelessWidget {
                 children: [
                   Text(
                     actionLabel!,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.labelSmall?.copyWith(color: AppColors.text2),
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: context.colors.text2,
+                    ),
                   ),
-                  const Icon(
+                  Icon(
                     Icons.chevron_right,
                     size: 15,
-                    color: AppColors.text3,
+                    color: context.colors.text3,
                   ),
                 ],
               ),
@@ -145,13 +148,15 @@ class StatValue extends StatelessWidget {
   const StatValue({
     required this.value,
     required this.label,
-    this.color = AppColors.text,
+    this.color,
     super.key,
   });
 
   final String value;
   final String label;
-  final Color color;
+
+  /// 기본값은 본문 색 (모드에 따라 달라지므로 build에서 결정)
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +167,7 @@ class StatValue extends StatelessWidget {
         Text(
           value,
           style: TextStyle(
-            color: color,
+            color: color ?? context.colors.text,
             fontSize: 19,
             fontWeight: FontWeight.w700,
             height: 1,
@@ -183,7 +188,7 @@ class PacerProgressBar extends StatelessWidget {
     required this.max,
     this.height = 7,
     this.segments = 0,
-    this.color = AppColors.accent,
+    this.color,
     super.key,
   });
 
@@ -193,10 +198,14 @@ class PacerProgressBar extends StatelessWidget {
 
   /// 0이면 연속 바, 1 이상이면 그 수만큼 칸을 나눈다.
   final int segments;
-  final Color color;
+
+  /// 기본값은 강조색 (모드에 따라 달라지므로 build에서 결정)
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
+    final barColor = color ?? context.colors.accent;
+
     if (segments > 0) {
       return Row(
         children: [
@@ -206,7 +215,7 @@ class PacerProgressBar extends StatelessWidget {
               child: Container(
                 height: height,
                 decoration: BoxDecoration(
-                  color: i < value ? color : AppColors.surface2,
+                  color: i < value ? barColor : context.colors.surface2,
                   borderRadius: BorderRadius.circular(height),
                 ),
               ),
@@ -222,8 +231,8 @@ class PacerProgressBar extends StatelessWidget {
       child: LinearProgressIndicator(
         value: ratio,
         minHeight: height,
-        backgroundColor: AppColors.surface2,
-        color: color,
+        backgroundColor: context.colors.surface2,
+        color: barColor,
       ),
     );
   }
@@ -256,8 +265,8 @@ class PacerListRow extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: showDivider
-            ? const BoxDecoration(
-                border: Border(bottom: BorderSide(color: AppColors.line)),
+            ? BoxDecoration(
+                border: Border(bottom: BorderSide(color: context.colors.line)),
               )
             : null,
         child: Row(
@@ -266,10 +275,10 @@ class PacerListRow extends StatelessWidget {
               width: 38,
               height: 38,
               decoration: BoxDecoration(
-                color: AppColors.surface2,
+                color: context.colors.surface2,
                 borderRadius: BorderRadius.circular(11),
               ),
-              child: Icon(icon, size: 19, color: AppColors.text2),
+              child: Icon(icon, size: 19, color: context.colors.text2),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -293,7 +302,7 @@ class PacerListRow extends StatelessWidget {
               ),
             ),
             if (trailing != null) trailing!,
-            const Icon(Icons.chevron_right, size: 16, color: AppColors.text3),
+            Icon(Icons.chevron_right, size: 16, color: context.colors.text3),
           ],
         ),
       ),

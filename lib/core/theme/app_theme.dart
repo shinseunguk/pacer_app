@@ -28,31 +28,47 @@ const kNumberFeatures = [FontFeature.tabularFigures()];
 abstract final class AppTheme {
   static const _fontFamily = 'Pretendard';
 
-  /// 시안은 라이트/다크 두 모드를 갖지만 Phase A는 다크만 제공한다.
+  static ThemeData dark({TargetPlatform? platform}) =>
+      _build(AppColors.dark, Brightness.dark, platform);
+
+  static ThemeData light({TargetPlatform? platform}) =>
+      _build(AppColors.light, Brightness.light, platform);
+
+  /// 색 토큰만 갈아끼우면 두 모드가 같은 규칙으로 만들어진다
+  /// (시안 `buildVars(mode, hue)`와 같은 구조).
   ///
-  /// [platform]에 따라 탭 피드백을 바꾼다 — iOS는 리플 없이 눌린 표시만,
-  /// 안드로이드는 머티리얼 리플 그대로. 각 OS 기본 감각을 따르기 위함이다.
-  static ThemeData dark({TargetPlatform? platform}) {
+  /// [platform]에 따라 탭 피드백이 달라진다 — iOS는 리플 없이 눌린 표시만,
+  /// 안드로이드는 머티리얼 리플 그대로.
+  static ThemeData _build(
+    AppColors c,
+    Brightness brightness,
+    TargetPlatform? platform,
+  ) {
     final isApple =
         platform == TargetPlatform.iOS || platform == TargetPlatform.macOS;
-    const scheme = ColorScheme.dark(
-      primary: AppColors.accent,
-      onPrimary: AppColors.onAccent,
-      secondary: AppColors.accent2,
-      surface: AppColors.surface,
-      onSurface: AppColors.text,
-      error: AppColors.pressure,
-      outline: AppColors.line2,
-    );
+
+    final scheme =
+        ColorScheme.fromSeed(
+          seedColor: c.accent,
+          brightness: brightness,
+        ).copyWith(
+          primary: c.accent,
+          onPrimary: c.onAccent,
+          secondary: c.accent2,
+          surface: c.surface,
+          onSurface: c.text,
+          error: c.pressure,
+          outline: c.line2,
+        );
 
     return ThemeData(
       useMaterial3: true,
-      brightness: Brightness.dark,
+      brightness: brightness,
       colorScheme: scheme,
+      extensions: [c],
       fontFamily: _fontFamily,
-      scaffoldBackgroundColor: AppColors.bg,
+      scaffoldBackgroundColor: c.bg,
       platform: platform,
-      // iOS는 리플을 쓰지 않는다. 안드로이드는 기본 리플(InkSparkle)을 유지.
       splashFactory: isApple
           ? NoSplash.splashFactory
           : InkSparkle.splashFactory,
@@ -65,35 +81,36 @@ abstract final class AppTheme {
           TargetPlatform.android: ZoomPageTransitionsBuilder(),
         },
       ),
-      appBarTheme: const AppBarTheme(
-        backgroundColor: AppColors.bg,
+      appBarTheme: AppBarTheme(
+        backgroundColor: c.bg,
+        foregroundColor: c.text,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         centerTitle: false,
         titleTextStyle: TextStyle(
           fontFamily: _fontFamily,
-          color: AppColors.text,
+          color: c.text,
           fontSize: 17,
           fontWeight: FontWeight.w700,
           letterSpacing: -0.3,
         ),
       ),
       cardTheme: CardThemeData(
-        color: AppColors.surface,
+        color: c.surface,
         elevation: 0,
         margin: EdgeInsets.zero,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppSpacing.radius),
-          side: const BorderSide(color: AppColors.line),
+          side: BorderSide(color: c.line),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           minimumSize: const Size.fromHeight(AppSpacing.buttonHeight),
-          backgroundColor: AppColors.accent,
-          foregroundColor: AppColors.onAccent,
-          disabledBackgroundColor: AppColors.surface3,
-          disabledForegroundColor: AppColors.text3,
+          backgroundColor: c.accent,
+          foregroundColor: c.onAccent,
+          disabledBackgroundColor: c.surface3,
+          disabledForegroundColor: c.text3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
@@ -108,9 +125,9 @@ abstract final class AppTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           minimumSize: const Size.fromHeight(AppSpacing.buttonHeight),
-          foregroundColor: AppColors.text,
-          backgroundColor: AppColors.surface,
-          side: const BorderSide(color: AppColors.line2),
+          foregroundColor: c.text,
+          backgroundColor: c.surface,
+          side: BorderSide(color: c.line2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
@@ -120,11 +137,11 @@ abstract final class AppTheme {
             fontWeight: FontWeight.w700,
             letterSpacing: -0.2,
           ),
-        ).copyWith(overlayColor: isApple ? _pressOverlay(Colors.white) : null),
+        ).copyWith(overlayColor: isApple ? _pressOverlay(c.text) : null),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: AppColors.accent,
+          foregroundColor: c.accent,
           textStyle: const TextStyle(
             fontFamily: _fontFamily,
             fontSize: 13.5,
@@ -134,79 +151,68 @@ abstract final class AppTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: AppColors.surface,
-        hintStyle: const TextStyle(color: AppColors.text3, fontSize: 15),
+        fillColor: c.surface,
+        hintStyle: TextStyle(color: c.text3, fontSize: 15),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: AppSpacing.md,
           vertical: 15,
         ),
-        border: _inputBorder(AppColors.line),
-        enabledBorder: _inputBorder(AppColors.line),
-        focusedBorder: _inputBorder(AppColors.accent),
-        errorBorder: _inputBorder(AppColors.pressure),
-        focusedErrorBorder: _inputBorder(AppColors.pressure),
+        border: _inputBorder(c.line),
+        enabledBorder: _inputBorder(c.line),
+        focusedBorder: _inputBorder(c.accent),
+        errorBorder: _inputBorder(c.pressure),
+        focusedErrorBorder: _inputBorder(c.pressure),
       ),
-      dividerTheme: const DividerThemeData(color: AppColors.line, space: 1),
-      snackBarTheme: const SnackBarThemeData(
-        backgroundColor: AppColors.surface2,
+      dividerTheme: DividerThemeData(color: c.line, space: 1),
+      snackBarTheme: SnackBarThemeData(
+        backgroundColor: c.surface2,
         contentTextStyle: TextStyle(
           fontFamily: _fontFamily,
-          color: AppColors.text,
+          color: c.text,
           fontSize: 13.5,
         ),
         behavior: SnackBarBehavior.floating,
       ),
-      bottomSheetTheme: const BottomSheetThemeData(
-        backgroundColor: AppColors.bg2,
+      dialogTheme: DialogThemeData(backgroundColor: c.surface),
+      bottomSheetTheme: BottomSheetThemeData(
+        backgroundColor: c.bg2,
         surfaceTintColor: Colors.transparent,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(22)),
         ),
       ),
       // 시안 타이포 스케일: 제목은 큼직하고 자간을 좁힌다(-0.03em).
-      textTheme: const TextTheme(
+      textTheme: TextTheme(
         displaySmall: TextStyle(
-          color: AppColors.text,
+          color: c.text,
           fontSize: 34,
           fontWeight: FontWeight.w700,
           letterSpacing: -1.0,
         ),
         headlineMedium: TextStyle(
-          color: AppColors.text,
+          color: c.text,
           fontSize: 27,
           fontWeight: FontWeight.w700,
           letterSpacing: -0.8,
           height: 1.25,
         ),
         titleLarge: TextStyle(
-          color: AppColors.text,
+          color: c.text,
           fontSize: 20,
           fontWeight: FontWeight.w700,
           letterSpacing: -0.5,
         ),
         titleMedium: TextStyle(
-          color: AppColors.text,
+          color: c.text,
           fontSize: 15,
           fontWeight: FontWeight.w700,
           letterSpacing: -0.2,
         ),
-        bodyLarge: TextStyle(
-          color: AppColors.text,
-          fontSize: 15.5,
-          height: 1.55,
-        ),
-        bodyMedium: TextStyle(
-          color: AppColors.text,
-          fontSize: 14,
-          height: 1.55,
-        ),
-        bodySmall: TextStyle(
-          color: AppColors.text2,
-          fontSize: 12.5,
-          height: 1.5,
-        ),
+        bodyLarge: TextStyle(color: c.text, fontSize: 15.5, height: 1.55),
+        bodyMedium: TextStyle(color: c.text, fontSize: 14, height: 1.55),
+        bodySmall: TextStyle(color: c.text2, fontSize: 12.5, height: 1.5),
         labelSmall: TextStyle(
-          color: AppColors.text3,
+          color: c.text3,
           fontSize: 11.5,
           fontWeight: FontWeight.w600,
         ),

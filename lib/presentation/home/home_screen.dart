@@ -126,13 +126,13 @@ class _StatusStrip extends ConsumerWidget {
                     width: 38,
                     height: 38,
                     decoration: BoxDecoration(
-                      color: AppColors.warmSoft,
+                      color: context.colors.warmSoft,
                       borderRadius: BorderRadius.circular(11),
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.local_fire_department,
                       size: 21,
-                      color: AppColors.warm,
+                      color: context.colors.warm,
                     ),
                   ),
                   const SizedBox(width: 10),
@@ -171,12 +171,12 @@ class _StatusStrip extends ConsumerWidget {
                           children: [
                             TextSpan(
                               text: '/${usage.limit}',
-                              style: const TextStyle(color: AppColors.text3),
+                              style: TextStyle(color: context.colors.text3),
                             ),
                           ],
                         ),
-                        style: const TextStyle(
-                          color: AppColors.text,
+                        style: TextStyle(
+                          color: context.colors.text,
                           fontSize: 13.5,
                           fontWeight: FontWeight.w700,
                           fontFeatures: kNumberFeatures,
@@ -221,13 +221,13 @@ class _HeroCta extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(22),
         decoration: BoxDecoration(
-          gradient: AppColors.heroGradient,
+          gradient: context.colors.heroGradient,
           borderRadius: BorderRadius.circular(AppSpacing.radiusLg),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: AppColors.accentLine,
+              color: context.colors.accentLine,
               blurRadius: 38,
-              offset: Offset(0, 18),
+              offset: const Offset(0, 18),
               spreadRadius: -16,
             ),
           ],
@@ -250,13 +250,13 @@ class _HeroCta extends StatelessWidget {
                     vertical: 5,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withValues(alpha: 0.22),
+                    color: context.colors.onAccent.withValues(alpha: 0.22),
                     borderRadius: BorderRadius.circular(999),
                   ),
                   child: Text(
                     l10n.homeHeroBadge,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: context.colors.onAccent,
                       fontSize: 11.5,
                       fontWeight: FontWeight.w700,
                     ),
@@ -265,8 +265,8 @@ class _HeroCta extends StatelessWidget {
                 const SizedBox(height: 12),
                 Text(
                   l10n.homeHeroTitle,
-                  style: const TextStyle(
-                    color: Colors.white,
+                  style: TextStyle(
+                    color: context.colors.onAccent,
                     fontSize: 25,
                     fontWeight: FontWeight.w700,
                     letterSpacing: -0.75,
@@ -279,7 +279,7 @@ class _HeroCta extends StatelessWidget {
                   child: Text(
                     l10n.homeHeroSubtitle,
                     style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.82),
+                      color: context.colors.onAccent.withValues(alpha: 0.82),
                       fontSize: 13.5,
                       height: 1.4,
                     ),
@@ -290,17 +290,17 @@ class _HeroCta extends StatelessWidget {
                   children: [
                     Text(
                       l10n.homeHeroAction,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: context.colors.onAccent,
                         fontSize: 14.5,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
                     const SizedBox(width: 6),
-                    const Icon(
+                    Icon(
                       Icons.arrow_forward,
                       size: 18,
-                      color: Colors.white,
+                      color: context.colors.onAccent,
                     ),
                   ],
                 ),
@@ -327,7 +327,7 @@ class _Ring extends StatelessWidget {
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(
-          color: Colors.white.withValues(alpha: opacity),
+          color: context.colors.onAccent.withValues(alpha: opacity),
           width: 2,
         ),
       ),
@@ -417,8 +417,8 @@ class _HistoryRow extends StatelessWidget {
             fontWeight: FontWeight.w700,
             fontFeatures: kNumberFeatures,
             color: summary.passResult == 'pass'
-                ? AppColors.success
-                : AppColors.text2,
+                ? context.colors.success
+                : context.colors.text2,
           ),
         ),
       ),

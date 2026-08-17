@@ -15,9 +15,10 @@ class PacerApp extends ConsumerWidget {
     return MaterialApp.router(
       title: 'Pacer',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.dark(platform: defaultTargetPlatform),
+      theme: AppTheme.light(platform: defaultTargetPlatform),
       darkTheme: AppTheme.dark(platform: defaultTargetPlatform),
-      themeMode: ThemeMode.dark,
+      // 시안이 라이트·다크를 모두 정의하므로 기기 설정을 따른다.
+      themeMode: ThemeMode.system,
       routerConfig: ref.watch(appRouterProvider),
       localizationsDelegates: const [
         AppL10n.delegate,

@@ -21,7 +21,7 @@ class SplashScreen extends StatelessWidget {
             Text(
               l10n.appName,
               style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: AppColors.accent,
+                color: context.colors.accent,
                 fontWeight: FontWeight.w800,
               ),
             ),

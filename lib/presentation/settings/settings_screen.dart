@@ -97,7 +97,7 @@ class SettingsScreen extends ConsumerWidget {
                       ? null
                       : () => _confirmWithdraw(context, ref),
                   style: TextButton.styleFrom(
-                    foregroundColor: AppColors.pressure,
+                    foregroundColor: context.colors.pressure,
                     minimumSize: const Size.fromHeight(48),
                   ),
                   child: Text(l10n.settingsWithdraw),
@@ -167,7 +167,7 @@ Future<bool> _confirm(
         TextButton(
           onPressed: () => Navigator.of(context).pop(true),
           style: destructive
-              ? TextButton.styleFrom(foregroundColor: AppColors.pressure)
+              ? TextButton.styleFrom(foregroundColor: context.colors.pressure)
               : null,
           child: Text(confirmLabel),
         ),

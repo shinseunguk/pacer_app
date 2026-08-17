@@ -15,11 +15,7 @@ import '../../../providers/interview_providers.dart';
 ///
 /// 실패해도 리포트 열람 자체는 막지 않는다(부가 기능이므로).
 class ReportFeedbackCard extends ConsumerStatefulWidget {
-  const ReportFeedbackCard({
-    required this.sessionId,
-    this.initial,
-    super.key,
-  });
+  const ReportFeedbackCard({required this.sessionId, this.initial, super.key});
 
   final String sessionId;
 
@@ -74,10 +70,8 @@ class _ReportFeedbackCardState extends ConsumerState<ReportFeedbackCard> {
                   icon: Icons.thumb_up_outlined,
                   label: l10n.reportFeedbackUp,
                   selected: _rating == FeedbackRating.up,
-                  tone: AppColors.success,
-                  onTap: _isSending
-                      ? null
-                      : () => _select(FeedbackRating.up),
+                  tone: context.colors.success,
+                  onTap: _isSending ? null : () => _select(FeedbackRating.up),
                 ),
               ),
               const SizedBox(width: AppSpacing.sm),
@@ -86,10 +80,8 @@ class _ReportFeedbackCardState extends ConsumerState<ReportFeedbackCard> {
                   icon: Icons.thumb_down_outlined,
                   label: l10n.reportFeedbackDown,
                   selected: _rating == FeedbackRating.down,
-                  tone: AppColors.warm,
-                  onTap: _isSending
-                      ? null
-                      : () => _select(FeedbackRating.down),
+                  tone: context.colors.warm,
+                  onTap: _isSending ? null : () => _select(FeedbackRating.down),
                 ),
               ),
             ],
@@ -138,9 +130,7 @@ class _ReportFeedbackCardState extends ConsumerState<ReportFeedbackCard> {
       await ref.read(submitReportFeedbackProvider)(
         widget.sessionId,
         rating: rating,
-        comment: rating == FeedbackRating.down
-            ? _commentController.text
-            : null,
+        comment: rating == FeedbackRating.down ? _commentController.text : null,
       );
       if (!mounted) return;
       setState(() => _showReason = false);
@@ -183,19 +173,19 @@ class _RatingButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: selected
               ? tone.withValues(alpha: 0.16)
-              : AppColors.surface2,
+              : context.colors.surface2,
           borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
-          border: Border.all(color: selected ? tone : AppColors.line),
+          border: Border.all(color: selected ? tone : context.colors.line),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 17, color: selected ? tone : AppColors.text2),
+            Icon(icon, size: 17, color: selected ? tone : context.colors.text2),
             const SizedBox(width: 6),
             Text(
               label,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: selected ? tone : AppColors.text2,
+                color: selected ? tone : context.colors.text2,
                 fontWeight: FontWeight.w600,
               ),
             ),

@@ -58,9 +58,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       Text(
                         l10n.appTagline,
                         textAlign: TextAlign.center,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyLarge?.copyWith(color: AppColors.text2),
+                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          color: context.colors.text2,
+                        ),
                       ),
                       const SizedBox(height: 20),
                       ConstrainedBox(
@@ -69,7 +69,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           l10n.loginSubcopy,
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(color: AppColors.text3),
+                              ?.copyWith(color: context.colors.text3),
                         ),
                       ),
                     ],
@@ -120,7 +120,7 @@ class _LegalNotice extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppL10n.of(context);
     final style = Theme.of(context).textTheme.labelSmall?.copyWith(
-      color: AppColors.text3,
+      color: context.colors.text3,
       fontWeight: FontWeight.w500,
       height: 1.6,
     );
@@ -160,9 +160,9 @@ class _LegalLink extends StatelessWidget {
       child: Text(
         label,
         style: Theme.of(context).textTheme.labelSmall?.copyWith(
-          color: AppColors.text2,
+          color: context.colors.text2,
           decoration: TextDecoration.underline,
-          decorationColor: AppColors.text3,
+          decorationColor: context.colors.text3,
         ),
       ),
     );
