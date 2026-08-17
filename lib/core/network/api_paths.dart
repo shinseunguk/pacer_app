@@ -21,4 +21,5 @@ abstract final class ApiPaths {
   static String pause(String id) => '/interviews/$id/pause';
   static String resume(String id) => '/interviews/$id/resume';
   static String complete(String id) => '/interviews/$id/complete';
+  static String interviewFeedback(String id) => '/interviews/$id/feedback';
 }

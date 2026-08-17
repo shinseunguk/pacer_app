@@ -10,6 +10,7 @@ import '../../domain/entities/job_category.dart';
 import '../../domain/repositories/interview_repository.dart';
 import '../../domain/repositories/job_repository.dart';
 import '../../domain/usecases/interview_usecases.dart';
+import '../../domain/usecases/submit_report_feedback.dart';
 import 'app_providers.dart';
 
 final jobRepositoryProvider = Provider<JobRepository>(
@@ -48,6 +49,10 @@ final resumeInterviewProvider = Provider(
 
 final completeInterviewProvider = Provider(
   (ref) => CompleteInterviewUseCase(ref.watch(interviewRepositoryProvider)),
+);
+
+final submitReportFeedbackProvider = Provider(
+  (ref) => SubmitReportFeedbackUseCase(ref.watch(interviewRepositoryProvider)),
 );
 
 final getInterviewDetailProvider = Provider(

@@ -1,3 +1,28 @@
+/// 리포트 만족도 (MVP 성공 기준 §6 "리포트 👍 비율").
+enum FeedbackRating {
+  up('up'),
+  down('down');
+
+  const FeedbackRating(this.value);
+
+  final String value;
+
+  static FeedbackRating? fromValue(String? value) {
+    if (value == null) return null;
+    for (final rating in FeedbackRating.values) {
+      if (rating.value == value) return rating;
+    }
+    return null;
+  }
+}
+
+class SessionFeedback {
+  const SessionFeedback({required this.rating, this.comment});
+
+  final FeedbackRating rating;
+  final String? comment;
+}
+
 /// 평가 항목 점수 (logic / job_fit / structure / keyword).
 class CriterionScore {
   const CriterionScore({

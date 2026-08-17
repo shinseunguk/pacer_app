@@ -171,5 +171,12 @@
   "onboardingNicknameTaken": "That nickname is already taken.",
   "profileEditNickname": "Edit nickname",
   "commonSave": "Save",
-  "profileNicknameChanged": "Nickname updated."
+  "profileNicknameChanged": "Nickname updated.",
+  "reportFeedbackQuestion": "Was this report helpful?",
+  "reportFeedbackUp": "Helpful",
+  "reportFeedbackDown": "Not really",
+  "reportFeedbackThanks": "Thanks — we'll use this to improve the evaluation.",
+  "reportFeedbackReasonHint": "What fell short? (optional)",
+  "reportFeedbackSend": "Send",
+  "reportFeedbackFailed": "Couldn't send your feedback. Please try again."
 }

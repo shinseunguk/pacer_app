@@ -2898,9 +2898,275 @@ $ProgressModelCopyWith<$Res> get progress {
 
 
 /// @nodoc
+mixin _$SessionFeedbackModel {
+
+ String get rating; String? get comment;
+/// Create a copy of SessionFeedbackModel
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SessionFeedbackModelCopyWith<SessionFeedbackModel> get copyWith => _$SessionFeedbackModelCopyWithImpl<SessionFeedbackModel>(this as SessionFeedbackModel, _$identity);
+
+  /// Serializes this SessionFeedbackModel to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SessionFeedbackModel&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.comment, comment) || other.comment == comment));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,rating,comment);
+
+@override
+String toString() {
+  return 'SessionFeedbackModel(rating: $rating, comment: $comment)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SessionFeedbackModelCopyWith<$Res>  {
+  factory $SessionFeedbackModelCopyWith(SessionFeedbackModel value, $Res Function(SessionFeedbackModel) _then) = _$SessionFeedbackModelCopyWithImpl;
+@useResult
+$Res call({
+ String rating, String? comment
+});
+
+
+
+
+}
+/// @nodoc
+class _$SessionFeedbackModelCopyWithImpl<$Res>
+    implements $SessionFeedbackModelCopyWith<$Res> {
+  _$SessionFeedbackModelCopyWithImpl(this._self, this._then);
+
+  final SessionFeedbackModel _self;
+  final $Res Function(SessionFeedbackModel) _then;
+
+/// Create a copy of SessionFeedbackModel
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? rating = null,Object? comment = freezed,}) {
+  return _then(_self.copyWith(
+rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as String,comment: freezed == comment ? _self.comment : comment // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [SessionFeedbackModel].
+extension SessionFeedbackModelPatterns on SessionFeedbackModel {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _SessionFeedbackModel value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _SessionFeedbackModel() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _SessionFeedbackModel value)  $default,){
+final _that = this;
+switch (_that) {
+case _SessionFeedbackModel():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _SessionFeedbackModel value)?  $default,){
+final _that = this;
+switch (_that) {
+case _SessionFeedbackModel() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String rating,  String? comment)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _SessionFeedbackModel() when $default != null:
+return $default(_that.rating,_that.comment);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String rating,  String? comment)  $default,) {final _that = this;
+switch (_that) {
+case _SessionFeedbackModel():
+return $default(_that.rating,_that.comment);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String rating,  String? comment)?  $default,) {final _that = this;
+switch (_that) {
+case _SessionFeedbackModel() when $default != null:
+return $default(_that.rating,_that.comment);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _SessionFeedbackModel extends SessionFeedbackModel {
+  const _SessionFeedbackModel({required this.rating, this.comment}): super._();
+  factory _SessionFeedbackModel.fromJson(Map<String, dynamic> json) => _$SessionFeedbackModelFromJson(json);
+
+@override final  String rating;
+@override final  String? comment;
+
+/// Create a copy of SessionFeedbackModel
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$SessionFeedbackModelCopyWith<_SessionFeedbackModel> get copyWith => __$SessionFeedbackModelCopyWithImpl<_SessionFeedbackModel>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$SessionFeedbackModelToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SessionFeedbackModel&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.comment, comment) || other.comment == comment));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,rating,comment);
+
+@override
+String toString() {
+  return 'SessionFeedbackModel(rating: $rating, comment: $comment)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$SessionFeedbackModelCopyWith<$Res> implements $SessionFeedbackModelCopyWith<$Res> {
+  factory _$SessionFeedbackModelCopyWith(_SessionFeedbackModel value, $Res Function(_SessionFeedbackModel) _then) = __$SessionFeedbackModelCopyWithImpl;
+@override @useResult
+$Res call({
+ String rating, String? comment
+});
+
+
+
+
+}
+/// @nodoc
+class __$SessionFeedbackModelCopyWithImpl<$Res>
+    implements _$SessionFeedbackModelCopyWith<$Res> {
+  __$SessionFeedbackModelCopyWithImpl(this._self, this._then);
+
+  final _SessionFeedbackModel _self;
+  final $Res Function(_SessionFeedbackModel) _then;
+
+/// Create a copy of SessionFeedbackModel
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? rating = null,Object? comment = freezed,}) {
+  return _then(_SessionFeedbackModel(
+rating: null == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as String,comment: freezed == comment ? _self.comment : comment // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
 mixin _$InterviewDetailModel {
 
- InterviewSessionModel get session; List<InterviewMessageModel> get messages; InterviewReportModel? get report;
+ InterviewSessionModel get session; List<InterviewMessageModel> get messages; InterviewReportModel? get report; SessionFeedbackModel? get feedback;
 /// Create a copy of InterviewDetailModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -2913,16 +3179,16 @@ $InterviewDetailModelCopyWith<InterviewDetailModel> get copyWith => _$InterviewD
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InterviewDetailModel&&(identical(other.session, session) || other.session == session)&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.report, report) || other.report == report));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InterviewDetailModel&&(identical(other.session, session) || other.session == session)&&const DeepCollectionEquality().equals(other.messages, messages)&&(identical(other.report, report) || other.report == report)&&(identical(other.feedback, feedback) || other.feedback == feedback));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,session,const DeepCollectionEquality().hash(messages),report);
+int get hashCode => Object.hash(runtimeType,session,const DeepCollectionEquality().hash(messages),report,feedback);
 
 @override
 String toString() {
-  return 'InterviewDetailModel(session: $session, messages: $messages, report: $report)';
+  return 'InterviewDetailModel(session: $session, messages: $messages, report: $report, feedback: $feedback)';
 }
 
 
@@ -2933,11 +3199,11 @@ abstract mixin class $InterviewDetailModelCopyWith<$Res>  {
   factory $InterviewDetailModelCopyWith(InterviewDetailModel value, $Res Function(InterviewDetailModel) _then) = _$InterviewDetailModelCopyWithImpl;
 @useResult
 $Res call({
- InterviewSessionModel session, List<InterviewMessageModel> messages, InterviewReportModel? report
+ InterviewSessionModel session, List<InterviewMessageModel> messages, InterviewReportModel? report, SessionFeedbackModel? feedback
 });
 
 
-$InterviewSessionModelCopyWith<$Res> get session;$InterviewReportModelCopyWith<$Res>? get report;
+$InterviewSessionModelCopyWith<$Res> get session;$InterviewReportModelCopyWith<$Res>? get report;$SessionFeedbackModelCopyWith<$Res>? get feedback;
 
 }
 /// @nodoc
@@ -2950,12 +3216,13 @@ class _$InterviewDetailModelCopyWithImpl<$Res>
 
 /// Create a copy of InterviewDetailModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? session = null,Object? messages = null,Object? report = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? session = null,Object? messages = null,Object? report = freezed,Object? feedback = freezed,}) {
   return _then(_self.copyWith(
 session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
 as InterviewSessionModel,messages: null == messages ? _self.messages : messages // ignore: cast_nullable_to_non_nullable
 as List<InterviewMessageModel>,report: freezed == report ? _self.report : report // ignore: cast_nullable_to_non_nullable
-as InterviewReportModel?,
+as InterviewReportModel?,feedback: freezed == feedback ? _self.feedback : feedback // ignore: cast_nullable_to_non_nullable
+as SessionFeedbackModel?,
   ));
 }
 /// Create a copy of InterviewDetailModel
@@ -2978,6 +3245,18 @@ $InterviewReportModelCopyWith<$Res>? get report {
 
   return $InterviewReportModelCopyWith<$Res>(_self.report!, (value) {
     return _then(_self.copyWith(report: value));
+  });
+}/// Create a copy of InterviewDetailModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SessionFeedbackModelCopyWith<$Res>? get feedback {
+    if (_self.feedback == null) {
+    return null;
+  }
+
+  return $SessionFeedbackModelCopyWith<$Res>(_self.feedback!, (value) {
+    return _then(_self.copyWith(feedback: value));
   });
 }
 }
@@ -3061,10 +3340,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( InterviewSessionModel session,  List<InterviewMessageModel> messages,  InterviewReportModel? report)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( InterviewSessionModel session,  List<InterviewMessageModel> messages,  InterviewReportModel? report,  SessionFeedbackModel? feedback)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _InterviewDetailModel() when $default != null:
-return $default(_that.session,_that.messages,_that.report);case _:
+return $default(_that.session,_that.messages,_that.report,_that.feedback);case _:
   return orElse();
 
 }
@@ -3082,10 +3361,10 @@ return $default(_that.session,_that.messages,_that.report);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( InterviewSessionModel session,  List<InterviewMessageModel> messages,  InterviewReportModel? report)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( InterviewSessionModel session,  List<InterviewMessageModel> messages,  InterviewReportModel? report,  SessionFeedbackModel? feedback)  $default,) {final _that = this;
 switch (_that) {
 case _InterviewDetailModel():
-return $default(_that.session,_that.messages,_that.report);case _:
+return $default(_that.session,_that.messages,_that.report,_that.feedback);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -3102,10 +3381,10 @@ return $default(_that.session,_that.messages,_that.report);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( InterviewSessionModel session,  List<InterviewMessageModel> messages,  InterviewReportModel? report)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( InterviewSessionModel session,  List<InterviewMessageModel> messages,  InterviewReportModel? report,  SessionFeedbackModel? feedback)?  $default,) {final _that = this;
 switch (_that) {
 case _InterviewDetailModel() when $default != null:
-return $default(_that.session,_that.messages,_that.report);case _:
+return $default(_that.session,_that.messages,_that.report,_that.feedback);case _:
   return null;
 
 }
@@ -3117,7 +3396,7 @@ return $default(_that.session,_that.messages,_that.report);case _:
 @JsonSerializable()
 
 class _InterviewDetailModel extends InterviewDetailModel {
-  const _InterviewDetailModel({required this.session, final  List<InterviewMessageModel> messages = const <InterviewMessageModel>[], this.report}): _messages = messages,super._();
+  const _InterviewDetailModel({required this.session, final  List<InterviewMessageModel> messages = const <InterviewMessageModel>[], this.report, this.feedback}): _messages = messages,super._();
   factory _InterviewDetailModel.fromJson(Map<String, dynamic> json) => _$InterviewDetailModelFromJson(json);
 
 @override final  InterviewSessionModel session;
@@ -3129,6 +3408,7 @@ class _InterviewDetailModel extends InterviewDetailModel {
 }
 
 @override final  InterviewReportModel? report;
+@override final  SessionFeedbackModel? feedback;
 
 /// Create a copy of InterviewDetailModel
 /// with the given fields replaced by the non-null parameter values.
@@ -3143,16 +3423,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InterviewDetailModel&&(identical(other.session, session) || other.session == session)&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.report, report) || other.report == report));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InterviewDetailModel&&(identical(other.session, session) || other.session == session)&&const DeepCollectionEquality().equals(other._messages, _messages)&&(identical(other.report, report) || other.report == report)&&(identical(other.feedback, feedback) || other.feedback == feedback));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,session,const DeepCollectionEquality().hash(_messages),report);
+int get hashCode => Object.hash(runtimeType,session,const DeepCollectionEquality().hash(_messages),report,feedback);
 
 @override
 String toString() {
-  return 'InterviewDetailModel(session: $session, messages: $messages, report: $report)';
+  return 'InterviewDetailModel(session: $session, messages: $messages, report: $report, feedback: $feedback)';
 }
 
 
@@ -3163,11 +3443,11 @@ abstract mixin class _$InterviewDetailModelCopyWith<$Res> implements $InterviewD
   factory _$InterviewDetailModelCopyWith(_InterviewDetailModel value, $Res Function(_InterviewDetailModel) _then) = __$InterviewDetailModelCopyWithImpl;
 @override @useResult
 $Res call({
- InterviewSessionModel session, List<InterviewMessageModel> messages, InterviewReportModel? report
+ InterviewSessionModel session, List<InterviewMessageModel> messages, InterviewReportModel? report, SessionFeedbackModel? feedback
 });
 
 
-@override $InterviewSessionModelCopyWith<$Res> get session;@override $InterviewReportModelCopyWith<$Res>? get report;
+@override $InterviewSessionModelCopyWith<$Res> get session;@override $InterviewReportModelCopyWith<$Res>? get report;@override $SessionFeedbackModelCopyWith<$Res>? get feedback;
 
 }
 /// @nodoc
@@ -3180,12 +3460,13 @@ class __$InterviewDetailModelCopyWithImpl<$Res>
 
 /// Create a copy of InterviewDetailModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? session = null,Object? messages = null,Object? report = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? session = null,Object? messages = null,Object? report = freezed,Object? feedback = freezed,}) {
   return _then(_InterviewDetailModel(
 session: null == session ? _self.session : session // ignore: cast_nullable_to_non_nullable
 as InterviewSessionModel,messages: null == messages ? _self._messages : messages // ignore: cast_nullable_to_non_nullable
 as List<InterviewMessageModel>,report: freezed == report ? _self.report : report // ignore: cast_nullable_to_non_nullable
-as InterviewReportModel?,
+as InterviewReportModel?,feedback: freezed == feedback ? _self.feedback : feedback // ignore: cast_nullable_to_non_nullable
+as SessionFeedbackModel?,
   ));
 }
 
@@ -3209,6 +3490,18 @@ $InterviewReportModelCopyWith<$Res>? get report {
 
   return $InterviewReportModelCopyWith<$Res>(_self.report!, (value) {
     return _then(_self.copyWith(report: value));
+  });
+}/// Create a copy of InterviewDetailModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SessionFeedbackModelCopyWith<$Res>? get feedback {
+    if (_self.feedback == null) {
+    return null;
+  }
+
+  return $SessionFeedbackModelCopyWith<$Res>(_self.feedback!, (value) {
+    return _then(_self.copyWith(feedback: value));
   });
 }
 }

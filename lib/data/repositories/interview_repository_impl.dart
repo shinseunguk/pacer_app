@@ -56,6 +56,23 @@ class InterviewRepositoryImpl implements InterviewRepository {
   }
 
   @override
+  Future<SessionFeedback> submitFeedback(
+    String sessionId, {
+    required FeedbackRating rating,
+    String? comment,
+  }) {
+    return _guard(() async {
+      final model = await _remote.submitFeedback(
+        sessionId,
+        rating: rating.value,
+        comment: comment,
+      );
+      // 서버가 방금 저장한 값을 그대로 돌려주므로 파싱 실패는 없다고 본다.
+      return model.toEntity() ?? SessionFeedback(rating: rating);
+    });
+  }
+
+  @override
   Future<InterviewDetail> getDetail(String sessionId) {
     return _guard(() async => (await _remote.getDetail(sessionId)).toEntity());
   }

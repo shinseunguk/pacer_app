@@ -17,6 +17,13 @@ abstract interface class InterviewRepository {
 
   Future<InterviewReport> complete(String sessionId);
 
+  /// 리포트 만족도 제출 (재제출 시 갱신).
+  Future<SessionFeedback> submitFeedback(
+    String sessionId, {
+    required FeedbackRating rating,
+    String? comment,
+  });
+
   Future<InterviewDetail> getDetail(String sessionId);
 
   Future<InterviewHistoryPage> getHistory({String? cursor, int? limit});

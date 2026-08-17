@@ -35,6 +35,7 @@ InterviewDetail _detail({
     createdAt: DateTime.utc(2026, 8, 15),
     messages: [_question(1, '자기소개 부탁드립니다.')],
     report: null,
+    feedback: null,
   );
 }
 

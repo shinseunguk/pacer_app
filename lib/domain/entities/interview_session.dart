@@ -99,6 +99,7 @@ class InterviewDetail {
     required this.createdAt,
     required this.messages,
     required this.report,
+    required this.feedback,
   });
 
   final String id;
@@ -110,4 +111,7 @@ class InterviewDetail {
   final DateTime createdAt;
   final List<InterviewMessage> messages;
   final InterviewReport? report;
+
+  /// 내가 남긴 리포트 만족도 (없으면 null)
+  final SessionFeedback? feedback;
 }

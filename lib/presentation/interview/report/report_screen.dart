@@ -10,6 +10,7 @@ import '../../../domain/entities/interview_report.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../common/app_error_view.dart';
 import '../../providers/interview_providers.dart';
+import 'widgets/report_feedback.dart';
 import '../../providers/user_providers.dart';
 
 /// S30 — 최종 리포트. complete는 멱등이라 재진입해도 같은 결과가 나온다.
@@ -82,6 +83,15 @@ class _ReportBody extends ConsumerWidget {
             ),
         ],
         const SizedBox(height: AppSpacing.xl),
+        // 평가 품질(핵심 가설)을 검증할 유일한 지표라 리포트 본문 바로 뒤에 둔다.
+        ReportFeedbackCard(
+          sessionId: sessionId,
+          initial: ref
+              .watch(interviewDetailProvider(sessionId))
+              .valueOrNull
+              ?.feedback,
+        ),
+        const SizedBox(height: AppSpacing.lg),
         OutlinedButton(
           onPressed: () => context.push(AppRoutes.transcript(sessionId)),
           child: Text(l10n.reportTranscript),
