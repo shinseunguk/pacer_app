@@ -68,5 +68,24 @@
 			<string>UIInterfaceOrientationLandscapeLeft</string>
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
-	</dict>
+		<!-- 카카오 로그인 — 스킴은 kakao{네이티브 앱 키}.
+	     키는 dart-define으로 주입하지만 URL 스킴은 빌드 시점에 고정돼야 하므로
+	     xcconfig 변수($(KAKAO_NATIVE_APP_KEY))로 받는다. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>kakao$(KAKAO_NATIVE_APP_KEY)</string>
+			</array>
+		</dict>
+	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>kakaokompassauth</string>
+		<string>kakaolink</string>
+	</array>
+</dict>
 </plist>

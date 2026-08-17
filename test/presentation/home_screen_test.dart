@@ -31,10 +31,16 @@ const _profile = UserProfile(
   ),
 );
 
-InterviewSummary _summary({int? score, String? passResult}) => InterviewSummary(
+InterviewSummary _summary({
+  int? score,
+  String? passResult,
+  String? role = '백엔드',
+  SessionStatus status = SessionStatus.completed,
+}) => InterviewSummary(
   id: 'session-1',
-  role: '백엔드',
+  role: role,
   interviewType: 'pressure',
+  status: status,
   score: score,
   passResult: passResult,
   createdAt: DateTime(2026, 8, 15),
@@ -116,8 +122,19 @@ void main() {
   });
 
   testWidgets('완료 전 면접은 점수 대신 진행 중으로 표시한다', (tester) async {
-    await pumpHome(tester, history: [_summary()]);
+    await pumpHome(
+      tester,
+      history: [_summary(status: SessionStatus.inProgress)],
+    );
 
     expect(find.text('진행 중'), findsOneWidget);
+  });
+
+  testWidgets('직무를 고르지 않은 면접은 유형 대신 "직무 미지정"으로 보여준다', (tester) async {
+    // 예전에는 유형으로 대체해 "압박 / 압박 면접"처럼 같은 말이 두 번 나왔다.
+    await pumpHome(tester, history: [_summary(role: null, score: 47)]);
+
+    expect(find.text('직무 미지정'), findsOneWidget);
+    expect(find.text('압박'), findsNothing);
   });
 }

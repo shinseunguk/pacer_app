@@ -1,0 +1,4 @@
+// 카카오 로그인용 네이티브 앱 키.
+// 이 파일을 Kakao.xcconfig 로 복사하고 값을 채운다(gitignore 대상).
+// Info.plist의 URL 스킴 kakao$(KAKAO_NATIVE_APP_KEY) 에 쓰인다.
+KAKAO_NATIVE_APP_KEY = your_kakao_native_app_key

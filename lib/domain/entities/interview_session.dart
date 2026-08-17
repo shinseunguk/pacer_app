@@ -67,6 +67,7 @@ class InterviewSummary {
     required this.id,
     required this.role,
     required this.interviewType,
+    required this.status,
     required this.score,
     required this.passResult,
     required this.createdAt,
@@ -75,9 +76,13 @@ class InterviewSummary {
   final String id;
   final String? role;
   final String interviewType;
+  final SessionStatus status;
   final int? score;
   final String? passResult;
   final DateTime createdAt;
+
+  /// 완료된 면접만 대화 전문으로 간다. 그 외에는 이어서 진행한다.
+  bool get isCompleted => status == SessionStatus.completed;
 }
 
 class InterviewHistoryPage {

@@ -440,4 +440,22 @@ class AppL10nEn extends AppL10n {
   @override
   String get settingsLogoutConfirmBody =>
       'Your records stay saved. Sign back in any time to pick up where you left off.';
+
+  @override
+  String get historyNoRole => 'No role selected';
+
+  @override
+  String get interviewExit => 'Save and exit';
+
+  @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get settingsAppearanceSystem => 'System';
+
+  @override
+  String get settingsAppearanceLight => 'Light';
+
+  @override
+  String get settingsAppearanceDark => 'Dark';
 }

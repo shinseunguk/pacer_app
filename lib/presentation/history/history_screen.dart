@@ -81,7 +81,7 @@ class _HistoryTile extends StatelessWidget {
           horizontal: AppSpacing.md,
           vertical: AppSpacing.sm,
         ),
-        title: Text(summary.role ?? type),
+        title: Text(summary.role ?? l10n.historyNoRole),
         subtitle: Text(
           '$type · $date',
           style: Theme.of(context).textTheme.bodySmall,
@@ -94,8 +94,17 @@ class _HistoryTile extends StatelessWidget {
                 : context.colors.accent,
           ),
         ),
-        onTap: () => context.push(AppRoutes.transcript(summary.id)),
+        onTap: () => _open(context),
       ),
+    );
+  }
+
+  /// 아직 끝나지 않은 면접은 이어서 진행하고, 끝난 면접만 대화 전문으로 간다.
+  void _open(BuildContext context) {
+    context.push(
+      summary.isCompleted
+          ? AppRoutes.transcript(summary.id)
+          : AppRoutes.interviewSession(summary.id),
     );
   }
 }

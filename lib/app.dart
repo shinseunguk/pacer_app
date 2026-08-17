@@ -6,6 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/router/app_router.dart';
 import 'core/theme/app_theme.dart';
 import 'l10n/app_localizations.dart';
+import 'presentation/providers/theme_providers.dart';
 
 class PacerApp extends ConsumerWidget {
   const PacerApp({super.key});
@@ -17,8 +18,8 @@ class PacerApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light(platform: defaultTargetPlatform),
       darkTheme: AppTheme.dark(platform: defaultTargetPlatform),
-      // 시안이 라이트·다크를 모두 정의하므로 기기 설정을 따른다.
-      themeMode: ThemeMode.system,
+      // 설정에서 고른 값(기본: 기기 설정 따름)
+      themeMode: ref.watch(themeModeProvider),
       routerConfig: ref.watch(appRouterProvider),
       localizationsDelegates: const [
         AppL10n.delegate,

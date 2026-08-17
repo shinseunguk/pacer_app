@@ -3,6 +3,7 @@ import '../common/pressable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../core/error/failure.dart';
 import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
@@ -37,6 +38,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
       final error = next.error;
       if (error == null) return;
+      // 사용자가 로그인 창을 닫은 것은 알릴 일이 아니다.
+      if (error is SignInCancelled) return;
+
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(SnackBar(content: Text(failureMessage(error))));

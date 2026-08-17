@@ -55,6 +55,13 @@ class _InterviewScreenState extends ConsumerState<InterviewScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(l10n.interviewTitle),
+        // 진행 화면은 go로 진입해 되돌아갈 스택이 없다 — 나가기 경로를 직접 준다.
+        // 면접은 서버에 계속 저장되므로 홈에서 언제든 이어할 수 있다.
+        leading: IconButton(
+          tooltip: l10n.interviewExit,
+          onPressed: () => context.go(AppRoutes.home),
+          icon: const Icon(Icons.close),
+        ),
         actions: [
           if (sessionState.valueOrNull?.status == SessionStatus.inProgress)
             TextButton(

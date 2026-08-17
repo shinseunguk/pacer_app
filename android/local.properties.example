@@ -1,0 +1,2 @@
+# 카카오 네이티브 앱 키 (local.properties 에 넣는다 — gitignore 대상)
+kakao.nativeAppKey=your_kakao_native_app_key

@@ -188,5 +188,11 @@
   "settingsWithdrawConfirm": "Delete",
   "settingsWithdrawFailed": "Couldn't delete your account. Please try again.",
   "settingsLogoutConfirmTitle": "Sign out?",
-  "settingsLogoutConfirmBody": "Your records stay saved. Sign back in any time to pick up where you left off."
+  "settingsLogoutConfirmBody": "Your records stay saved. Sign back in any time to pick up where you left off.",
+  "historyNoRole": "No role selected",
+  "interviewExit": "Save and exit",
+  "settingsAppearance": "Appearance",
+  "settingsAppearanceSystem": "System",
+  "settingsAppearanceLight": "Light",
+  "settingsAppearanceDark": "Dark"
 }

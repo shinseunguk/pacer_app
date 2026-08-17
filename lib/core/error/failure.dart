@@ -36,6 +36,11 @@ class ValidationFailure extends Failure {
   const ValidationFailure(super.message, {super.code});
 }
 
+/// 사용자가 소셜 로그인 창을 닫음 — 오류가 아니므로 화면에 띄우지 않는다.
+class SignInCancelled extends Failure {
+  const SignInCancelled() : super('', code: 'SIGN_IN_CANCELLED');
+}
+
 class UnknownFailure extends Failure {
   const UnknownFailure([super.message = '잠시 후 다시 시도해주세요.']);
 }

@@ -1,2 +1,5 @@
 #include? "Pods/Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"
 #include "Generated.xcconfig"
+
+// 카카오 네이티브 앱 키 (레포에 커밋하지 않는다 — Kakao.example.xcconfig 참고)
+#include? "Kakao.xcconfig"
