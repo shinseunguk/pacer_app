@@ -79,8 +79,8 @@ class _NicknameEditScreenState extends ConsumerState<NicknameEditScreen> {
                       check.message ?? l10n.onboardingNicknameRule,
                       style: Theme.of(context).textTheme.labelSmall?.copyWith(
                         color: check.isError
-                            ? AppColors.pressure
-                            : AppColors.text3,
+                            ? context.colors.pressure
+                            : context.colors.text3,
                       ),
                     ),
                   ),
@@ -140,14 +140,14 @@ class _StatusIcon extends StatelessWidget {
         padding: EdgeInsets.all(14),
         child: AppSpinner(size: 18),
       ),
-      NicknameStatus.available => const Icon(
+      NicknameStatus.available => Icon(
         Icons.check_circle,
-        color: AppColors.success,
+        color: context.colors.success,
         size: 20,
       ),
-      NicknameStatus.taken || NicknameStatus.invalid => const Icon(
+      NicknameStatus.taken || NicknameStatus.invalid => Icon(
         Icons.error_outline,
-        color: AppColors.pressure,
+        color: context.colors.pressure,
         size: 20,
       ),
       _ => const SizedBox.shrink(),

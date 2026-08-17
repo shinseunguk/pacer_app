@@ -89,7 +89,9 @@ class _HistoryTile extends StatelessWidget {
         trailing: Text(
           summary.score?.toString() ?? l10n.historyInProgress,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: summary.score == null ? AppColors.text2 : AppColors.accent,
+            color: summary.score == null
+                ? context.colors.text2
+                : context.colors.accent,
           ),
         ),
         onTap: () => context.push(AppRoutes.transcript(summary.id)),

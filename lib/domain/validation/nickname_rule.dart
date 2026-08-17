@@ -42,8 +42,7 @@ bool _isAllowed(String grapheme) =>
     _plainCharacter.hasMatch(grapheme) || _isEmoji(grapheme);
 
 /// 사람이 세는 단위로 쪼갠 길이.
-int nicknameLength(String value) =>
-    normalizeNickname(value).characters.length;
+int nicknameLength(String value) => normalizeNickname(value).characters.length;
 
 /// 규칙 위반 사유. 통과하면 null.
 NicknameViolation? findNicknameViolation(String value) {

@@ -100,9 +100,9 @@ class ConsentScreen extends ConsumerWidget {
                   padding: const EdgeInsets.only(bottom: AppSpacing.sm),
                   child: Text(
                     l10n.consentRequired,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.bodySmall?.copyWith(color: AppColors.pressure),
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: context.colors.pressure,
+                    ),
                   ),
                 ),
               FilledButton(

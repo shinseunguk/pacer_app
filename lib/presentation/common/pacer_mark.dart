@@ -13,9 +13,17 @@ class PacerMark extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colors;
+
     return SizedBox.square(
       dimension: size,
-      child: CustomPaint(painter: _PacerMarkPainter(stroke: stroke)),
+      child: CustomPaint(
+        painter: _PacerMarkPainter(
+          stroke: stroke,
+          accent: colors.accent,
+          track: colors.accentSoft,
+        ),
+      ),
     );
   }
 }
@@ -24,26 +32,32 @@ class PacerMark extends StatelessWidget {
 const _progress = 0.62;
 
 class _PacerMarkPainter extends CustomPainter {
-  const _PacerMarkPainter({required this.stroke});
+  const _PacerMarkPainter({
+    required this.stroke,
+    required this.accent,
+    required this.track,
+  });
 
   final double stroke;
+  final Color accent;
+  final Color track;
 
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
     final radius = (size.width - stroke) / 2 - 1;
 
-    final track = Paint()
+    final trackPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke
-      ..color = AppColors.accentSoft;
-    canvas.drawCircle(center, radius, track);
+      ..color = track;
+    canvas.drawCircle(center, radius, trackPaint);
 
     final arc = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = stroke
       ..strokeCap = StrokeCap.round
-      ..color = AppColors.accent;
+      ..color = accent;
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
       -math.pi / 2,
@@ -52,7 +66,7 @@ class _PacerMarkPainter extends CustomPainter {
       arc,
     );
 
-    final dot = Paint()..color = AppColors.accent;
+    final dot = Paint()..color = accent;
     const angle = -math.pi / 2 + _progress * 2 * math.pi;
     canvas.drawCircle(
       center + Offset(radius * math.cos(angle), radius * math.sin(angle)),
@@ -64,7 +78,9 @@ class _PacerMarkPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_PacerMarkPainter oldDelegate) =>
-      oldDelegate.stroke != stroke;
+      oldDelegate.stroke != stroke ||
+      oldDelegate.accent != accent ||
+      oldDelegate.track != track;
 }
 
 /// 로고마크 + 워드마크 (로그인·스플래시 상단).

@@ -17,13 +17,13 @@ class AppShell extends StatelessWidget {
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: DecoratedBox(
-        decoration: const BoxDecoration(
-          border: Border(top: BorderSide(color: AppColors.line)),
+        decoration: BoxDecoration(
+          border: Border(top: BorderSide(color: context.colors.line)),
         ),
         child: NavigationBarTheme(
           data: NavigationBarThemeData(
-            backgroundColor: AppColors.bg,
-            indicatorColor: AppColors.accentSoft,
+            backgroundColor: context.colors.bg,
+            indicatorColor: context.colors.accentSoft,
             surfaceTintColor: Colors.transparent,
             labelTextStyle: WidgetStateProperty.resolveWith(
               (states) => TextStyle(
@@ -32,16 +32,16 @@ class AppShell extends StatelessWidget {
                     ? FontWeight.w700
                     : FontWeight.w600,
                 color: states.contains(WidgetState.selected)
-                    ? AppColors.accent
-                    : AppColors.text3,
+                    ? context.colors.accent
+                    : context.colors.text3,
               ),
             ),
             iconTheme: WidgetStateProperty.resolveWith(
               (states) => IconThemeData(
                 size: 24,
                 color: states.contains(WidgetState.selected)
-                    ? AppColors.accent
-                    : AppColors.text3,
+                    ? context.colors.accent
+                    : context.colors.text3,
               ),
             ),
           ),

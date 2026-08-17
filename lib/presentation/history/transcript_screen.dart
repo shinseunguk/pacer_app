@@ -65,7 +65,9 @@ class _ReportSummary extends StatelessWidget {
             Text(
               report.isPass ? l10n.reportPass : l10n.reportFail,
               style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                color: report.isPass ? AppColors.success : AppColors.pressure,
+                color: report.isPass
+                    ? context.colors.success
+                    : context.colors.pressure,
               ),
             ),
             if (report.showScore)
@@ -98,9 +100,9 @@ class _ModelAnswer extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: AppSpacing.sm),
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.surface2,
+        color: context.colors.surface2,
         borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
-        border: Border.all(color: AppColors.line),
+        border: Border.all(color: context.colors.line),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,7 +111,7 @@ class _ModelAnswer extends StatelessWidget {
             l10n.transcriptModelAnswer,
             style: Theme.of(
               context,
-            ).textTheme.bodySmall?.copyWith(color: AppColors.accent),
+            ).textTheme.bodySmall?.copyWith(color: context.colors.accent),
           ),
           const SizedBox(height: AppSpacing.xs),
           Text(answer, style: Theme.of(context).textTheme.bodyMedium),

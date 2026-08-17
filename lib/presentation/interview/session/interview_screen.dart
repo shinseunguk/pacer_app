@@ -182,7 +182,7 @@ class _ProgressHeader extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppSpacing.xs),
             child: LinearProgressIndicator(
               value: (progress.current / total).clamp(0, 1),
-              backgroundColor: AppColors.surface2,
+              backgroundColor: context.colors.surface2,
               minHeight: 4,
             ),
           ),
@@ -279,8 +279,8 @@ class _Panel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
-      decoration: const BoxDecoration(
-        border: Border(top: BorderSide(color: AppColors.line)),
+      decoration: BoxDecoration(
+        border: Border(top: BorderSide(color: context.colors.line)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,

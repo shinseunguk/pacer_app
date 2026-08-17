@@ -56,14 +56,14 @@ class ProfileScreen extends ConsumerWidget {
                       width: 46,
                       height: 46,
                       decoration: BoxDecoration(
-                        color: AppColors.accentSoft,
+                        color: context.colors.accentSoft,
                         borderRadius: BorderRadius.circular(14),
                       ),
                       child: Center(
                         child: Text(
                           data.nickname.characters.firstOrNull ?? '?',
-                          style: const TextStyle(
-                            color: AppColors.accent,
+                          style: TextStyle(
+                            color: context.colors.accent,
                             fontSize: 19,
                             fontWeight: FontWeight.w700,
                           ),
@@ -87,10 +87,10 @@ class ProfileScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    const Icon(
+                    Icon(
                       Icons.chevron_right,
                       size: 18,
-                      color: AppColors.text3,
+                      color: context.colors.text3,
                     ),
                   ],
                 ),
@@ -107,8 +107,8 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                     Text(
                       '${data.usage.baseQuestionUsed}/${data.usage.limit}',
-                      style: const TextStyle(
-                        color: AppColors.text,
+                      style: TextStyle(
+                        color: context.colors.text,
                         fontWeight: FontWeight.w700,
                         fontFeatures: kNumberFeatures,
                       ),
