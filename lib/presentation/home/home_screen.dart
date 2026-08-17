@@ -404,10 +404,10 @@ class _HistoryRow extends StatelessWidget {
 
     return PacerListRow(
       icon: Icons.work_outline,
-      title: summary.role ?? type,
+      title: summary.role ?? l10n.historyNoRole,
       subtitle: '$type 면접 · $date',
       showDivider: !isLast,
-      onTap: () => context.push(AppRoutes.transcript(summary.id)),
+      onTap: () => _open(context),
       trailing: Padding(
         padding: const EdgeInsets.only(right: 6),
         child: Text(
@@ -422,6 +422,15 @@ class _HistoryRow extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  /// 아직 끝나지 않은 면접은 이어서 진행하고, 끝난 면접만 대화 전문으로 간다.
+  void _open(BuildContext context) {
+    context.push(
+      summary.isCompleted
+          ? AppRoutes.transcript(summary.id)
+          : AppRoutes.interviewSession(summary.id),
     );
   }
 }

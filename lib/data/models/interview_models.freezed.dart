@@ -3510,7 +3510,7 @@ $SessionFeedbackModelCopyWith<$Res>? get feedback {
 /// @nodoc
 mixin _$InterviewSummaryModel {
 
- String get id; String? get role; String get interviewType; int? get score; String? get passResult; DateTime get createdAt;
+ String get id; String? get role; String get interviewType; String get status; int? get score; String? get passResult; DateTime get createdAt;
 /// Create a copy of InterviewSummaryModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3523,16 +3523,16 @@ $InterviewSummaryModelCopyWith<InterviewSummaryModel> get copyWith => _$Intervie
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InterviewSummaryModel&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.interviewType, interviewType) || other.interviewType == interviewType)&&(identical(other.score, score) || other.score == score)&&(identical(other.passResult, passResult) || other.passResult == passResult)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is InterviewSummaryModel&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.interviewType, interviewType) || other.interviewType == interviewType)&&(identical(other.status, status) || other.status == status)&&(identical(other.score, score) || other.score == score)&&(identical(other.passResult, passResult) || other.passResult == passResult)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,role,interviewType,score,passResult,createdAt);
+int get hashCode => Object.hash(runtimeType,id,role,interviewType,status,score,passResult,createdAt);
 
 @override
 String toString() {
-  return 'InterviewSummaryModel(id: $id, role: $role, interviewType: $interviewType, score: $score, passResult: $passResult, createdAt: $createdAt)';
+  return 'InterviewSummaryModel(id: $id, role: $role, interviewType: $interviewType, status: $status, score: $score, passResult: $passResult, createdAt: $createdAt)';
 }
 
 
@@ -3543,7 +3543,7 @@ abstract mixin class $InterviewSummaryModelCopyWith<$Res>  {
   factory $InterviewSummaryModelCopyWith(InterviewSummaryModel value, $Res Function(InterviewSummaryModel) _then) = _$InterviewSummaryModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String? role, String interviewType, int? score, String? passResult, DateTime createdAt
+ String id, String? role, String interviewType, String status, int? score, String? passResult, DateTime createdAt
 });
 
 
@@ -3560,11 +3560,12 @@ class _$InterviewSummaryModelCopyWithImpl<$Res>
 
 /// Create a copy of InterviewSummaryModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? role = freezed,Object? interviewType = null,Object? score = freezed,Object? passResult = freezed,Object? createdAt = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? role = freezed,Object? interviewType = null,Object? status = null,Object? score = freezed,Object? passResult = freezed,Object? createdAt = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String?,interviewType: null == interviewType ? _self.interviewType : interviewType // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,score: freezed == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
 as int?,passResult: freezed == passResult ? _self.passResult : passResult // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable
@@ -3653,10 +3654,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String? role,  String interviewType,  int? score,  String? passResult,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String? role,  String interviewType,  String status,  int? score,  String? passResult,  DateTime createdAt)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _InterviewSummaryModel() when $default != null:
-return $default(_that.id,_that.role,_that.interviewType,_that.score,_that.passResult,_that.createdAt);case _:
+return $default(_that.id,_that.role,_that.interviewType,_that.status,_that.score,_that.passResult,_that.createdAt);case _:
   return orElse();
 
 }
@@ -3674,10 +3675,10 @@ return $default(_that.id,_that.role,_that.interviewType,_that.score,_that.passRe
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String? role,  String interviewType,  int? score,  String? passResult,  DateTime createdAt)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String? role,  String interviewType,  String status,  int? score,  String? passResult,  DateTime createdAt)  $default,) {final _that = this;
 switch (_that) {
 case _InterviewSummaryModel():
-return $default(_that.id,_that.role,_that.interviewType,_that.score,_that.passResult,_that.createdAt);case _:
+return $default(_that.id,_that.role,_that.interviewType,_that.status,_that.score,_that.passResult,_that.createdAt);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -3694,10 +3695,10 @@ return $default(_that.id,_that.role,_that.interviewType,_that.score,_that.passRe
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String? role,  String interviewType,  int? score,  String? passResult,  DateTime createdAt)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String? role,  String interviewType,  String status,  int? score,  String? passResult,  DateTime createdAt)?  $default,) {final _that = this;
 switch (_that) {
 case _InterviewSummaryModel() when $default != null:
-return $default(_that.id,_that.role,_that.interviewType,_that.score,_that.passResult,_that.createdAt);case _:
+return $default(_that.id,_that.role,_that.interviewType,_that.status,_that.score,_that.passResult,_that.createdAt);case _:
   return null;
 
 }
@@ -3709,12 +3710,13 @@ return $default(_that.id,_that.role,_that.interviewType,_that.score,_that.passRe
 @JsonSerializable()
 
 class _InterviewSummaryModel extends InterviewSummaryModel {
-  const _InterviewSummaryModel({required this.id, this.role, required this.interviewType, this.score, this.passResult, required this.createdAt}): super._();
+  const _InterviewSummaryModel({required this.id, this.role, required this.interviewType, this.status = 'in_progress', this.score, this.passResult, required this.createdAt}): super._();
   factory _InterviewSummaryModel.fromJson(Map<String, dynamic> json) => _$InterviewSummaryModelFromJson(json);
 
 @override final  String id;
 @override final  String? role;
 @override final  String interviewType;
+@override@JsonKey() final  String status;
 @override final  int? score;
 @override final  String? passResult;
 @override final  DateTime createdAt;
@@ -3732,16 +3734,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InterviewSummaryModel&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.interviewType, interviewType) || other.interviewType == interviewType)&&(identical(other.score, score) || other.score == score)&&(identical(other.passResult, passResult) || other.passResult == passResult)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InterviewSummaryModel&&(identical(other.id, id) || other.id == id)&&(identical(other.role, role) || other.role == role)&&(identical(other.interviewType, interviewType) || other.interviewType == interviewType)&&(identical(other.status, status) || other.status == status)&&(identical(other.score, score) || other.score == score)&&(identical(other.passResult, passResult) || other.passResult == passResult)&&(identical(other.createdAt, createdAt) || other.createdAt == createdAt));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,role,interviewType,score,passResult,createdAt);
+int get hashCode => Object.hash(runtimeType,id,role,interviewType,status,score,passResult,createdAt);
 
 @override
 String toString() {
-  return 'InterviewSummaryModel(id: $id, role: $role, interviewType: $interviewType, score: $score, passResult: $passResult, createdAt: $createdAt)';
+  return 'InterviewSummaryModel(id: $id, role: $role, interviewType: $interviewType, status: $status, score: $score, passResult: $passResult, createdAt: $createdAt)';
 }
 
 
@@ -3752,7 +3754,7 @@ abstract mixin class _$InterviewSummaryModelCopyWith<$Res> implements $Interview
   factory _$InterviewSummaryModelCopyWith(_InterviewSummaryModel value, $Res Function(_InterviewSummaryModel) _then) = __$InterviewSummaryModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String? role, String interviewType, int? score, String? passResult, DateTime createdAt
+ String id, String? role, String interviewType, String status, int? score, String? passResult, DateTime createdAt
 });
 
 
@@ -3769,11 +3771,12 @@ class __$InterviewSummaryModelCopyWithImpl<$Res>
 
 /// Create a copy of InterviewSummaryModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? role = freezed,Object? interviewType = null,Object? score = freezed,Object? passResult = freezed,Object? createdAt = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? role = freezed,Object? interviewType = null,Object? status = null,Object? score = freezed,Object? passResult = freezed,Object? createdAt = null,}) {
   return _then(_InterviewSummaryModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String?,interviewType: null == interviewType ? _self.interviewType : interviewType // ignore: cast_nullable_to_non_nullable
+as String,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String,score: freezed == score ? _self.score : score // ignore: cast_nullable_to_non_nullable
 as int?,passResult: freezed == passResult ? _self.passResult : passResult // ignore: cast_nullable_to_non_nullable
 as String?,createdAt: null == createdAt ? _self.createdAt : createdAt // ignore: cast_nullable_to_non_nullable

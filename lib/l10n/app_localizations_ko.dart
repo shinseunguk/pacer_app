@@ -426,4 +426,10 @@ class AppL10nKo extends AppL10n {
   @override
   String get settingsLogoutConfirmBody =>
       '기록은 그대로 남아 있어요. 다시 로그인하면 이어서 볼 수 있어요.';
+
+  @override
+  String get historyNoRole => '직무 미지정';
+
+  @override
+  String get interviewExit => '저장하고 나가기';
 }

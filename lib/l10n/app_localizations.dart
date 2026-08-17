@@ -900,6 +900,18 @@ abstract class AppL10n {
   /// In ko, this message translates to:
   /// **'기록은 그대로 남아 있어요. 다시 로그인하면 이어서 볼 수 있어요.'**
   String get settingsLogoutConfirmBody;
+
+  /// No description provided for @historyNoRole.
+  ///
+  /// In ko, this message translates to:
+  /// **'직무 미지정'**
+  String get historyNoRole;
+
+  /// No description provided for @interviewExit.
+  ///
+  /// In ko, this message translates to:
+  /// **'저장하고 나가기'**
+  String get interviewExit;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {
