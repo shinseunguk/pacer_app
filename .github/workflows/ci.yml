@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    name: analyze · test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.41.7
+          channel: stable
+          cache: true
+
+      - run: flutter pub get
+
+      # 커밋된 생성 코드(freezed/json/l10n)가 최신인지 함께 확인한다.
+      - name: Codegen
+        run: |
+          flutter gen-l10n
+          dart run build_runner build --delete-conflicting-outputs
+
+      - name: Codegen이 최신인지 확인
+        run: |
+          if [ -n "$(git status --porcelain lib)" ]; then
+            echo "생성 코드가 최신이 아닙니다. build_runner 결과를 커밋하세요:"
+            git status --porcelain lib
+            exit 1
+          fi
+
+      - name: Analyze
+        run: flutter analyze
+
+      # 계약 테스트(test/contract)는 서버가 필요해 자동으로 건너뛴다.
+      - name: Test
+        run: flutter test
