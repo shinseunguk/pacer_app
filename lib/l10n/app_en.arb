@@ -190,5 +190,9 @@
   "settingsLogoutConfirmTitle": "Sign out?",
   "settingsLogoutConfirmBody": "Your records stay saved. Sign back in any time to pick up where you left off.",
   "historyNoRole": "No role selected",
-  "interviewExit": "Save and exit"
+  "interviewExit": "Save and exit",
+  "settingsAppearance": "Appearance",
+  "settingsAppearanceSystem": "System",
+  "settingsAppearanceLight": "Light",
+  "settingsAppearanceDark": "Dark"
 }

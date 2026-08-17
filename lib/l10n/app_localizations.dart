@@ -912,6 +912,30 @@ abstract class AppL10n {
   /// In ko, this message translates to:
   /// **'저장하고 나가기'**
   String get interviewExit;
+
+  /// No description provided for @settingsAppearance.
+  ///
+  /// In ko, this message translates to:
+  /// **'화면 모드'**
+  String get settingsAppearance;
+
+  /// No description provided for @settingsAppearanceSystem.
+  ///
+  /// In ko, this message translates to:
+  /// **'시스템 설정'**
+  String get settingsAppearanceSystem;
+
+  /// No description provided for @settingsAppearanceLight.
+  ///
+  /// In ko, this message translates to:
+  /// **'라이트'**
+  String get settingsAppearanceLight;
+
+  /// No description provided for @settingsAppearanceDark.
+  ///
+  /// In ko, this message translates to:
+  /// **'다크'**
+  String get settingsAppearanceDark;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

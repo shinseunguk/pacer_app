@@ -432,4 +432,16 @@ class AppL10nKo extends AppL10n {
 
   @override
   String get interviewExit => '저장하고 나가기';
+
+  @override
+  String get settingsAppearance => '화면 모드';
+
+  @override
+  String get settingsAppearanceSystem => '시스템 설정';
+
+  @override
+  String get settingsAppearanceLight => '라이트';
+
+  @override
+  String get settingsAppearanceDark => '다크';
 }

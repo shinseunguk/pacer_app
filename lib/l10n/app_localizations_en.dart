@@ -446,4 +446,16 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get interviewExit => 'Save and exit';
+
+  @override
+  String get settingsAppearance => 'Appearance';
+
+  @override
+  String get settingsAppearanceSystem => 'System';
+
+  @override
+  String get settingsAppearanceLight => 'Light';
+
+  @override
+  String get settingsAppearanceDark => 'Dark';
 }

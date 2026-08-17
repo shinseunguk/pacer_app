@@ -10,7 +10,9 @@ import '../../l10n/app_localizations.dart';
 import '../auth/auth_notifier.dart';
 import '../common/app_spinner.dart';
 import '../common/failure_message.dart';
+import '../common/pressable.dart';
 import '../common/ui.dart';
+import '../providers/theme_providers.dart';
 
 /// S60 설정 — 계정·약관·로그아웃·회원 탈퇴.
 ///
@@ -58,6 +60,8 @@ class SettingsScreen extends ConsumerWidget {
                     onTap: () => context.push(AppRoutes.profileNickname),
                   ),
                 ),
+                const SizedBox(height: AppSpacing.md),
+                const _AppearanceCard(),
                 SectionLabel(label: l10n.settingsLegal),
                 PacerCard(
                   padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -175,4 +179,72 @@ Future<bool> _confirm(
     ),
   );
   return result ?? false;
+}
+
+/// 화면 모드 선택 — 시스템 설정을 따르거나 라이트·다크로 고정한다.
+class _AppearanceCard extends ConsumerWidget {
+  const _AppearanceCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppL10n.of(context);
+    final mode = ref.watch(themeModeProvider);
+
+    final labels = {
+      ThemeMode.system: l10n.settingsAppearanceSystem,
+      ThemeMode.light: l10n.settingsAppearanceLight,
+      ThemeMode.dark: l10n.settingsAppearanceDark,
+    };
+
+    return PacerCard(
+      radius: 20,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                switch (mode) {
+                  ThemeMode.light => Icons.light_mode_outlined,
+                  ThemeMode.dark => Icons.dark_mode_outlined,
+                  ThemeMode.system => Icons.brightness_auto_outlined,
+                },
+                size: 19,
+                color: context.colors.text2,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                l10n.settingsAppearance,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ],
+          ),
+          DropdownButtonHideUnderline(
+            child: DropdownButton<ThemeMode>(
+              value: mode,
+              isDense: true,
+              borderRadius: BorderRadius.circular(AppSpacing.radiusSm),
+              dropdownColor: context.colors.surface2,
+              style: Theme.of(context).textTheme.bodyMedium,
+              icon: Icon(
+                Icons.expand_more,
+                size: 18,
+                color: context.colors.text3,
+              ),
+              items: [
+                for (final entry in labels.entries)
+                  DropdownMenuItem(value: entry.key, child: Text(entry.value)),
+              ],
+              onChanged: (selected) {
+                if (selected == null) return;
+
+                hapticTap();
+                ref.read(themeModeProvider.notifier).select(selected);
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
