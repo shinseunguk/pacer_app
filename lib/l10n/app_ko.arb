@@ -1,0 +1,175 @@
+{
+  "@@locale": "ko",
+  "appName": "페이서",
+  "appTagline": "면접, 혼자 뛰지 마세요",
+  "commonNext": "다음",
+  "commonRetry": "다시 시도",
+  "commonStart": "시작하기",
+  "commonCancel": "취소",
+  "commonConfirm": "확인",
+  "commonSkip": "건너뛰기",
+  "commonLoadFailed": "불러오지 못했어요.",
+  "loginKakao": "카카오로 시작하기",
+  "loginApple": "Apple로 시작하기",
+  "loginDevMock": "테스트 계정으로 계속하기 (dev)",
+  "loginTermsNotice": "로그인하면 이용약관과 개인정보 처리방침에 동의하게 됩니다.",
+  "loginFailed": "로그인하지 못했어요. 다시 시도해주세요.",
+  "onboardingNicknameTitle": "어떻게 불러드릴까요?",
+  "onboardingNicknameDescription": "면접관이 부를 이름이에요. 나중에 바꿀 수 있어요.",
+  "onboardingNicknameHint": "닉네임 (2~12자)",
+  "onboardingNicknameEmpty": "닉네임을 입력해주세요.",
+  "onboardingNicknameTooLong": "닉네임은 20자까지 입력할 수 있어요.",
+  "consentTitle": "약관에 동의해주세요",
+  "consentAll": "전체 동의",
+  "consentTerms": "[필수] 서비스 이용약관",
+  "consentPrivacy": "[필수] 개인정보 수집·이용 동의",
+  "consentLlm": "[필수] 면접 내용의 AI 처리 위탁 동의",
+  "consentLlmDescription": "입력한 공고·경력·답변은 면접 질문과 평가 생성을 위해 AI 모델로 전송돼요.",
+  "consentMarketing": "[선택] 마케팅 정보 수신",
+  "consentRequired": "필수 항목에 모두 동의해야 시작할 수 있어요.",
+  "homeGreeting": "안녕하세요, {nickname}님",
+  "@homeGreeting": {
+    "placeholders": {
+      "nickname": {
+        "type": "String"
+      }
+    }
+  },
+  "homeQuotaRemaining": "오늘 남은 질문 {remaining}개",
+  "@homeQuotaRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "homeStartInterview": "새 면접 시작",
+  "homeRecentTitle": "최근 면접",
+  "homeHistory": "히스토리",
+  "homeEmptyHistory": "아직 진행한 면접이 없어요. 첫 면접을 시작해보세요.",
+  "homeSignOut": "로그아웃",
+  "prepTitle": "면접 준비",
+  "prepSourcePaste": "공고 붙여넣기",
+  "prepSourceTemplate": "직무로 시작",
+  "prepPostingLabel": "채용 공고",
+  "prepPostingHint": "주요 업무·자격요건을 붙여넣어 주세요.",
+  "prepPostingEmpty": "공고 내용을 입력해주세요.",
+  "prepSelectJob": "직무 선택",
+  "prepSelectJobEmpty": "직무를 선택하거나 직접 입력해주세요.",
+  "prepSelectedJob": "선택한 직무: {role}",
+  "@prepSelectedJob": {
+    "placeholders": {
+      "role": {
+        "type": "String"
+      }
+    }
+  },
+  "jobTitle": "직무 선택",
+  "jobCustomLabel": "목록에 없다면 직접 입력",
+  "jobCustomHint": "예: 로봇 소프트웨어",
+  "jobCustomApply": "직접 입력한 직무 사용",
+  "applicantTitle": "지원자 정보",
+  "applicantDescription": "경력·자기소개를 적으면 더 맞춤형 질문이 나와요. (선택)",
+  "applicantHint": "예: 경력 3년, 결제 시스템 백엔드 개발...",
+  "setupTitle": "면접 설정",
+  "setupType": "면접 유형",
+  "setupTypeGeneral": "일반",
+  "setupTypePressure": "압박",
+  "setupDifficulty": "난이도",
+  "setupDifficultyLow": "쉬움",
+  "setupDifficultyMid": "보통",
+  "setupDifficultyHigh": "어려움",
+  "setupQuestionCount": "기본 질문 수",
+  "setupQuestionCountValue": "{count}문항",
+  "@setupQuestionCountValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "setupShowScore": "리포트에 점수 표시",
+  "setupStart": "면접 시작",
+  "interviewTitle": "면접 진행",
+  "interviewProgress": "질문 {current}/{total}",
+  "@interviewProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "interviewInputHint": "답변을 입력하세요",
+  "interviewSend": "전송",
+  "interviewSkip": "모르겠습니다",
+  "interviewSkipped": "모르겠습니다 (미응답)",
+  "interviewPause": "일시정지",
+  "interviewPausedNotice": "일시정지된 면접이에요. 이어하기를 누르면 계속됩니다.",
+  "interviewResume": "이어하기",
+  "interviewFinish": "면접 종료하고 리포트 보기",
+  "interviewSendFailed": "전송하지 못했어요. 답변은 그대로 두었으니 다시 시도해주세요.",
+  "reportTitle": "최종 리포트",
+  "reportPass": "합격",
+  "reportFail": "불합격",
+  "reportScoreHidden": "점수 표시를 꺼둔 면접이에요.",
+  "reportCriteriaTitle": "항목별 점수",
+  "reportReasonTitle": "판정 근거",
+  "reportHome": "홈으로",
+  "reportTranscript": "대화 전문 보기",
+  "criterionLogic": "논리",
+  "criterionJobFit": "직무 적합",
+  "criterionStructure": "답변 구조",
+  "criterionKeyword": "전문성",
+  "historyTitle": "히스토리",
+  "historyEmpty": "아직 기록이 없어요. 첫 면접을 시작해보세요.",
+  "historyInProgress": "진행 중",
+  "transcriptTitle": "대화 전문",
+  "transcriptModelAnswer": "모범답안",
+  "legalTitle": "약관",
+  "legalVersion": "버전 {version} · 시행일 {date}",
+  "legalView": "보기",
+  "@legalVersion": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      },
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "loginSubcopy": "면접 이력과 성장 추이는 계정에 안전하게 저장돼요.",
+  "loginNoticeTerms": "계속하면 이용약관 및 개인정보 처리방침에 동의하는 것으로 간주됩니다.",
+  "loginNoticeAi": "입력한 내용은 AI 분석을 위해 전송돼요.",
+  "legalTerms": "이용약관",
+  "legalPrivacy": "개인정보 처리방침",
+  "homeSubcopy": "오늘도 한 발 앞서 준비해볼까요?",
+  "homeStreak": "연속 연습",
+  "homeStreakDays": "{days}일",
+  "homeQuotaTitle": "오늘 기본 질문",
+  "homeQuotaNote": "꼬리질문 미차감 · 자정 초기화",
+  "homeHeroBadge": "준비됐나요?",
+  "homeHeroTitle": "새 면접 시작하기",
+  "homeHeroSubtitle": "공고를 넣고 맞춤 면접을 뛰어보세요",
+  "homeHeroAction": "공고 입력",
+  "homeSectionRecent": "최근 면접",
+  "homeSeeAll": "전체 보기",
+  "tabHome": "홈",
+  "tabHistory": "기록",
+  "tabProfile": "마이",
+  "@homeStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingNicknameRule": "한글·영문·숫자·이모지로 2~12자",
+  "onboardingNicknameTaken": "이미 사용 중인 닉네임이에요.",
+  "profileEditNickname": "닉네임 수정",
+  "commonSave": "저장",
+  "profileNicknameChanged": "닉네임을 바꿨어요."
+}
