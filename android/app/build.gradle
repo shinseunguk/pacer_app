@@ -49,6 +49,13 @@ android {
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
+
+        // 카카오 리다이렉트 스킴에 쓰이는 네이티브 앱 키.
+        // 로컬은 local.properties, CI는 환경변수로 넣는다(레포에 커밋하지 않는다).
+        manifestPlaceholders = [
+            KAKAO_NATIVE_APP_KEY: localProperties.getProperty('kakao.nativeAppKey')
+                ?: (System.getenv('KAKAO_NATIVE_APP_KEY') ?: '')
+        ]
     }
 
     buildTypes {

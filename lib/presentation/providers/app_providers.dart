@@ -10,6 +10,7 @@ import '../../core/network/dio_client.dart';
 import '../../core/storage/session_prefs.dart';
 import '../../core/storage/token_storage.dart';
 import '../../data/datasources/auth_remote_data_source.dart';
+import '../../data/datasources/kakao_social_auth_service.dart';
 import '../../data/datasources/social_auth_service.dart';
 import '../../data/datasources/user_remote_data_source.dart';
 import '../../data/repositories/auth_repository_impl.dart';
@@ -67,9 +68,10 @@ final dioProvider = Provider<Dio>((ref) {
 
 final socialAuthServiceProvider = Provider<SocialAuthService>((ref) {
   final config = ref.watch(appConfigProvider);
-  return config.useMockSocialLogin
-      ? const MockSocialAuthService()
-      : const UnavailableSocialAuthService();
+
+  if (config.useMockSocialLogin) return const MockSocialAuthService();
+  if (config.hasKakaoKey) return const KakaoSocialAuthService();
+  return const UnavailableSocialAuthService();
 });
 
 final authRepositoryProvider = Provider<AuthRepository>((ref) {

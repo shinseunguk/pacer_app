@@ -25,6 +25,7 @@ build/
 *.log
 
 # iOS
+ios/Flutter/Kakao.xcconfig
 ios/Pods/
 ios/.symlinks/
 ios/Flutter/Flutter.framework
