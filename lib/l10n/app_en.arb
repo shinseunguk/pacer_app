@@ -178,5 +178,15 @@
   "reportFeedbackThanks": "Thanks — we'll use this to improve the evaluation.",
   "reportFeedbackReasonHint": "What fell short? (optional)",
   "reportFeedbackSend": "Send",
-  "reportFeedbackFailed": "Couldn't send your feedback. Please try again."
+  "reportFeedbackFailed": "Couldn't send your feedback. Please try again.",
+  "settingsTitle": "Settings",
+  "settingsAccount": "Account",
+  "settingsLegal": "Legal",
+  "settingsWithdraw": "Delete account",
+  "settingsWithdrawConfirmTitle": "Delete your account?",
+  "settingsWithdrawConfirmBody": "Your interviews and reports will be deleted permanently. Job posts and career details you entered are destroyed without delay.",
+  "settingsWithdrawConfirm": "Delete",
+  "settingsWithdrawFailed": "Couldn't delete your account. Please try again.",
+  "settingsLogoutConfirmTitle": "Sign out?",
+  "settingsLogoutConfirmBody": "Your records stay saved. Sign back in any time to pick up where you left off."
 }

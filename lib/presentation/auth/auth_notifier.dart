@@ -62,6 +62,16 @@ class AuthNotifier extends AsyncNotifier<AuthStatus> {
     });
   }
 
+  /// 회원 탈퇴 — 파기 요청 후 로그인 화면으로 돌아간다.
+  Future<void> withdraw() async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      await ref.read(withdrawAccountProvider)();
+      await ref.read(sessionPrefsProvider).clear();
+      return AuthStatus.unauthenticated;
+    });
+  }
+
   /// Called by the auth interceptor when a refresh finally fails.
   Future<void> handleSessionExpired() async {
     await ref.read(sessionPrefsProvider).clear();

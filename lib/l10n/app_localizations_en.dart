@@ -407,4 +407,37 @@ class AppL10nEn extends AppL10n {
   @override
   String get reportFeedbackFailed =>
       'Couldn\'t send your feedback. Please try again.';
+
+  @override
+  String get settingsTitle => 'Settings';
+
+  @override
+  String get settingsAccount => 'Account';
+
+  @override
+  String get settingsLegal => 'Legal';
+
+  @override
+  String get settingsWithdraw => 'Delete account';
+
+  @override
+  String get settingsWithdrawConfirmTitle => 'Delete your account?';
+
+  @override
+  String get settingsWithdrawConfirmBody =>
+      'Your interviews and reports will be deleted permanently. Job posts and career details you entered are destroyed without delay.';
+
+  @override
+  String get settingsWithdrawConfirm => 'Delete';
+
+  @override
+  String get settingsWithdrawFailed =>
+      'Couldn\'t delete your account. Please try again.';
+
+  @override
+  String get settingsLogoutConfirmTitle => 'Sign out?';
+
+  @override
+  String get settingsLogoutConfirmBody =>
+      'Your records stay saved. Sign back in any time to pick up where you left off.';
 }

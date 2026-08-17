@@ -394,4 +394,36 @@ class AppL10nKo extends AppL10n {
 
   @override
   String get reportFeedbackFailed => '의견을 보내지 못했어요. 잠시 후 다시 시도해주세요.';
+
+  @override
+  String get settingsTitle => '설정';
+
+  @override
+  String get settingsAccount => '계정';
+
+  @override
+  String get settingsLegal => '약관·정책';
+
+  @override
+  String get settingsWithdraw => '회원 탈퇴';
+
+  @override
+  String get settingsWithdrawConfirmTitle => '정말 탈퇴하시겠어요?';
+
+  @override
+  String get settingsWithdrawConfirmBody =>
+      '탈퇴하면 면접 기록과 평가가 모두 삭제되고 되돌릴 수 없어요. 입력하신 공고·경력 정보도 지체 없이 파기돼요.';
+
+  @override
+  String get settingsWithdrawConfirm => '탈퇴하기';
+
+  @override
+  String get settingsWithdrawFailed => '탈퇴하지 못했어요. 잠시 후 다시 시도해주세요.';
+
+  @override
+  String get settingsLogoutConfirmTitle => '로그아웃할까요?';
+
+  @override
+  String get settingsLogoutConfirmBody =>
+      '기록은 그대로 남아 있어요. 다시 로그인하면 이어서 볼 수 있어요.';
 }

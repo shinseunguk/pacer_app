@@ -28,6 +28,7 @@ abstract final class AppRoutes {
   static const history = '/history';
   static const profile = '/profile';
   static const profileNickname = '/profile/nickname';
+  static const settings = '/profile/settings';
   static const transcriptPattern = '/transcript/:id';
 
   static String transcript(String id) => '/transcript/$id';

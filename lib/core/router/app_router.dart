@@ -20,6 +20,7 @@ import '../../presentation/onboarding/consent_screen.dart';
 import '../../presentation/onboarding/nickname_screen.dart';
 import '../../presentation/profile/nickname_edit_screen.dart';
 import '../../presentation/profile/profile_screen.dart';
+import '../../presentation/settings/settings_screen.dart';
 import '../../presentation/splash/splash_screen.dart';
 import 'routes.dart';
 
@@ -79,6 +80,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                   GoRoute(
                     path: 'nickname',
                     builder: (_, _) => const NicknameEditScreen(),
+                  ),
+                  GoRoute(
+                    path: 'settings',
+                    builder: (_, _) => const SettingsScreen(),
                   ),
                 ],
               ),
