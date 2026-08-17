@@ -14,6 +14,7 @@ import 'package:pacer_app/data/repositories/interview_repository_impl.dart';
 import 'package:pacer_app/data/repositories/legal_repository_impl.dart';
 import 'package:pacer_app/domain/entities/agreements.dart';
 import 'package:pacer_app/domain/entities/interview_message.dart';
+import 'package:pacer_app/domain/entities/interview_report.dart';
 import 'package:pacer_app/domain/entities/interview_setup.dart';
 import 'package:pacer_app/domain/entities/interview_turn_event.dart';
 import 'package:pacer_app/domain/entities/legal_document.dart';
@@ -212,6 +213,18 @@ void main() {
         final detail = await repository.getDetail(created.sessionId);
         expect(detail.messages, isNotEmpty);
         expect(detail.report?.overallScore, report.overallScore);
+
+        // 리포트 만족도 — MVP 성공 기준 §6 지표 수집
+        final feedback = await repository.submitFeedback(
+          created.sessionId,
+          rating: FeedbackRating.down,
+          comment: '점수 근거가 약해요',
+        );
+        expect(feedback.rating, FeedbackRating.down);
+
+        final withFeedback = await repository.getDetail(created.sessionId);
+        expect(withFeedback.feedback?.rating, FeedbackRating.down);
+        expect(withFeedback.feedback?.comment, '점수 근거가 약해요');
 
         final history = await repository.getHistory(limit: 5);
         expect(

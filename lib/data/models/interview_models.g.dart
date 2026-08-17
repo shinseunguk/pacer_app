@@ -193,6 +193,17 @@ Map<String, dynamic> _$InterviewSessionModelToJson(
   'createdAt': instance.createdAt.toIso8601String(),
 };
 
+_SessionFeedbackModel _$SessionFeedbackModelFromJson(
+  Map<String, dynamic> json,
+) => _SessionFeedbackModel(
+  rating: json['rating'] as String,
+  comment: json['comment'] as String?,
+);
+
+Map<String, dynamic> _$SessionFeedbackModelToJson(
+  _SessionFeedbackModel instance,
+) => <String, dynamic>{'rating': instance.rating, 'comment': instance.comment};
+
 _InterviewDetailModel _$InterviewDetailModelFromJson(
   Map<String, dynamic> json,
 ) => _InterviewDetailModel(
@@ -209,6 +220,9 @@ _InterviewDetailModel _$InterviewDetailModelFromJson(
   report: json['report'] == null
       ? null
       : InterviewReportModel.fromJson(json['report'] as Map<String, dynamic>),
+  feedback: json['feedback'] == null
+      ? null
+      : SessionFeedbackModel.fromJson(json['feedback'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$InterviewDetailModelToJson(
@@ -217,6 +231,7 @@ Map<String, dynamic> _$InterviewDetailModelToJson(
   'session': instance.session,
   'messages': instance.messages,
   'report': instance.report,
+  'feedback': instance.feedback,
 };
 
 _InterviewSummaryModel _$InterviewSummaryModelFromJson(

@@ -203,6 +203,26 @@ abstract class InterviewSessionModel with _$InterviewSessionModel {
       _$InterviewSessionModelFromJson(json);
 }
 
+@freezed
+abstract class SessionFeedbackModel with _$SessionFeedbackModel {
+  const SessionFeedbackModel._();
+
+  const factory SessionFeedbackModel({
+    required String rating,
+    String? comment,
+  }) = _SessionFeedbackModel;
+
+  factory SessionFeedbackModel.fromJson(Map<String, dynamic> json) =>
+      _$SessionFeedbackModelFromJson(json);
+
+  SessionFeedback? toEntity() {
+    final parsed = FeedbackRating.fromValue(rating);
+    return parsed == null
+        ? null
+        : SessionFeedback(rating: parsed, comment: comment);
+  }
+}
+
 /// `GET /interviews/{id}`
 @freezed
 abstract class InterviewDetailModel with _$InterviewDetailModel {
@@ -212,6 +232,7 @@ abstract class InterviewDetailModel with _$InterviewDetailModel {
     required InterviewSessionModel session,
     @Default(<InterviewMessageModel>[]) List<InterviewMessageModel> messages,
     InterviewReportModel? report,
+    SessionFeedbackModel? feedback,
   }) = _InterviewDetailModel;
 
   factory InterviewDetailModel.fromJson(Map<String, dynamic> json) =>
@@ -227,6 +248,7 @@ abstract class InterviewDetailModel with _$InterviewDetailModel {
     createdAt: session.createdAt,
     messages: messages.map((message) => message.toEntity()).toList(),
     report: report?.toEntity(),
+    feedback: feedback?.toEntity(),
   );
 }
 

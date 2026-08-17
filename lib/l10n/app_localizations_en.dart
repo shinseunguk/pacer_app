@@ -384,4 +384,27 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get profileNicknameChanged => 'Nickname updated.';
+
+  @override
+  String get reportFeedbackQuestion => 'Was this report helpful?';
+
+  @override
+  String get reportFeedbackUp => 'Helpful';
+
+  @override
+  String get reportFeedbackDown => 'Not really';
+
+  @override
+  String get reportFeedbackThanks =>
+      'Thanks — we\'ll use this to improve the evaluation.';
+
+  @override
+  String get reportFeedbackReasonHint => 'What fell short? (optional)';
+
+  @override
+  String get reportFeedbackSend => 'Send';
+
+  @override
+  String get reportFeedbackFailed =>
+      'Couldn\'t send your feedback. Please try again.';
 }

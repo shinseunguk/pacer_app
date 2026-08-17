@@ -171,5 +171,12 @@
   "onboardingNicknameTaken": "이미 사용 중인 닉네임이에요.",
   "profileEditNickname": "닉네임 수정",
   "commonSave": "저장",
-  "profileNicknameChanged": "닉네임을 바꿨어요."
+  "profileNicknameChanged": "닉네임을 바꿨어요.",
+  "reportFeedbackQuestion": "이 리포트가 도움이 되었나요?",
+  "reportFeedbackUp": "도움돼요",
+  "reportFeedbackDown": "아쉬워요",
+  "reportFeedbackThanks": "의견 고마워요. 평가 품질을 높이는 데 쓸게요.",
+  "reportFeedbackReasonHint": "어떤 점이 아쉬웠나요? (선택)",
+  "reportFeedbackSend": "보내기",
+  "reportFeedbackFailed": "의견을 보내지 못했어요. 잠시 후 다시 시도해주세요."
 }

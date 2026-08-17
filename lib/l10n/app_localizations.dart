@@ -798,6 +798,48 @@ abstract class AppL10n {
   /// In ko, this message translates to:
   /// **'닉네임을 바꿨어요.'**
   String get profileNicknameChanged;
+
+  /// No description provided for @reportFeedbackQuestion.
+  ///
+  /// In ko, this message translates to:
+  /// **'이 리포트가 도움이 되었나요?'**
+  String get reportFeedbackQuestion;
+
+  /// No description provided for @reportFeedbackUp.
+  ///
+  /// In ko, this message translates to:
+  /// **'도움돼요'**
+  String get reportFeedbackUp;
+
+  /// No description provided for @reportFeedbackDown.
+  ///
+  /// In ko, this message translates to:
+  /// **'아쉬워요'**
+  String get reportFeedbackDown;
+
+  /// No description provided for @reportFeedbackThanks.
+  ///
+  /// In ko, this message translates to:
+  /// **'의견 고마워요. 평가 품질을 높이는 데 쓸게요.'**
+  String get reportFeedbackThanks;
+
+  /// No description provided for @reportFeedbackReasonHint.
+  ///
+  /// In ko, this message translates to:
+  /// **'어떤 점이 아쉬웠나요? (선택)'**
+  String get reportFeedbackReasonHint;
+
+  /// No description provided for @reportFeedbackSend.
+  ///
+  /// In ko, this message translates to:
+  /// **'보내기'**
+  String get reportFeedbackSend;
+
+  /// No description provided for @reportFeedbackFailed.
+  ///
+  /// In ko, this message translates to:
+  /// **'의견을 보내지 못했어요. 잠시 후 다시 시도해주세요.'**
+  String get reportFeedbackFailed;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

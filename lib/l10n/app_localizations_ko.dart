@@ -373,4 +373,25 @@ class AppL10nKo extends AppL10n {
 
   @override
   String get profileNicknameChanged => '닉네임을 바꿨어요.';
+
+  @override
+  String get reportFeedbackQuestion => '이 리포트가 도움이 되었나요?';
+
+  @override
+  String get reportFeedbackUp => '도움돼요';
+
+  @override
+  String get reportFeedbackDown => '아쉬워요';
+
+  @override
+  String get reportFeedbackThanks => '의견 고마워요. 평가 품질을 높이는 데 쓸게요.';
+
+  @override
+  String get reportFeedbackReasonHint => '어떤 점이 아쉬웠나요? (선택)';
+
+  @override
+  String get reportFeedbackSend => '보내기';
+
+  @override
+  String get reportFeedbackFailed => '의견을 보내지 못했어요. 잠시 후 다시 시도해주세요.';
 }

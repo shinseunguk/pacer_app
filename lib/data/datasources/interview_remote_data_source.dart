@@ -70,6 +70,18 @@ class InterviewRemoteDataSource {
     return CompleteInterviewModel.fromJson(response.data ?? const {});
   }
 
+  Future<SessionFeedbackModel> submitFeedback(
+    String sessionId, {
+    required String rating,
+    String? comment,
+  }) async {
+    final response = await _dio.post<Map<String, dynamic>>(
+      ApiPaths.interviewFeedback(sessionId),
+      data: {'rating': rating, if (comment != null) 'comment': comment},
+    );
+    return SessionFeedbackModel.fromJson(response.data ?? const {});
+  }
+
   Future<InterviewDetailModel> getDetail(String sessionId) async {
     final response = await _dio.get<Map<String, dynamic>>(
       ApiPaths.interview(sessionId),
