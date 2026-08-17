@@ -6,9 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
-import '../../domain/entities/legal_document.dart';
 import '../../l10n/app_localizations.dart';
-import '../auth/auth_notifier.dart';
 import '../common/app_error_view.dart';
 import '../common/ui.dart';
 import '../providers/user_providers.dart';
@@ -23,7 +21,16 @@ class ProfileScreen extends ConsumerWidget {
     final profile = ref.watch(myProfileProvider);
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.tabProfile)),
+      appBar: AppBar(
+        title: Text(l10n.tabProfile),
+        actions: [
+          IconButton(
+            tooltip: l10n.settingsTitle,
+            onPressed: () => context.push(AppRoutes.settings),
+            icon: const Icon(Icons.settings_outlined),
+          ),
+        ],
+      ),
       body: SafeArea(
         bottom: false,
         child: profile.when(
@@ -108,38 +115,6 @@ class ProfileScreen extends ConsumerWidget {
                     ),
                   ],
                 ),
-              ),
-              const SizedBox(height: AppSpacing.md),
-              PacerCard(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
-                radius: 20,
-                child: Column(
-                  children: [
-                    PacerListRow(
-                      icon: Icons.description_outlined,
-                      title: l10n.legalTerms,
-                      subtitle: l10n.legalTitle,
-                      onTap: () => context.push(
-                        AppRoutes.legal(LegalDocumentType.terms.value),
-                      ),
-                    ),
-                    PacerListRow(
-                      icon: Icons.privacy_tip_outlined,
-                      title: l10n.legalPrivacy,
-                      subtitle: l10n.legalTitle,
-                      showDivider: false,
-                      onTap: () => context.push(
-                        AppRoutes.legal(LegalDocumentType.privacy.value),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: AppSpacing.lg),
-              OutlinedButton(
-                onPressed: () =>
-                    ref.read(authNotifierProvider.notifier).signOut(),
-                child: Text(l10n.homeSignOut),
               ),
             ],
           ),

@@ -840,6 +840,66 @@ abstract class AppL10n {
   /// In ko, this message translates to:
   /// **'의견을 보내지 못했어요. 잠시 후 다시 시도해주세요.'**
   String get reportFeedbackFailed;
+
+  /// No description provided for @settingsTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'설정'**
+  String get settingsTitle;
+
+  /// No description provided for @settingsAccount.
+  ///
+  /// In ko, this message translates to:
+  /// **'계정'**
+  String get settingsAccount;
+
+  /// No description provided for @settingsLegal.
+  ///
+  /// In ko, this message translates to:
+  /// **'약관·정책'**
+  String get settingsLegal;
+
+  /// No description provided for @settingsWithdraw.
+  ///
+  /// In ko, this message translates to:
+  /// **'회원 탈퇴'**
+  String get settingsWithdraw;
+
+  /// No description provided for @settingsWithdrawConfirmTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'정말 탈퇴하시겠어요?'**
+  String get settingsWithdrawConfirmTitle;
+
+  /// No description provided for @settingsWithdrawConfirmBody.
+  ///
+  /// In ko, this message translates to:
+  /// **'탈퇴하면 면접 기록과 평가가 모두 삭제되고 되돌릴 수 없어요. 입력하신 공고·경력 정보도 지체 없이 파기돼요.'**
+  String get settingsWithdrawConfirmBody;
+
+  /// No description provided for @settingsWithdrawConfirm.
+  ///
+  /// In ko, this message translates to:
+  /// **'탈퇴하기'**
+  String get settingsWithdrawConfirm;
+
+  /// No description provided for @settingsWithdrawFailed.
+  ///
+  /// In ko, this message translates to:
+  /// **'탈퇴하지 못했어요. 잠시 후 다시 시도해주세요.'**
+  String get settingsWithdrawFailed;
+
+  /// No description provided for @settingsLogoutConfirmTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'로그아웃할까요?'**
+  String get settingsLogoutConfirmTitle;
+
+  /// No description provided for @settingsLogoutConfirmBody.
+  ///
+  /// In ko, this message translates to:
+  /// **'기록은 그대로 남아 있어요. 다시 로그인하면 이어서 볼 수 있어요.'**
+  String get settingsLogoutConfirmBody;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

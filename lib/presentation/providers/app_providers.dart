@@ -23,6 +23,7 @@ import '../../domain/usecases/get_my_profile.dart';
 import '../../domain/usecases/sign_in_with_social.dart';
 import '../../domain/usecases/sign_out.dart';
 import '../../domain/usecases/update_nickname.dart';
+import '../../domain/usecases/withdraw_account.dart';
 import '../auth/auth_notifier.dart';
 
 /// Overridden in `main()` after `SharedPreferences.getInstance()`.
@@ -101,6 +102,13 @@ final checkNicknameProvider = Provider(
 
 final updateNicknameProvider = Provider(
   (ref) => UpdateNicknameUseCase(ref.watch(userRepositoryProvider)),
+);
+
+final withdrawAccountProvider = Provider(
+  (ref) => WithdrawAccountUseCase(
+    user: ref.watch(userRepositoryProvider),
+    auth: ref.watch(authRepositoryProvider),
+  ),
 );
 
 final getMyProfileProvider = Provider(

@@ -178,5 +178,15 @@
   "reportFeedbackThanks": "의견 고마워요. 평가 품질을 높이는 데 쓸게요.",
   "reportFeedbackReasonHint": "어떤 점이 아쉬웠나요? (선택)",
   "reportFeedbackSend": "보내기",
-  "reportFeedbackFailed": "의견을 보내지 못했어요. 잠시 후 다시 시도해주세요."
+  "reportFeedbackFailed": "의견을 보내지 못했어요. 잠시 후 다시 시도해주세요.",
+  "settingsTitle": "설정",
+  "settingsAccount": "계정",
+  "settingsLegal": "약관·정책",
+  "settingsWithdraw": "회원 탈퇴",
+  "settingsWithdrawConfirmTitle": "정말 탈퇴하시겠어요?",
+  "settingsWithdrawConfirmBody": "탈퇴하면 면접 기록과 평가가 모두 삭제되고 되돌릴 수 없어요. 입력하신 공고·경력 정보도 지체 없이 파기돼요.",
+  "settingsWithdrawConfirm": "탈퇴하기",
+  "settingsWithdrawFailed": "탈퇴하지 못했어요. 잠시 후 다시 시도해주세요.",
+  "settingsLogoutConfirmTitle": "로그아웃할까요?",
+  "settingsLogoutConfirmBody": "기록은 그대로 남아 있어요. 다시 로그인하면 이어서 볼 수 있어요."
 }
