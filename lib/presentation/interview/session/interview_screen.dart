@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../common/app_spinner.dart';
-import '../../common/pressable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,10 +9,14 @@ import '../../../domain/entities/interview_message.dart';
 import '../../../domain/entities/interview_session.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../common/app_error_view.dart';
-import '../../common/failure_message.dart';
+import '../../common/app_spinner.dart';
+import '../../common/pressable.dart';
+import '../../common/ui.dart';
 import '../../providers/user_providers.dart';
 import 'interview_session_notifier.dart';
 import 'widgets/chat_bubble.dart';
+import 'widgets/pause_sheet.dart';
+import 'widgets/turn_error_card.dart';
 
 /// S20 — 채팅 면접. 답변은 SSE로 스트리밍되어 흘러 들어온다.
 class InterviewScreen extends ConsumerStatefulWidget {
@@ -37,20 +39,13 @@ class _InterviewScreenState extends ConsumerState<InterviewScreen> {
     super.dispose();
   }
 
+  InterviewSessionNotifier get _notifier =>
+      ref.read(interviewSessionProvider(widget.sessionId).notifier);
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppL10n.of(context);
-    final provider = interviewSessionProvider(widget.sessionId);
-    final sessionState = ref.watch(provider);
-
-    ref.listen(provider, (_, next) {
-      final error = next.valueOrNull?.turnError;
-      if (error == null) return;
-
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text(failureMessage(error))));
-    });
+    final sessionState = ref.watch(interviewSessionProvider(widget.sessionId));
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +60,7 @@ class _InterviewScreenState extends ConsumerState<InterviewScreen> {
         actions: [
           if (sessionState.valueOrNull?.status == SessionStatus.inProgress)
             TextButton(
-              onPressed: () => ref.read(provider.notifier).pause(),
+              onPressed: _openPauseSheet,
               child: Text(l10n.interviewPause),
             ),
         ],
@@ -75,24 +70,24 @@ class _InterviewScreenState extends ConsumerState<InterviewScreen> {
           loading: () => const Center(child: AppSpinner(size: 28)),
           error: (error, _) => AppErrorView(
             error: error,
-            onRetry: () => ref.invalidate(provider),
+            onRetry: () =>
+                ref.invalidate(interviewSessionProvider(widget.sessionId)),
           ),
-          data: (data) => _body(context, l10n, data),
+          data: (data) => _body(data),
         ),
       ),
     );
   }
 
-  Widget _body(
-    BuildContext context,
-    AppL10n l10n,
-    InterviewSessionState state,
-  ) {
+  Widget _body(InterviewSessionState state) {
     WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
 
     return Column(
       children: [
-        _ProgressHeader(progress: state.progress),
+        _ProgressHeader(
+          progress: state.progress,
+          isPressure: state.isPressure,
+        ),
         Expanded(
           child: ListView.builder(
             controller: _scrollController,
@@ -112,29 +107,40 @@ class _InterviewScreenState extends ConsumerState<InterviewScreen> {
         _Composer(
           state: state,
           controller: _inputController,
-          onSend: () => _send(state),
-          onSkip: () => ref
-              .read(interviewSessionProvider(widget.sessionId).notifier)
-              .skip(),
-          onResume: () => ref
-              .read(interviewSessionProvider(widget.sessionId).notifier)
-              .resume(),
+          onSend: () => _submit(state),
+          onRetry: () => _submit(state, retry: true),
+          onSkip: () => _notifier.skip(),
+          onResume: () => _notifier.resume(),
           onFinish: _finish,
         ),
       ],
     );
   }
 
-  Future<void> _send(InterviewSessionState state) async {
+  /// 일시정지는 시안대로 바텀시트에서 갈래를 고른다.
+  Future<void> _openPauseSheet() async {
+    final choice = await showPauseSheet(context);
+    if (choice != PauseChoice.saveAndExit) return;
+
+    await _notifier.pause();
+    if (!mounted) return;
+    context.go(AppRoutes.home);
+  }
+
+  /// 답변 전송. [retry]면 실패해 남아 있던 답변을 걷어내고 다시 보낸다.
+  Future<void> _submit(InterviewSessionState state, {bool retry = false}) async {
     final content = _inputController.text.trim();
-    if (content.isEmpty || !state.canAnswer) return;
+
+    // 스킵이 실패했다면 보관된 입력이 없다 — 스킵을 다시 시도한다.
+    if (content.isEmpty) {
+      if (retry) await _notifier.skip();
+      return;
+    }
+    if (!state.canAnswer) return;
 
     hapticTap();
-
-    final notifier = ref.read(
-      interviewSessionProvider(widget.sessionId).notifier,
-    );
-    await notifier.sendAnswer(content);
+    final notifier = _notifier;
+    await (retry ? notifier.retryAnswer(content) : notifier.sendAnswer(content));
 
     if (!mounted) return;
     // 전송에 실패하면 입력을 지우지 않는다(임시 보관 — 화면정의서 §4).
@@ -161,14 +167,17 @@ class _InterviewScreenState extends ConsumerState<InterviewScreen> {
 }
 
 class _ProgressHeader extends StatelessWidget {
-  const _ProgressHeader({required this.progress});
+  const _ProgressHeader({required this.progress, required this.isPressure});
 
   final InterviewProgress progress;
+
+  /// 압박 면접은 진행바를 pressure 톤으로 칠한다 (시안 S20).
+  final bool isPressure;
 
   @override
   Widget build(BuildContext context) {
     final l10n = AppL10n.of(context);
-    final total = progress.total == 0 ? 1 : progress.total;
+    final colors = context.colors;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(
@@ -184,14 +193,15 @@ class _ProgressHeader extends StatelessWidget {
             l10n.interviewProgress(progress.current, progress.total),
             style: Theme.of(context).textTheme.bodySmall,
           ),
-          const SizedBox(height: AppSpacing.xs),
-          ClipRRect(
-            borderRadius: BorderRadius.circular(AppSpacing.xs),
-            child: LinearProgressIndicator(
-              value: (progress.current / total).clamp(0, 1),
-              backgroundColor: context.colors.surface2,
-              minHeight: 4,
-            ),
+          const SizedBox(height: AppSpacing.sm),
+          PacerProgressBar(
+            value: progress.current,
+            max: progress.total,
+            segments: progress.total,
+            height: 5,
+            color: isPressure ? colors.pressure : null,
+            // 바가 페이지 배경 위에 바로 놓여 기본 트랙(surface2)이 배경에 묻힌다.
+            trackColor: isPressure ? colors.pressureSoft : colors.accentSoft,
           ),
         ],
       ),
@@ -204,6 +214,7 @@ class _Composer extends StatelessWidget {
     required this.state,
     required this.controller,
     required this.onSend,
+    required this.onRetry,
     required this.onSkip,
     required this.onResume,
     required this.onFinish,
@@ -212,6 +223,7 @@ class _Composer extends StatelessWidget {
   final InterviewSessionState state;
   final TextEditingController controller;
   final VoidCallback onSend;
+  final VoidCallback onRetry;
   final VoidCallback onSkip;
   final VoidCallback onResume;
   final VoidCallback onFinish;
@@ -241,8 +253,12 @@ class _Composer extends StatelessWidget {
       );
     }
 
+    final error = state.turnError;
+
     return _Panel(
       children: [
+        // 스낵바는 금방 사라져 재시도 경로를 잃는다 — 입력창 위에 남겨 둔다.
+        if (error != null) TurnErrorCard(error: error, onRetry: onRetry),
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [

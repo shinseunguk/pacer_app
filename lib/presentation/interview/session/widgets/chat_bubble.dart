@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/app_spinner.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../domain/entities/interview_message.dart';
 import '../../../../l10n/app_localizations.dart';
+import 'coach_avatar.dart';
+import 'typing_dots.dart';
 
 /// 면접관/지원자 발화 말풍선. 꼬리질문은 살짝 다른 색으로 구분한다.
 class ChatBubble extends StatelessWidget {
@@ -15,66 +16,122 @@ class ChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppL10n.of(context);
-    final isInterviewer = message.type.isInterviewer;
     final isSkip = message.type == MessageType.skip;
 
     final text = isSkip ? l10n.interviewSkipped : (message.content ?? '');
     if (text.isEmpty) return const SizedBox.shrink();
 
-    return Align(
-      alignment: isInterviewer ? Alignment.centerLeft : Alignment.centerRight,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppSpacing.md,
-          vertical: AppSpacing.sm + 2,
-        ),
-        constraints: BoxConstraints(
-          maxWidth: MediaQuery.sizeOf(context).width * 0.78,
-        ),
-        decoration: BoxDecoration(
+    final bubble = _Bubble(
+      type: message.type,
+      child: Text(
+        text,
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          // 답변 말풍선만 강조색을 배경으로 깔므로 그 위에는 onAccent를 쓴다.
           color: switch (message.type) {
-            MessageType.baseQuestion => context.colors.surface,
-            MessageType.followUp => context.colors.surface2,
-            MessageType.answer => context.colors.accent,
-            MessageType.skip => context.colors.surface2,
+            MessageType.answer => context.colors.onAccent,
+            MessageType.skip => context.colors.text2,
+            _ => context.colors.text,
           },
-          borderRadius: BorderRadius.circular(AppSpacing.radius),
-          border: Border.all(
-            color: message.type == MessageType.followUp
-                ? context.colors.accent
-                : context.colors.line,
-          ),
+          fontStyle: isSkip ? FontStyle.italic : FontStyle.normal,
         ),
-        child: Text(
-          text,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: isSkip ? context.colors.text2 : context.colors.text,
-            fontStyle: isSkip ? FontStyle.italic : FontStyle.normal,
+      ),
+    );
+
+    if (!message.type.isInterviewer) {
+      return Align(alignment: Alignment.centerRight, child: bubble);
+    }
+
+    return _CoachTurn(child: bubble);
+  }
+}
+
+/// 로고마크 칩 + "페이서" 라벨을 붙인 면접관 발화 묶음 (시안 `ChatTurn`).
+class _CoachTurn extends StatelessWidget {
+  const _CoachTurn({required this.child});
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppL10n.of(context);
+
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CoachAvatar(),
+          const SizedBox(width: AppSpacing.sm),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l10n.interviewCoachName,
+                  style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    color: context.colors.text3,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: AppSpacing.xs),
+                child,
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
 }
 
-/// 스트리밍 대기 표시 (시안의 TypingDots 대응).
+class _Bubble extends StatelessWidget {
+  const _Bubble({required this.type, required this.child});
+
+  final MessageType type;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm + 2,
+      ),
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.sizeOf(context).width * 0.72,
+      ),
+      decoration: BoxDecoration(
+        color: switch (type) {
+          MessageType.baseQuestion => context.colors.surface,
+          MessageType.followUp => context.colors.surface2,
+          MessageType.answer => context.colors.accent,
+          MessageType.skip => context.colors.surface2,
+        },
+        borderRadius: BorderRadius.circular(AppSpacing.radius),
+        border: Border.all(
+          color: type == MessageType.followUp
+              ? context.colors.accent
+              : context.colors.line,
+        ),
+      ),
+      child: child,
+    );
+  }
+}
+
+/// 스트리밍 대기 표시 — 면접관 말풍선 자리에 점 3개를 띄운다 (시안 `TypingDots`).
 class TypingIndicator extends StatelessWidget {
   const TypingIndicator({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-        padding: const EdgeInsets.all(AppSpacing.md),
-        decoration: BoxDecoration(
-          color: context.colors.surface,
-          borderRadius: BorderRadius.circular(AppSpacing.radius),
-          border: Border.all(color: context.colors.line),
+    return const _CoachTurn(
+      child: _Bubble(
+        type: MessageType.baseQuestion,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: AppSpacing.xs),
+          child: TypingDots(),
         ),
-        child: const AppSpinner(size: 18),
       ),
     );
   }

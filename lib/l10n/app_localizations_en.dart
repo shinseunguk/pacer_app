@@ -246,6 +246,22 @@ class AppL10nEn extends AppL10n {
       'Couldn\'t send that. Your answer is kept — please try again.';
 
   @override
+  String get interviewCoachName => 'Pacer';
+
+  @override
+  String get interviewRetry => 'Try again';
+
+  @override
+  String get interviewPauseSheetTitle => 'Pause this interview?';
+
+  @override
+  String get interviewPauseSheetDesc =>
+      'Everything so far is saved. You can pick it up from home anytime.';
+
+  @override
+  String get interviewContinue => 'Keep going';
+
+  @override
   String get reportTitle => 'Final report';
 
   @override

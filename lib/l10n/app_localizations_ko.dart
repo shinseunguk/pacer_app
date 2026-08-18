@@ -239,6 +239,21 @@ class AppL10nKo extends AppL10n {
   String get interviewSendFailed => '전송하지 못했어요. 답변은 그대로 두었으니 다시 시도해주세요.';
 
   @override
+  String get interviewCoachName => '페이서';
+
+  @override
+  String get interviewRetry => '다시 시도';
+
+  @override
+  String get interviewPauseSheetTitle => '면접을 잠시 멈출까요?';
+
+  @override
+  String get interviewPauseSheetDesc => '지금까지 대화는 저장돼요. 홈에서 언제든 이어할 수 있어요.';
+
+  @override
+  String get interviewContinue => '이어서 진행';
+
+  @override
   String get reportTitle => '최종 리포트';
 
   @override

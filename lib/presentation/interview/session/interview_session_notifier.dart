@@ -11,6 +11,7 @@ class InterviewSessionState {
     required this.messages,
     required this.progress,
     required this.status,
+    required this.interviewType,
     this.isStreaming = false,
     this.isFinished = false,
     this.turnError,
@@ -19,6 +20,11 @@ class InterviewSessionState {
   final List<InterviewMessage> messages;
   final InterviewProgress progress;
   final SessionStatus status;
+
+  /// 진행바 톤을 가르는 면접 유형 (`general` / `pressure`).
+  final String interviewType;
+
+  bool get isPressure => interviewType == 'pressure';
 
   /// 면접관 발화를 받는 중(입력 잠금 + 타이핑 표시).
   final bool isStreaming;
@@ -36,6 +42,7 @@ class InterviewSessionState {
     List<InterviewMessage>? messages,
     InterviewProgress? progress,
     SessionStatus? status,
+    String? interviewType,
     bool? isStreaming,
     bool? isFinished,
     Object? turnError,
@@ -45,6 +52,7 @@ class InterviewSessionState {
       messages: messages ?? this.messages,
       progress: progress ?? this.progress,
       status: status ?? this.status,
+      interviewType: interviewType ?? this.interviewType,
       isStreaming: isStreaming ?? this.isStreaming,
       isFinished: isFinished ?? this.isFinished,
       turnError: clearError ? null : (turnError ?? this.turnError),
@@ -68,6 +76,7 @@ class InterviewSessionNotifier
       messages: detail.messages,
       progress: detail.progress,
       status: detail.status,
+      interviewType: detail.interviewType,
       isFinished:
           detail.status == SessionStatus.completed ||
           detail.progress.current >= detail.progress.total,
@@ -102,6 +111,28 @@ class InterviewSessionNotifier
     } on Object catch (error) {
       _stopStreaming(error: error);
     }
+  }
+
+  /// 전송 실패 후 다시 시도 — 화면에 남아 있던 실패한 답변을 걷어내고 새로 보낸다.
+  /// (걷어내지 않으면 같은 답변 말풍선이 두 개 쌓인다.)
+  Future<void> retryAnswer(String content) async {
+    final current = state.valueOrNull;
+    if (current == null) return;
+
+    final messages = current.messages;
+    final hasFailedAnswer =
+        messages.isNotEmpty && messages.last.type == MessageType.answer;
+
+    if (hasFailedAnswer) {
+      state = AsyncData(
+        current.copyWith(
+          messages: messages.sublist(0, messages.length - 1),
+          clearError: true,
+        ),
+      );
+    }
+
+    await sendAnswer(content);
   }
 
   /// "모르겠습니다" — 미응답으로 넘기고 다음 질문을 받는다.
