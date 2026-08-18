@@ -5,9 +5,9 @@
 
 ## 설계 문서 (docs/)
 구현 전 반드시 참조한다.
-- `docs/Pacer_기획서_v1.md`
 - `docs/Pacer_기능명세_유저스토리_v1.md`
 - `docs/Pacer_화면정의서_v1.md`
+- **공유 문서(서버 레포가 정본)**: `pacer_server/docs/Pacer_기획서_v1.md`, `Pacer_MVP범위_v1.md` — 사본을 두지 않는다.
 - **계약(서버 레포)**: `pacer_server/docs/Pacer_API명세_v1.md`, `Pacer_데이터모델_ERD_v1.md` — 앱은 이 API 명세대로 연동한다.
 
 ## 작업 가드레일 (Phase A)
