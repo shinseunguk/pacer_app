@@ -189,6 +189,7 @@ class PacerProgressBar extends StatelessWidget {
     this.height = 7,
     this.segments = 0,
     this.color,
+    this.trackColor,
     super.key,
   });
 
@@ -202,9 +203,14 @@ class PacerProgressBar extends StatelessWidget {
   /// 기본값은 강조색 (모드에 따라 달라지므로 build에서 결정)
   final Color? color;
 
+  /// 아직 차지 않은 구간의 색. 바가 카드 위가 아니라 페이지 배경 위에 놓이면
+  /// 기본값(surface2)이 배경과 구분되지 않으므로 호출부에서 지정한다.
+  final Color? trackColor;
+
   @override
   Widget build(BuildContext context) {
     final barColor = color ?? context.colors.accent;
+    final emptyColor = trackColor ?? context.colors.surface2;
 
     if (segments > 0) {
       return Row(
@@ -215,7 +221,7 @@ class PacerProgressBar extends StatelessWidget {
               child: Container(
                 height: height,
                 decoration: BoxDecoration(
-                  color: i < value ? barColor : context.colors.surface2,
+                  color: i < value ? barColor : emptyColor,
                   borderRadius: BorderRadius.circular(height),
                 ),
               ),
@@ -231,7 +237,7 @@ class PacerProgressBar extends StatelessWidget {
       child: LinearProgressIndicator(
         value: ratio,
         minHeight: height,
-        backgroundColor: context.colors.surface2,
+        backgroundColor: emptyColor,
         color: barColor,
       ),
     );

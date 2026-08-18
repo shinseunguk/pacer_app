@@ -535,6 +535,36 @@ abstract class AppL10n {
   /// **'전송하지 못했어요. 답변은 그대로 두었으니 다시 시도해주세요.'**
   String get interviewSendFailed;
 
+  /// No description provided for @interviewCoachName.
+  ///
+  /// In ko, this message translates to:
+  /// **'페이서'**
+  String get interviewCoachName;
+
+  /// No description provided for @interviewRetry.
+  ///
+  /// In ko, this message translates to:
+  /// **'다시 시도'**
+  String get interviewRetry;
+
+  /// No description provided for @interviewPauseSheetTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'면접을 잠시 멈출까요?'**
+  String get interviewPauseSheetTitle;
+
+  /// No description provided for @interviewPauseSheetDesc.
+  ///
+  /// In ko, this message translates to:
+  /// **'지금까지 대화는 저장돼요. 홈에서 언제든 이어할 수 있어요.'**
+  String get interviewPauseSheetDesc;
+
+  /// No description provided for @interviewContinue.
+  ///
+  /// In ko, this message translates to:
+  /// **'이어서 진행'**
+  String get interviewContinue;
+
   /// No description provided for @reportTitle.
   ///
   /// In ko, this message translates to:
