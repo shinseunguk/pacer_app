@@ -75,11 +75,11 @@ android {
             dimension "env"
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
-            resValue "string", "app_name", "페이서 DEV"
+            resValue "string", "app_name", "Pacer DEV"
         }
         prod {
             dimension "env"
-            resValue "string", "app_name", "페이서"
+            resValue "string", "app_name", "Pacer"
         }
     }
 }
