@@ -4,14 +4,19 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../domain/entities/interview_message.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../common/motion.dart';
 import 'coach_avatar.dart';
 import 'typing_dots.dart';
 
 /// 면접관/지원자 발화 말풍선. 꼬리질문은 살짝 다른 색으로 구분한다.
 class ChatBubble extends StatelessWidget {
-  const ChatBubble({required this.message, super.key});
+  const ChatBubble({required this.message, this.animate = false, super.key});
 
   final InterviewMessage message;
+
+  /// 이번에 새로 도착한 발화만 등장 모션을 태운다.
+  /// 스크롤로 다시 그려지는 발화까지 재생하면 대화가 계속 들썩인다.
+  final bool animate;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +42,16 @@ class ChatBubble extends StatelessWidget {
       ),
     );
 
-    if (!message.type.isInterviewer) {
-      return Align(alignment: Alignment.centerRight, child: bubble);
-    }
+    final isInterviewer = message.type.isInterviewer;
+    final entrance = BubbleIn(
+      fromLeft: isInterviewer,
+      enabled: animate,
+      child: isInterviewer
+          ? _CoachTurn(child: bubble)
+          : Align(alignment: Alignment.centerRight, child: bubble),
+    );
 
-    return _CoachTurn(child: bubble);
+    return entrance;
   }
 }
 

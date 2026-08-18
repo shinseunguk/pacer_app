@@ -167,6 +167,26 @@ void main() {
     expect(answer.style?.color, AppColors.light.onAccent);
   });
 
+  testWidgets('말풍선 등장 모션은 새로 도착한 발화에만 태운다', (tester) async {
+    // 스크롤·재빌드로 다시 그려지는 발화까지 재생하면 대화가 계속 들썩인다.
+    when(() => repository.submitAnswer(any(), any())).thenAnswer(
+      (_) => const Stream<InterviewTurnEvent>.empty(),
+    );
+
+    await pumpScreen(tester);
+    expect(tester.widget<ChatBubble>(find.byType(ChatBubble)).animate, isTrue);
+
+    // 답변을 보내면 목록이 다시 빌드된다 — 기존 질문은 재생하지 않아야 한다.
+    await tester.enterText(find.byType(TextField), '답변입니다.');
+    await tester.tap(find.byIcon(Icons.send));
+    await tester.pumpAndSettle();
+
+    final bubbles = find.byType(ChatBubble);
+    expect(bubbles, findsNWidgets(2));
+    expect(tester.widget<ChatBubble>(bubbles.at(0)).animate, isFalse);
+    expect(tester.widget<ChatBubble>(bubbles.at(1)).animate, isTrue);
+  });
+
   testWidgets('일시정지를 누르면 바텀시트로 두 갈래를 제시한다', (tester) async {
     await pumpScreen(tester);
 
