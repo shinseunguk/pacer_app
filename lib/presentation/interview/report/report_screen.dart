@@ -9,6 +9,7 @@ import '../../../core/theme/app_theme.dart';
 import '../../../domain/entities/interview_report.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../common/app_error_view.dart';
+import '../../common/motion.dart';
 import '../../providers/interview_providers.dart';
 import 'widgets/report_feedback.dart';
 import '../../providers/user_providers.dart';
@@ -53,33 +54,49 @@ class _ReportBody extends ConsumerWidget {
     return ListView(
       padding: const EdgeInsets.all(AppSpacing.lg),
       children: [
-        _PassBadge(isPass: report.isPass),
+        // 판정과 점수는 리포트의 결론이라 살짝 튀며 들어온다 (시안 pop).
+        PopIn(child: _PassBadge(isPass: report.isPass)),
         const SizedBox(height: AppSpacing.lg),
         if (report.showScore)
-          _OverallScore(score: report.overallScore)
+          PopIn(order: 1, child: _OverallScore(score: report.overallScore))
         else
           Text(
             l10n.reportScoreHidden,
             style: Theme.of(context).textTheme.bodySmall,
           ),
         const SizedBox(height: AppSpacing.lg),
-        Text(
-          l10n.reportReasonTitle,
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        Text(report.passReason, style: Theme.of(context).textTheme.bodyMedium),
-        if (report.showScore) ...[
-          const SizedBox(height: AppSpacing.lg),
-          Text(
-            l10n.reportCriteriaTitle,
+        RiseIn(
+          order: 2,
+          child: Text(
+            l10n.reportReasonTitle,
             style: Theme.of(context).textTheme.titleMedium,
           ),
+        ),
+        const SizedBox(height: AppSpacing.sm),
+        RiseIn(
+          order: 3,
+          child: Text(
+            report.passReason,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        ),
+        if (report.showScore) ...[
+          const SizedBox(height: AppSpacing.lg),
+          RiseIn(
+            order: 4,
+            child: Text(
+              l10n.reportCriteriaTitle,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+          ),
           const SizedBox(height: AppSpacing.sm),
-          for (final score in report.scores)
-            _CriterionRow(
-              score: score,
-              label: _criterionLabel(l10n, score.criterion),
+          for (final (index, score) in report.scores.indexed)
+            RiseIn(
+              order: 5 + index,
+              child: _CriterionRow(
+                score: score,
+                label: _criterionLabel(l10n, score.criterion),
+              ),
             ),
         ],
         const SizedBox(height: AppSpacing.xl),

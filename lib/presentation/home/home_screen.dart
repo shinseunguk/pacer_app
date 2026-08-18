@@ -11,6 +11,7 @@ import '../../domain/entities/interview_session.dart';
 import '../../domain/entities/user_profile.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/app_error_view.dart';
+import '../common/motion.dart';
 import '../common/pressable.dart';
 import '../common/ui.dart';
 import '../providers/interview_providers.dart';
@@ -50,18 +51,25 @@ class HomeScreen extends ConsumerWidget {
                 AppSpacing.md,
                 AppSpacing.lg,
               ),
+              // 섹션을 위에서부터 차례로 띄운다 (시안 rise).
               children: [
-                _Greeting(nickname: data.nickname),
+                RiseIn(child: _Greeting(nickname: data.nickname)),
                 const SizedBox(height: AppSpacing.md),
-                _StatusStrip(profile: data),
+                RiseIn(order: 1, child: _StatusStrip(profile: data)),
                 const SizedBox(height: AppSpacing.md),
-                const _HeroCta(),
-                SectionLabel(
-                  label: l10n.homeSectionRecent,
-                  actionLabel: l10n.homeSeeAll,
-                  onAction: () => context.go(AppRoutes.history),
+                const RiseIn(order: 2, child: _HeroCta()),
+                RiseIn(
+                  order: 3,
+                  child: SectionLabel(
+                    label: l10n.homeSectionRecent,
+                    actionLabel: l10n.homeSeeAll,
+                    onAction: () => context.go(AppRoutes.history),
+                  ),
                 ),
-                const _RecentInterviews(limit: _recentCount),
+                const RiseIn(
+                  order: 4,
+                  child: _RecentInterviews(limit: _recentCount),
+                ),
               ],
             ),
           ),

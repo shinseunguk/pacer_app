@@ -32,6 +32,9 @@ class _InterviewScreenState extends ConsumerState<InterviewScreen> {
   final _inputController = TextEditingController();
   final _scrollController = ScrollController();
 
+  /// 이미 등장 모션을 태운 발화. 스크롤로 다시 그려질 때 재생을 막는다.
+  final _animatedMessages = <String>{};
+
   @override
   void dispose() {
     _inputController.dispose();
@@ -100,7 +103,10 @@ class _InterviewScreenState extends ConsumerState<InterviewScreen> {
               if (index >= state.messages.length) {
                 return const TypingIndicator();
               }
-              return ChatBubble(message: state.messages[index]);
+              final message = state.messages[index];
+              // Set.add는 처음 넣을 때만 true라 그대로 "새 발화" 판정이 된다.
+              final isNew = _animatedMessages.add(message.messageId);
+              return ChatBubble(message: message, animate: isNew);
             },
           ),
         ),
