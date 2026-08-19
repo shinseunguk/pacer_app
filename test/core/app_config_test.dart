@@ -8,6 +8,7 @@ void main() {
         apiBaseUrl: 'http://localhost:3000/v1',
         flavor: Flavor.dev,
         kakaoNativeAppKey: '',
+      sentryDsn: '',
       );
 
       expect(config.hasKakaoKey, isFalse);
@@ -19,6 +20,7 @@ void main() {
         apiBaseUrl: 'http://localhost:3000/v1',
         flavor: Flavor.dev,
         kakaoNativeAppKey: 'abc123',
+      sentryDsn: '',
       );
 
       expect(config.hasKakaoKey, isTrue);
@@ -31,6 +33,7 @@ void main() {
         apiBaseUrl: 'https://api.pacer.app/v1',
         flavor: Flavor.prod,
         kakaoNativeAppKey: '',
+      sentryDsn: '',
       );
 
       expect(config.useMockSocialLogin, isFalse);
