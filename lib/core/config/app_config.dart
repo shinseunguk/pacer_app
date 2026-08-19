@@ -10,6 +10,7 @@ class AppConfig {
     required this.apiBaseUrl,
     required this.flavor,
     required this.kakaoNativeAppKey,
+    required this.sentryDsn,
   });
 
   final String apiBaseUrl;
@@ -18,6 +19,9 @@ class AppConfig {
   /// 카카오 네이티브 앱 키 — 콘솔에서 발급받아 dart-define으로 주입한다.
   /// 비어 있으면 목 로그인으로 폴백한다(키 없는 개발 환경 유지).
   final String kakaoNativeAppKey;
+
+  /// Sentry DSN — 비어 있으면 에러 리포팅을 켜지 않는다.
+  final String sentryDsn;
 
   static const _defaultBaseUrl = 'http://localhost:3000/v1';
 
@@ -29,17 +33,22 @@ class AppConfig {
     );
 
     const kakaoKey = String.fromEnvironment('KAKAO_NATIVE_APP_KEY');
+    const sentryDsn = String.fromEnvironment('SENTRY_DSN');
 
     return const AppConfig(
       apiBaseUrl: baseUrl,
       flavor: flavorName == 'prod' ? Flavor.prod : Flavor.dev,
       kakaoNativeAppKey: kakaoKey,
+      sentryDsn: sentryDsn,
     );
   }
 
   bool get isDev => flavor == Flavor.dev;
 
   bool get hasKakaoKey => kakaoNativeAppKey.isNotEmpty;
+
+  /// DSN이 없으면 Sentry를 켜지 않는다 — 로컬 개발·테스트가 그대로 돈다.
+  bool get hasSentryDsn => sentryDsn.isNotEmpty;
 
   /// 카카오 키가 없는 개발 환경에서는 서버의 목 검증기와 짝을 이루는
   /// 목 로그인을 쓴다 (idToken == socialId).
