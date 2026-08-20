@@ -996,6 +996,222 @@ abstract class AppL10n {
   /// In ko, this message translates to:
   /// **'다크'**
   String get settingsAppearanceDark;
+
+  /// No description provided for @homeFreeTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'무료 체험'**
+  String get homeFreeTitle;
+
+  /// No description provided for @homeFreeRemaining.
+  ///
+  /// In ko, this message translates to:
+  /// **'{remaining}회 남음'**
+  String homeFreeRemaining(int remaining);
+
+  /// No description provided for @homeFreeNote.
+  ///
+  /// In ko, this message translates to:
+  /// **'5문항 면접 · 자정 초기화 없음'**
+  String get homeFreeNote;
+
+  /// No description provided for @homeProTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'Pro · 무제한'**
+  String get homeProTitle;
+
+  /// No description provided for @homeProRenewal.
+  ///
+  /// In ko, this message translates to:
+  /// **'{date} 갱신'**
+  String homeProRenewal(String date);
+
+  /// No description provided for @homeProNoRenewal.
+  ///
+  /// In ko, this message translates to:
+  /// **'기간 만료 후 무료로 전환돼요'**
+  String get homeProNoRenewal;
+
+  /// No description provided for @homeFreeExhausted.
+  ///
+  /// In ko, this message translates to:
+  /// **'무료 체험을 모두 사용했어요'**
+  String get homeFreeExhausted;
+
+  /// No description provided for @lastFreeTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'마지막 무료 면접이에요'**
+  String get lastFreeTitle;
+
+  /// No description provided for @lastFreeBody.
+  ///
+  /// In ko, this message translates to:
+  /// **'이번 면접이 끝나면 Pro로 계속할 수 있어요.'**
+  String get lastFreeBody;
+
+  /// No description provided for @lastFreeStart.
+  ///
+  /// In ko, this message translates to:
+  /// **'시작하기'**
+  String get lastFreeStart;
+
+  /// No description provided for @presetLockedTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'Pro 전용 길이예요'**
+  String get presetLockedTitle;
+
+  /// No description provided for @presetLockedBody.
+  ///
+  /// In ko, this message translates to:
+  /// **'무료 체험은 빠른 연습으로 진행돼요. Pro로 바꾸면 더 길게 연습할 수 있어요.'**
+  String get presetLockedBody;
+
+  /// No description provided for @reportUpsellTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'무료 체험을 모두 사용했어요'**
+  String get reportUpsellTitle;
+
+  /// No description provided for @reportUpsellBody.
+  ///
+  /// In ko, this message translates to:
+  /// **'Pro로 무제한 이어가기'**
+  String get reportUpsellBody;
+
+  /// No description provided for @reportUpsellPrice.
+  ///
+  /// In ko, this message translates to:
+  /// **'월 9,900원'**
+  String get reportUpsellPrice;
+
+  /// No description provided for @paywallTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'Pacer Pro'**
+  String get paywallTitle;
+
+  /// No description provided for @paywallHeadline.
+  ///
+  /// In ko, this message translates to:
+  /// **'면접 연습, 횟수 걱정 없이'**
+  String get paywallHeadline;
+
+  /// No description provided for @paywallSubhead.
+  ///
+  /// In ko, this message translates to:
+  /// **'무료 체험 2회로는 부족했다면'**
+  String get paywallSubhead;
+
+  /// No description provided for @paywallBenefitUnlimited.
+  ///
+  /// In ko, this message translates to:
+  /// **'면접 무제한'**
+  String get paywallBenefitUnlimited;
+
+  /// No description provided for @paywallBenefitUnlimitedNote.
+  ///
+  /// In ko, this message translates to:
+  /// **'매일 새로운 공고로 계속 연습'**
+  String get paywallBenefitUnlimitedNote;
+
+  /// No description provided for @paywallBenefitLength.
+  ///
+  /// In ko, this message translates to:
+  /// **'5 · 10 · 15문항 선택'**
+  String get paywallBenefitLength;
+
+  /// No description provided for @paywallBenefitLengthNote.
+  ///
+  /// In ko, this message translates to:
+  /// **'실전만큼 길게, 심층까지'**
+  String get paywallBenefitLengthNote;
+
+  /// No description provided for @paywallBenefitReport.
+  ///
+  /// In ko, this message translates to:
+  /// **'전체 리포트와 모범답안'**
+  String get paywallBenefitReport;
+
+  /// No description provided for @paywallBenefitReportNote.
+  ///
+  /// In ko, this message translates to:
+  /// **'질문마다 무엇을 고쳐야 하는지'**
+  String get paywallBenefitReportNote;
+
+  /// No description provided for @paywallPrice.
+  ///
+  /// In ko, this message translates to:
+  /// **'월 9,900원'**
+  String get paywallPrice;
+
+  /// No description provided for @paywallCta.
+  ///
+  /// In ko, this message translates to:
+  /// **'Pro 시작하기'**
+  String get paywallCta;
+
+  /// No description provided for @paywallRestore.
+  ///
+  /// In ko, this message translates to:
+  /// **'구매 복원'**
+  String get paywallRestore;
+
+  /// No description provided for @paywallRestoreEmpty.
+  ///
+  /// In ko, this message translates to:
+  /// **'복원할 구매가 없어요.'**
+  String get paywallRestoreEmpty;
+
+  /// No description provided for @paywallRestoreDone.
+  ///
+  /// In ko, this message translates to:
+  /// **'구독이 복원됐어요.'**
+  String get paywallRestoreDone;
+
+  /// No description provided for @paywallDone.
+  ///
+  /// In ko, this message translates to:
+  /// **'Pro가 시작됐어요. 이제 무제한으로 연습할 수 있어요.'**
+  String get paywallDone;
+
+  /// No description provided for @paywallTermsTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'구독 안내'**
+  String get paywallTermsTitle;
+
+  /// No description provided for @paywallTermsRenewal.
+  ///
+  /// In ko, this message translates to:
+  /// **'월 9,900원 자동 갱신 구독이에요. 기간이 끝나기 24시간 전까지 해지하지 않으면 자동으로 갱신돼요.'**
+  String get paywallTermsRenewal;
+
+  /// No description provided for @paywallTermsCancel.
+  ///
+  /// In ko, this message translates to:
+  /// **'해지는 기기의 설정 > 계정 > 구독에서 언제든 할 수 있어요. 해지해도 남은 기간까지는 계속 이용할 수 있어요.'**
+  String get paywallTermsCancel;
+
+  /// No description provided for @paywallTermsLinks.
+  ///
+  /// In ko, this message translates to:
+  /// **'이용약관과 개인정보 처리방침에 동의하는 것으로 봅니다.'**
+  String get paywallTermsLinks;
+
+  /// No description provided for @paywallTerms.
+  ///
+  /// In ko, this message translates to:
+  /// **'이용약관'**
+  String get paywallTerms;
+
+  /// No description provided for @paywallPrivacy.
+  ///
+  /// In ko, this message translates to:
+  /// **'개인정보 처리방침'**
+  String get paywallPrivacy;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

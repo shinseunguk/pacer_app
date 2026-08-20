@@ -24,6 +24,9 @@ abstract final class AppRoutes {
 
   static String legal(String type) => '/legal/$type';
 
+  // 페이월(S50)
+  static const paywall = '/paywall';
+
   // 히스토리(S40) · 대화 전문(S41) · 마이
   static const history = '/history';
   static const profile = '/profile';

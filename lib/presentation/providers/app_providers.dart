@@ -12,11 +12,15 @@ import '../../core/storage/token_storage.dart';
 import '../../data/datasources/auth_remote_data_source.dart';
 import '../../data/datasources/kakao_social_auth_service.dart';
 import '../../data/datasources/social_auth_service.dart';
+import '../../data/datasources/store_purchase_service.dart';
+import '../../data/datasources/subscription_remote_data_source.dart';
 import '../../data/datasources/user_remote_data_source.dart';
 import '../../data/repositories/auth_repository_impl.dart';
+import '../../data/repositories/subscription_repository_impl.dart';
 import '../../data/repositories/user_repository_impl.dart';
 import '../../domain/entities/social_provider.dart';
 import '../../domain/repositories/auth_repository.dart';
+import '../../domain/repositories/subscription_repository.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../../domain/usecases/check_nickname.dart';
 import '../../domain/usecases/complete_onboarding.dart';
@@ -126,3 +130,17 @@ class UnavailableSocialAuthService implements SocialAuthService {
     throw const ServerFailure('아직 준비 중인 로그인 방식이에요.');
   }
 }
+
+/// 스토어 결제. 상품 등록 전에는 개발 환경에서만 스텁을 쓴다.
+final storePurchaseServiceProvider = Provider<StorePurchaseService>((ref) {
+  final config = ref.watch(appConfigProvider);
+
+  if (config.useStubPurchase) return const StubStorePurchaseService();
+  return const UnavailableStorePurchaseService();
+});
+
+final subscriptionRepositoryProvider = Provider<SubscriptionRepository>((ref) {
+  return SubscriptionRepositoryImpl(
+    SubscriptionRemoteDataSource(ref.watch(dioProvider)),
+  );
+});

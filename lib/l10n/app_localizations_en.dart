@@ -491,4 +491,121 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get settingsAppearanceDark => 'Dark';
+
+  @override
+  String get homeFreeTitle => 'Free trial';
+
+  @override
+  String homeFreeRemaining(int remaining) {
+    return '$remaining left';
+  }
+
+  @override
+  String get homeFreeNote => '5-question interview · no daily reset';
+
+  @override
+  String get homeProTitle => 'Pro · unlimited';
+
+  @override
+  String homeProRenewal(String date) {
+    return 'Renews $date';
+  }
+
+  @override
+  String get homeProNoRenewal => 'Reverts to free after this period';
+
+  @override
+  String get homeFreeExhausted => 'You\'ve used your free trial';
+
+  @override
+  String get lastFreeTitle => 'This is your last free interview';
+
+  @override
+  String get lastFreeBody => 'After this one, you can continue with Pro.';
+
+  @override
+  String get lastFreeStart => 'Start';
+
+  @override
+  String get presetLockedTitle => 'Pro-only length';
+
+  @override
+  String get presetLockedBody =>
+      'Free trials run as Quick practice. Go Pro for longer sessions.';
+
+  @override
+  String get reportUpsellTitle => 'You\'ve used your free trial';
+
+  @override
+  String get reportUpsellBody => 'Continue unlimited with Pro';
+
+  @override
+  String get reportUpsellPrice => '₩9,900 / month';
+
+  @override
+  String get paywallTitle => 'Pacer Pro';
+
+  @override
+  String get paywallHeadline => 'Practice without counting';
+
+  @override
+  String get paywallSubhead => 'If two free interviews weren\'t enough';
+
+  @override
+  String get paywallBenefitUnlimited => 'Unlimited interviews';
+
+  @override
+  String get paywallBenefitUnlimitedNote =>
+      'Practice with a new posting any day';
+
+  @override
+  String get paywallBenefitLength => '5 · 10 · 15 questions';
+
+  @override
+  String get paywallBenefitLengthNote => 'As long as the real thing';
+
+  @override
+  String get paywallBenefitReport => 'Full report and model answers';
+
+  @override
+  String get paywallBenefitReportNote => 'What to fix, question by question';
+
+  @override
+  String get paywallPrice => '₩9,900 / month';
+
+  @override
+  String get paywallCta => 'Start Pro';
+
+  @override
+  String get paywallRestore => 'Restore purchase';
+
+  @override
+  String get paywallRestoreEmpty => 'No purchase to restore.';
+
+  @override
+  String get paywallRestoreDone => 'Your subscription was restored.';
+
+  @override
+  String get paywallDone => 'Pro is active. Practice without limits.';
+
+  @override
+  String get paywallTermsTitle => 'Subscription details';
+
+  @override
+  String get paywallTermsRenewal =>
+      '₩9,900 per month, auto-renewing. It renews automatically unless cancelled at least 24 hours before the period ends.';
+
+  @override
+  String get paywallTermsCancel =>
+      'Cancel any time in Settings > Account > Subscriptions. You keep access until the current period ends.';
+
+  @override
+  String get paywallTermsLinks =>
+      'By subscribing you agree to the Terms and Privacy Policy.';
+
+  @override
+  String get paywallTerms => 'Terms of Service';
+
+  @override
+  String get paywallPrivacy => 'Privacy Policy';
 }

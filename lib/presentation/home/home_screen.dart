@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import '../../core/router/routes.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/theme/app_theme.dart';
+import '../../domain/entities/entitlement.dart';
 import '../../domain/entities/interview_session.dart';
 import '../../domain/entities/user_profile.dart';
 import '../../l10n/app_localizations.dart';
@@ -16,6 +17,7 @@ import '../common/pressable.dart';
 import '../common/ui.dart';
 import '../providers/interview_providers.dart';
 import '../providers/user_providers.dart';
+import '../purchases/entitlement_notifier.dart';
 
 /// S10 — 홈/허브. 시안(screen_home.jsx)의 구성: 인사 헤더 · 스트릭/한도 카드 ·
 /// 그라데이션 히어로 CTA · 최근 면접.
@@ -115,7 +117,6 @@ class _StatusStrip extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppL10n.of(context);
     final streak = ref.watch(practiceStreakProvider);
-    final usage = profile.usage;
 
     // 두 카드 높이를 맞추려면 stretch가 필요하고, 리스트 안에서는 높이가 무한이라
     // IntrinsicHeight로 한 번 재어 준다.
@@ -155,59 +156,7 @@ class _StatusStrip extends ConsumerWidget {
             ),
           ),
           const SizedBox(width: 10),
-          Expanded(
-            flex: 13,
-            child: PacerCard(
-              padding: const EdgeInsets.all(13),
-              radius: 16,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text(
-                        l10n.homeQuotaTitle,
-                        style: Theme.of(context).textTheme.labelSmall,
-                      ),
-                      Text.rich(
-                        TextSpan(
-                          text: '${usage.baseQuestionUsed}',
-                          children: [
-                            TextSpan(
-                              text: '/${usage.limit}',
-                              style: TextStyle(color: context.colors.text3),
-                            ),
-                          ],
-                        ),
-                        style: TextStyle(
-                          color: context.colors.text,
-                          fontSize: 13.5,
-                          fontWeight: FontWeight.w700,
-                          fontFeatures: kNumberFeatures,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 7),
-                  PacerProgressBar(
-                    value: usage.baseQuestionUsed,
-                    max: usage.limit,
-                  ),
-                  const SizedBox(height: 6),
-                  Text(
-                    l10n.homeQuotaNote,
-                    style: Theme.of(
-                      context,
-                    ).textTheme.labelSmall?.copyWith(fontSize: 10),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          const Expanded(flex: 13, child: _EntitlementCard()),
         ],
       ),
     );
@@ -441,4 +390,141 @@ class _HistoryRow extends StatelessWidget {
           : AppRoutes.interviewSession(summary.id),
     );
   }
+}
+
+/// 이용권 카드.
+///
+/// 기존 문구는 "오늘 기본 질문 · 자정 초기화"였는데, 무료 2회는 **평생 누적이라
+/// 리셋되지 않는다.** 그대로 두면 매일 충전되는 것으로 오해된다 (이슈 #21).
+class _EntitlementCard extends ConsumerWidget {
+  const _EntitlementCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    // 아직 못 읽었으면 무료로 가정한다 — pro로 가정하면 잠금이 풀린 화면을
+    // 잠깐 보여주게 된다.
+    final entitlement = ref
+        .watch(entitlementProvider)
+        .maybeWhen(
+          data: (value) => value,
+          orElse: () => const Entitlement.unknown(),
+        );
+
+    if (entitlement.isPro) return _ProCard(entitlement: entitlement);
+    return _FreeCard(entitlement: entitlement);
+  }
+}
+
+class _ProCard extends StatelessWidget {
+  const _ProCard({required this.entitlement});
+
+  final Entitlement entitlement;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppL10n.of(context);
+    final colors = context.colors;
+    final expiresAt = entitlement.expiresAt;
+
+    return PacerCard(
+      padding: const EdgeInsets.all(13),
+      radius: 16,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              Icon(Icons.workspace_premium, size: 17, color: colors.accent),
+              const SizedBox(width: 5),
+              Flexible(
+                child: Text(
+                  l10n.homeProTitle,
+                  style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: colors.accent,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Text(
+            // 해지했으면 갱신일이 아니라 만료 후 무료 전환을 알린다.
+            entitlement.autoRenewing && expiresAt != null
+                ? l10n.homeProRenewal(_formatDate(expiresAt))
+                : l10n.homeProNoRenewal,
+            style: Theme.of(
+              context,
+            ).textTheme.labelSmall?.copyWith(fontSize: 10),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _FreeCard extends StatelessWidget {
+  const _FreeCard({required this.entitlement});
+
+  final Entitlement entitlement;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppL10n.of(context);
+    final colors = context.colors;
+    final exhausted = entitlement.hasExhaustedFreeInterviews;
+    final used = entitlement.freeInterviewsUsed.clamp(0, kFreeInterviewLimit);
+
+    return Pressable(
+      // 다 쓴 뒤에는 카드 자체가 페이월 입구가 된다.
+      onTap: exhausted ? () => context.push(AppRoutes.paywall) : null,
+      borderRadius: BorderRadius.circular(16),
+      child: PacerCard(
+        padding: const EdgeInsets.all(13),
+        radius: 16,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.baseline,
+              textBaseline: TextBaseline.alphabetic,
+              children: [
+                Text(
+                  l10n.homeFreeTitle,
+                  style: Theme.of(context).textTheme.labelSmall,
+                ),
+                Text(
+                  l10n.homeFreeRemaining(entitlement.freeInterviewsRemaining),
+                  style: TextStyle(
+                    color: exhausted ? colors.text3 : colors.text,
+                    fontSize: 13.5,
+                    fontWeight: FontWeight.w700,
+                    fontFeatures: kNumberFeatures,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 7),
+            PacerProgressBar(value: used, max: kFreeInterviewLimit),
+            const SizedBox(height: 6),
+            Text(
+              exhausted ? l10n.homeFreeExhausted : l10n.homeFreeNote,
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                fontSize: 10,
+                color: exhausted ? colors.accent : null,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+String _formatDate(DateTime date) {
+  final local = date.toLocal();
+  return '${local.month}월 ${local.day}일';
 }

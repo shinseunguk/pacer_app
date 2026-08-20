@@ -6,11 +6,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/router/routes.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/error/failure.dart';
+import '../../../domain/entities/entitlement.dart';
 import '../../../domain/entities/interview_setup.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../common/failure_message.dart';
 import '../../providers/interview_providers.dart';
 import '../../providers/user_providers.dart';
+import '../../purchases/entitlement_notifier.dart';
 import 'interview_setup_notifier.dart';
 import 'widgets/preset_picker.dart';
 
@@ -28,10 +31,43 @@ class _InterviewOptionsScreenState
   bool _isStarting = false;
 
   @override
+  void initState() {
+    super.initState();
+    // 기본값은 '실전'(10문항)인데 무료는 5문항까지만 고를 수 있다. 그대로 두면
+    // 잠긴 프리셋이 선택된 채로 뜨고, 시작을 누르면 402를 맞는다.
+    WidgetsBinding.instance.addPostFrameCallback((_) => _normalizeToPlan());
+  }
+
+  /// 고를 수 없는 길이가 선택돼 있으면 고를 수 있는 값으로 내린다.
+  void _normalizeToPlan() {
+    if (!mounted) return;
+
+    final entitlement = ref.read(entitlementProvider).valueOrNull;
+    if (entitlement == null) return;
+
+    final setup = ref.read(interviewSetupProvider);
+    if (entitlement.canUseQuestionCount(setup.questionCount)) return;
+
+    ref.read(interviewSetupProvider.notifier).setQuestionCount(
+      kFreeQuestionCount,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppL10n.of(context);
     final setup = ref.watch(interviewSetupProvider);
     final notifier = ref.read(interviewSetupProvider.notifier);
+    // 못 읽었으면 무료로 가정한다 — pro로 가정하면 잠금이 풀린 화면을 잠깐 보여준다.
+    // 이용권이 늦게 도착해도 잠긴 값이 선택된 채로 남지 않게 한다.
+    ref.listen(entitlementProvider, (_, _) => _normalizeToPlan());
+
+    final entitlement = ref
+        .watch(entitlementProvider)
+        .maybeWhen(
+          data: (value) => value,
+          orElse: () => const Entitlement.unknown(),
+        );
 
     return Scaffold(
       appBar: AppBar(title: Text(l10n.setupTitle)),
@@ -82,6 +118,8 @@ class _InterviewOptionsScreenState
               selected: InterviewPreset.fromQuestionCount(setup.questionCount),
               onSelected: (preset) =>
                   notifier.setQuestionCount(preset.questionCount),
+              lockedPresets: _lockedPresets(entitlement),
+              onLockedTap: (_) => _showPresetLocked(),
             ),
             const SizedBox(height: AppSpacing.sm),
             SwitchListTile.adaptive(
@@ -92,7 +130,7 @@ class _InterviewOptionsScreenState
             ),
             const SizedBox(height: AppSpacing.xl),
             FilledButton(
-              onPressed: _isStarting ? null : () => _start(setup),
+              onPressed: _isStarting ? null : () => _start(setup, entitlement),
               child: _isStarting
                   ? const AppSpinner(size: 20)
                   : Text(l10n.setupStart),
@@ -103,8 +141,77 @@ class _InterviewOptionsScreenState
     );
   }
 
-  Future<void> _start(InterviewSetup setup) async {
+  Set<InterviewPreset> _lockedPresets(Entitlement entitlement) {
+    if (entitlement.isPro) return const {};
+
+    return InterviewPreset.values
+        .where((preset) => !entitlement.canUseQuestionCount(preset.questionCount))
+        .toSet();
+  }
+
+  Future<void> _showPresetLocked() async {
+    final l10n = AppL10n.of(context);
+    final goToPaywall = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.presetLockedTitle),
+        content: Text(l10n.presetLockedBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.commonCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.paywallCta),
+          ),
+        ],
+      ),
+    );
+
+    if (goToPaywall != true || !mounted) return;
+    await _openPaywall();
+  }
+
+  /// 페이월에서 구독하고 돌아오면 잠금이 바로 풀려야 한다.
+  Future<void> _openPaywall() async {
+    await context.push<bool>(AppRoutes.paywall);
+    if (!mounted) return;
+    await ref.read(entitlementProvider.notifier).refresh();
+  }
+
+  /// 무료가 하나 남았을 때만 예고한다. 매번 띄우면 잔소리가 되고,
+  /// 다 쓴 뒤에 알리면 늦다.
+  Future<bool> _confirmLastFree(Entitlement entitlement) async {
+    if (!entitlement.isLastFreeInterview) return true;
+
+    final l10n = AppL10n.of(context);
+    final proceed = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.lastFreeTitle),
+        content: Text(l10n.lastFreeBody),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(dialogContext).pop(false),
+            child: Text(l10n.commonCancel),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(dialogContext).pop(true),
+            child: Text(l10n.lastFreeStart),
+          ),
+        ],
+      ),
+    );
+    return proceed ?? false;
+  }
+
+  Future<void> _start(InterviewSetup setup, Entitlement entitlement) async {
     hapticTap();
+
+    if (!await _confirmLastFree(entitlement)) return;
+    if (!mounted) return;
+
     setState(() => _isStarting = true);
 
     try {
@@ -113,8 +220,15 @@ class _InterviewOptionsScreenState
 
       // 남은 한도 뱃지는 질문을 소비했으니 다시 읽는다.
       ref.invalidate(myProfileProvider);
+      await ref.read(entitlementProvider.notifier).refresh();
+      if (!mounted) return;
+
       ref.read(interviewSetupProvider.notifier).reset();
       context.go(AppRoutes.interviewSession(created.sessionId));
+    } on PaymentRequiredFailure {
+      // 402는 오류가 아니라 페이월로 가야 할 신호다.
+      if (!mounted) return;
+      await _openPaywall();
     } on Object catch (error) {
       if (!mounted) return;
       ScaffoldMessenger.of(context)

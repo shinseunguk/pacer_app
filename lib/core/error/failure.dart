@@ -25,6 +25,14 @@ class ServerFailure extends Failure {
   final int? statusCode;
 }
 
+/// 402 — 이용권이 필요하다. 오류로 띄우지 말고 페이월로 보낸다.
+///
+/// `FREE_QUOTA_EXCEEDED`(무료 2회 소진)와 `PLAN_REQUIRED`(무료가 5문항 초과 선택)를
+/// 모두 포함한다. 서버 메시지를 그대로 들고 있어 페이월 밖에서도 쓸 수 있다.
+class PaymentRequiredFailure extends Failure {
+  const PaymentRequiredFailure(super.message, {super.code});
+}
+
 /// Session expired or refresh failed — the app must sign out.
 class AuthFailure extends Failure {
   const AuthFailure([super.message = '다시 로그인해주세요.', String? code])
@@ -39,6 +47,12 @@ class ValidationFailure extends Failure {
 /// 사용자가 소셜 로그인 창을 닫음 — 오류가 아니므로 화면에 띄우지 않는다.
 class SignInCancelled extends Failure {
   const SignInCancelled() : super('', code: 'SIGN_IN_CANCELLED');
+}
+
+/// 사용자가 스토어 결제 창을 닫음 — 오류가 아니므로 화면에 띄우지 않는다
+/// ([SignInCancelled]과 같은 원칙).
+class PurchaseCancelled extends Failure {
+  const PurchaseCancelled() : super('', code: 'PURCHASE_CANCELLED');
 }
 
 class UnknownFailure extends Failure {

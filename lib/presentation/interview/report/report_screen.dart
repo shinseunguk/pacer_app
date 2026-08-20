@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../../core/router/routes.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../domain/entities/entitlement.dart';
 import '../../../domain/entities/interview_report.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../common/app_error_view.dart';
@@ -13,6 +14,8 @@ import '../../common/motion.dart';
 import '../../providers/interview_providers.dart';
 import 'widgets/report_feedback.dart';
 import '../../providers/user_providers.dart';
+import '../../common/pressable.dart';
+import '../../purchases/entitlement_notifier.dart';
 
 /// S30 — 최종 리포트. complete는 멱등이라 재진입해도 같은 결과가 나온다.
 class ReportScreen extends ConsumerWidget {
@@ -108,6 +111,8 @@ class _ReportBody extends ConsumerWidget {
               .valueOrNull
               ?.feedback,
         ),
+        // 만족도를 남긴 직후가 전환이 가장 잘 되는 지점이다 (이슈 #21).
+        const _UpsellCard(),
         const SizedBox(height: AppSpacing.lg),
         OutlinedButton(
           onPressed: () => context.push(AppRoutes.transcript(sessionId)),
@@ -119,6 +124,7 @@ class _ReportBody extends ConsumerWidget {
             // 리포트를 확인하고 홈으로 돌아가면 한도·히스토리를 새로 읽는다.
             ref.invalidate(myProfileProvider);
             ref.invalidate(interviewHistoryProvider);
+            ref.invalidate(entitlementProvider);
             context.go(AppRoutes.home);
           },
           child: Text(l10n.reportHome),
@@ -230,6 +236,78 @@ class _CriterionRow extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+/// 무료 체험을 다 쓴 사용자에게만 보이는 전환 카드.
+///
+/// 아직 무료가 남았거나 이미 Pro면 아무것도 그리지 않는다 — 리포트를 보러 온
+/// 사람에게 매번 구독을 들이밀면 리포트 자체의 신뢰가 깎인다.
+class _UpsellCard extends ConsumerWidget {
+  const _UpsellCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final entitlement = ref
+        .watch(entitlementProvider)
+        .maybeWhen(
+          data: (value) => value,
+          orElse: () => const Entitlement.unknown(),
+        );
+
+    if (!entitlement.hasExhaustedFreeInterviews) {
+      return const SizedBox.shrink();
+    }
+
+    final l10n = AppL10n.of(context);
+    final colors = context.colors;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSpacing.lg),
+      child: Pressable(
+        onTap: () => context.push(AppRoutes.paywall),
+        borderRadius: BorderRadius.circular(AppSpacing.radius),
+        child: Container(
+          padding: const EdgeInsets.all(AppSpacing.md),
+          decoration: BoxDecoration(
+            color: colors.accentSoft,
+            borderRadius: BorderRadius.circular(AppSpacing.radius),
+            border: Border.all(color: colors.accentLine),
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.reportUpsellTitle,
+                      style: textTheme.bodySmall?.copyWith(color: colors.text2),
+                    ),
+                    const SizedBox(height: AppSpacing.xs),
+                    Text(
+                      l10n.reportUpsellBody,
+                      style: textTheme.titleSmall?.copyWith(
+                        color: colors.accent,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      l10n.reportUpsellPrice,
+                      style: textTheme.labelSmall?.copyWith(
+                        color: colors.text2,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right, color: colors.accent),
+            ],
+          ),
+        ),
       ),
     );
   }
