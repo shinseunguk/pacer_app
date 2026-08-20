@@ -12,6 +12,7 @@ import '../../common/failure_message.dart';
 import '../../providers/interview_providers.dart';
 import '../../providers/user_providers.dart';
 import 'interview_setup_notifier.dart';
+import 'widgets/preset_picker.dart';
 
 /// S13 — 유형·난이도·질문 수·점수 표시 후 면접 시작.
 class InterviewOptionsScreen extends ConsumerStatefulWidget {
@@ -76,22 +77,11 @@ class _InterviewOptionsScreenState
                   notifier.setDifficulty(value.first),
             ),
             const SizedBox(height: AppSpacing.lg),
-            _SectionLabel(l10n.setupQuestionCount),
-            Row(
-              children: [
-                Expanded(
-                  child: Slider(
-                    value: setup.questionCount.toDouble(),
-                    min: kMinQuestionCount.toDouble(),
-                    max: kMaxQuestionCount.toDouble(),
-                    divisions: kMaxQuestionCount - kMinQuestionCount,
-                    label: '${setup.questionCount}',
-                    onChanged: (value) =>
-                        notifier.setQuestionCount(value.round()),
-                  ),
-                ),
-                Text(l10n.setupQuestionCountValue(setup.questionCount)),
-              ],
+            _SectionLabel(l10n.setupLength),
+            PresetPicker(
+              selected: InterviewPreset.fromQuestionCount(setup.questionCount),
+              onSelected: (preset) =>
+                  notifier.setQuestionCount(preset.questionCount),
             ),
             const SizedBox(height: AppSpacing.sm),
             SwitchListTile.adaptive(

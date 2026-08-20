@@ -79,11 +79,22 @@
   "setupDifficultyLow": "쉬움",
   "setupDifficultyMid": "보통",
   "setupDifficultyHigh": "어려움",
-  "setupQuestionCount": "기본 질문 수",
-  "setupQuestionCountValue": "{count}문항",
-  "@setupQuestionCountValue": {
+  "setupLength": "면접 길이",
+  "setupPresetQuick": "빠른 연습",
+  "setupPresetStandard": "실전",
+  "setupPresetDeep": "심층",
+  "setupPresetMinutes": "약 {minutes}분",
+  "@setupPresetMinutes": {
     "placeholders": {
-      "count": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "setupPresetTurns": "질문 {turns}개 내외",
+  "@setupPresetTurns": {
+    "placeholders": {
+      "turns": {
         "type": "int"
       }
     }

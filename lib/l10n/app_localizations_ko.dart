@@ -190,11 +190,25 @@ class AppL10nKo extends AppL10n {
   String get setupDifficultyHigh => '어려움';
 
   @override
-  String get setupQuestionCount => '기본 질문 수';
+  String get setupLength => '면접 길이';
 
   @override
-  String setupQuestionCountValue(int count) {
-    return '$count문항';
+  String get setupPresetQuick => '빠른 연습';
+
+  @override
+  String get setupPresetStandard => '실전';
+
+  @override
+  String get setupPresetDeep => '심층';
+
+  @override
+  String setupPresetMinutes(int minutes) {
+    return '약 $minutes분';
+  }
+
+  @override
+  String setupPresetTurns(int turns) {
+    return '질문 $turns개 내외';
   }
 
   @override

@@ -79,11 +79,22 @@
   "setupDifficultyLow": "Easy",
   "setupDifficultyMid": "Medium",
   "setupDifficultyHigh": "Hard",
-  "setupQuestionCount": "Base questions",
-  "setupQuestionCountValue": "{count} questions",
-  "@setupQuestionCountValue": {
+  "setupLength": "Interview length",
+  "setupPresetQuick": "Quick practice",
+  "setupPresetStandard": "Full run",
+  "setupPresetDeep": "In depth",
+  "setupPresetMinutes": "About {minutes} min",
+  "@setupPresetMinutes": {
     "placeholders": {
-      "count": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "setupPresetTurns": "~{turns} questions",
+  "@setupPresetTurns": {
+    "placeholders": {
+      "turns": {
         "type": "int"
       }
     }
