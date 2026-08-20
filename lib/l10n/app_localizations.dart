@@ -445,17 +445,41 @@ abstract class AppL10n {
   /// **'어려움'**
   String get setupDifficultyHigh;
 
-  /// No description provided for @setupQuestionCount.
+  /// No description provided for @setupLength.
   ///
   /// In ko, this message translates to:
-  /// **'기본 질문 수'**
-  String get setupQuestionCount;
+  /// **'면접 길이'**
+  String get setupLength;
 
-  /// No description provided for @setupQuestionCountValue.
+  /// No description provided for @setupPresetQuick.
   ///
   /// In ko, this message translates to:
-  /// **'{count}문항'**
-  String setupQuestionCountValue(int count);
+  /// **'빠른 연습'**
+  String get setupPresetQuick;
+
+  /// No description provided for @setupPresetStandard.
+  ///
+  /// In ko, this message translates to:
+  /// **'실전'**
+  String get setupPresetStandard;
+
+  /// No description provided for @setupPresetDeep.
+  ///
+  /// In ko, this message translates to:
+  /// **'심층'**
+  String get setupPresetDeep;
+
+  /// No description provided for @setupPresetMinutes.
+  ///
+  /// In ko, this message translates to:
+  /// **'약 {minutes}분'**
+  String setupPresetMinutes(int minutes);
+
+  /// No description provided for @setupPresetTurns.
+  ///
+  /// In ko, this message translates to:
+  /// **'질문 {turns}개 내외'**
+  String setupPresetTurns(int turns);
 
   /// No description provided for @setupShowScore.
   ///

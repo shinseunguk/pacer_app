@@ -195,11 +195,25 @@ class AppL10nEn extends AppL10n {
   String get setupDifficultyHigh => 'Hard';
 
   @override
-  String get setupQuestionCount => 'Base questions';
+  String get setupLength => 'Interview length';
 
   @override
-  String setupQuestionCountValue(int count) {
-    return '$count questions';
+  String get setupPresetQuick => 'Quick practice';
+
+  @override
+  String get setupPresetStandard => 'Full run';
+
+  @override
+  String get setupPresetDeep => 'In depth';
+
+  @override
+  String setupPresetMinutes(int minutes) {
+    return 'About $minutes min';
+  }
+
+  @override
+  String setupPresetTurns(int turns) {
+    return '~$turns questions';
   }
 
   @override

@@ -28,9 +28,45 @@ enum JobSource {
   final String value;
 }
 
-const kMinQuestionCount = 3;
-const kMaxQuestionCount = 10;
-const kDefaultQuestionCount = 5;
+/// 직무 질문 수의 범위. 도입 질문(자기소개·지원동기) 2개는 여기 포함되지 않는다.
+/// 서버 `MIN/MAX_QUESTION_COUNT`와 같은 값이다.
+const kMinQuestionCount = 5;
+const kMaxQuestionCount = 15;
+const kDefaultQuestionCount = 10;
+
+/// 면접 시작 전에 붙는 도입 질문 수 (자기소개·지원동기).
+const kIntroQuestionCount = 2;
+
+/// 면접 길이 프리셋.
+///
+/// 사용자는 "기본 질문 몇 개"가 아니라 **얼마나 걸리고 몇 번 답하는지**를 궁금해한다.
+/// 그래서 화면에는 `questionCount`를 노출하지 않고 예상 시간과 발화 수만 보여준다.
+/// 5문항이라고 쓰면 5개만 받는 것처럼 보이는데 실제로는 12개를 답한다.
+enum InterviewPreset {
+  /// 무료 사용자가 쓸 수 있는 유일한 프리셋.
+  quick(questionCount: 5, minutes: 20),
+  standard(questionCount: 10, minutes: 35),
+  deep(questionCount: 15, minutes: 55);
+
+  const InterviewPreset({required this.questionCount, required this.minutes});
+
+  /// 직무 질문 수 (도입 질문 제외). 서버로 보내는 값.
+  final int questionCount;
+
+  /// 화면에 표시할 예상 소요 시간(분). 실측 전이라 추정치다.
+  final int minutes;
+
+  /// 사용자가 실제로 답하게 되는 발화 수.
+  /// 도입 2개 + 직무 N개 + 꼬리질문(직무 질문당 평균 1개).
+  int get approxTurns => kIntroQuestionCount + questionCount * 2;
+
+  static InterviewPreset fromQuestionCount(int count) {
+    return InterviewPreset.values.firstWhere(
+      (preset) => preset.questionCount == count,
+      orElse: () => InterviewPreset.standard,
+    );
+  }
+}
 
 /// S11~S13에서 모으는 면접 생성 입력.
 class InterviewSetup {
