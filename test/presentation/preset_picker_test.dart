@@ -102,6 +102,56 @@ void main() {
     expect(tapped, InterviewPreset.deep);
   });
 
+  testWidgets('잠긴 프리셋은 자물쇠를 달고 선택 대신 안내로 보낸다', (tester) async {
+    InterviewPreset? selected;
+    InterviewPreset? lockedTap;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        theme: AppTheme.dark(),
+        localizationsDelegates: const [
+          AppL10n.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: AppL10n.supportedLocales,
+        locale: const Locale('ko'),
+        home: Scaffold(
+          body: ListView(
+            children: [
+              PresetPicker(
+                selected: InterviewPreset.quick,
+                onSelected: (preset) => selected = preset,
+                lockedPresets: const {
+                  InterviewPreset.standard,
+                  InterviewPreset.deep,
+                },
+                onLockedTap: (preset) => lockedTap = preset,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.byIcon(Icons.lock_outline), findsNWidgets(2));
+
+    await tester.tap(find.text('심층'));
+    await tester.pumpAndSettle();
+
+    // 잠긴 카드는 선택되지 않는다 — 눌러도 설정이 바뀌면 안 된다.
+    expect(lockedTap, InterviewPreset.deep);
+    expect(selected, isNull);
+  });
+
+  testWidgets('잠기지 않은 프리셋에는 자물쇠가 없다', (tester) async {
+    await pumpPicker(tester);
+
+    expect(find.byIcon(Icons.lock_outline), findsNothing);
+  });
+
   test('질문 수로 프리셋을 되찾고, 없는 값이면 실전으로 떨어진다', () {
     expect(InterviewPreset.fromQuestionCount(5), InterviewPreset.quick);
     expect(InterviewPreset.fromQuestionCount(15), InterviewPreset.deep);

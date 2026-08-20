@@ -476,4 +476,119 @@ class AppL10nKo extends AppL10n {
 
   @override
   String get settingsAppearanceDark => '다크';
+
+  @override
+  String get homeFreeTitle => '무료 체험';
+
+  @override
+  String homeFreeRemaining(int remaining) {
+    return '$remaining회 남음';
+  }
+
+  @override
+  String get homeFreeNote => '5문항 면접 · 자정 초기화 없음';
+
+  @override
+  String get homeProTitle => 'Pro · 무제한';
+
+  @override
+  String homeProRenewal(String date) {
+    return '$date 갱신';
+  }
+
+  @override
+  String get homeProNoRenewal => '기간 만료 후 무료로 전환돼요';
+
+  @override
+  String get homeFreeExhausted => '무료 체험을 모두 사용했어요';
+
+  @override
+  String get lastFreeTitle => '마지막 무료 면접이에요';
+
+  @override
+  String get lastFreeBody => '이번 면접이 끝나면 Pro로 계속할 수 있어요.';
+
+  @override
+  String get lastFreeStart => '시작하기';
+
+  @override
+  String get presetLockedTitle => 'Pro 전용 길이예요';
+
+  @override
+  String get presetLockedBody =>
+      '무료 체험은 빠른 연습으로 진행돼요. Pro로 바꾸면 더 길게 연습할 수 있어요.';
+
+  @override
+  String get reportUpsellTitle => '무료 체험을 모두 사용했어요';
+
+  @override
+  String get reportUpsellBody => 'Pro로 무제한 이어가기';
+
+  @override
+  String get reportUpsellPrice => '월 9,900원';
+
+  @override
+  String get paywallTitle => 'Pacer Pro';
+
+  @override
+  String get paywallHeadline => '면접 연습, 횟수 걱정 없이';
+
+  @override
+  String get paywallSubhead => '무료 체험 2회로는 부족했다면';
+
+  @override
+  String get paywallBenefitUnlimited => '면접 무제한';
+
+  @override
+  String get paywallBenefitUnlimitedNote => '매일 새로운 공고로 계속 연습';
+
+  @override
+  String get paywallBenefitLength => '5 · 10 · 15문항 선택';
+
+  @override
+  String get paywallBenefitLengthNote => '실전만큼 길게, 심층까지';
+
+  @override
+  String get paywallBenefitReport => '전체 리포트와 모범답안';
+
+  @override
+  String get paywallBenefitReportNote => '질문마다 무엇을 고쳐야 하는지';
+
+  @override
+  String get paywallPrice => '월 9,900원';
+
+  @override
+  String get paywallCta => 'Pro 시작하기';
+
+  @override
+  String get paywallRestore => '구매 복원';
+
+  @override
+  String get paywallRestoreEmpty => '복원할 구매가 없어요.';
+
+  @override
+  String get paywallRestoreDone => '구독이 복원됐어요.';
+
+  @override
+  String get paywallDone => 'Pro가 시작됐어요. 이제 무제한으로 연습할 수 있어요.';
+
+  @override
+  String get paywallTermsTitle => '구독 안내';
+
+  @override
+  String get paywallTermsRenewal =>
+      '월 9,900원 자동 갱신 구독이에요. 기간이 끝나기 24시간 전까지 해지하지 않으면 자동으로 갱신돼요.';
+
+  @override
+  String get paywallTermsCancel =>
+      '해지는 기기의 설정 > 계정 > 구독에서 언제든 할 수 있어요. 해지해도 남은 기간까지는 계속 이용할 수 있어요.';
+
+  @override
+  String get paywallTermsLinks => '이용약관과 개인정보 처리방침에 동의하는 것으로 봅니다.';
+
+  @override
+  String get paywallTerms => '이용약관';
+
+  @override
+  String get paywallPrivacy => '개인정보 처리방침';
 }

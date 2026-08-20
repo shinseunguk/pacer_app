@@ -211,5 +211,55 @@
   "settingsAppearance": "Appearance",
   "settingsAppearanceSystem": "System",
   "settingsAppearanceLight": "Light",
-  "settingsAppearanceDark": "Dark"
+  "settingsAppearanceDark": "Dark",
+  "homeFreeTitle": "Free trial",
+  "homeFreeRemaining": "{remaining} left",
+  "@homeFreeRemaining": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  },
+  "homeFreeNote": "5-question interview · no daily reset",
+  "homeProTitle": "Pro · unlimited",
+  "homeProRenewal": "Renews {date}",
+  "@homeProRenewal": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "homeProNoRenewal": "Reverts to free after this period",
+  "homeFreeExhausted": "You've used your free trial",
+  "lastFreeTitle": "This is your last free interview",
+  "lastFreeBody": "After this one, you can continue with Pro.",
+  "lastFreeStart": "Start",
+  "presetLockedTitle": "Pro-only length",
+  "presetLockedBody": "Free trials run as Quick practice. Go Pro for longer sessions.",
+  "reportUpsellTitle": "You've used your free trial",
+  "reportUpsellBody": "Continue unlimited with Pro",
+  "reportUpsellPrice": "₩9,900 / month",
+  "paywallTitle": "Pacer Pro",
+  "paywallHeadline": "Practice without counting",
+  "paywallSubhead": "If two free interviews weren't enough",
+  "paywallBenefitUnlimited": "Unlimited interviews",
+  "paywallBenefitUnlimitedNote": "Practice with a new posting any day",
+  "paywallBenefitLength": "5 · 10 · 15 questions",
+  "paywallBenefitLengthNote": "As long as the real thing",
+  "paywallBenefitReport": "Full report and model answers",
+  "paywallBenefitReportNote": "What to fix, question by question",
+  "paywallPrice": "₩9,900 / month",
+  "paywallCta": "Start Pro",
+  "paywallRestore": "Restore purchase",
+  "paywallRestoreEmpty": "No purchase to restore.",
+  "paywallRestoreDone": "Your subscription was restored.",
+  "paywallDone": "Pro is active. Practice without limits.",
+  "paywallTermsTitle": "Subscription details",
+  "paywallTermsRenewal": "₩9,900 per month, auto-renewing. It renews automatically unless cancelled at least 24 hours before the period ends.",
+  "paywallTermsCancel": "Cancel any time in Settings > Account > Subscriptions. You keep access until the current period ends.",
+  "paywallTermsLinks": "By subscribing you agree to the Terms and Privacy Policy.",
+  "paywallTerms": "Terms of Service",
+  "paywallPrivacy": "Privacy Policy"
 }

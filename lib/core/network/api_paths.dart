@@ -22,4 +22,8 @@ abstract final class ApiPaths {
   static String resume(String id) => '/interviews/$id/resume';
   static String complete(String id) => '/interviews/$id/complete';
   static String interviewFeedback(String id) => '/interviews/$id/feedback';
+
+  static const myEntitlement = '/subscriptions/me';
+  static const verifyPurchase = '/subscriptions/verify';
+  static const restorePurchase = '/subscriptions/restore';
 }

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../domain/entities/legal_document.dart';
 import '../../presentation/auth/auth_notifier.dart';
+import '../../presentation/purchases/paywall_screen.dart';
 import '../../presentation/auth/login_screen.dart';
 import '../../presentation/legal/legal_document_screen.dart';
 import '../../presentation/history/history_screen.dart';
@@ -118,6 +119,12 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.interviewSessionPattern,
         builder: (_, state) =>
             InterviewScreen(sessionId: state.pathParameters['id'] ?? ''),
+      ),
+
+      // 페이월은 어느 화면에서든 위로 덮인다 — 셸(하단 탭) 밖에 둔다.
+      GoRoute(
+        path: AppRoutes.paywall,
+        builder: (_, _) => const PaywallScreen(),
       ),
 
       GoRoute(

@@ -53,4 +53,8 @@ class AppConfig {
   /// 카카오 키가 없는 개발 환경에서는 서버의 목 검증기와 짝을 이루는
   /// 목 로그인을 쓴다 (idToken == socialId).
   bool get useMockSocialLogin => isDev && !hasKakaoKey;
+
+  /// 스토어에 상품이 등록되기 전까지는 개발 환경에서만 스텁 결제를 쓴다
+  /// (서버 StubReceiptVerifier와 짝). 운영 빌드에서는 절대 켜지지 않는다.
+  bool get useStubPurchase => isDev;
 }

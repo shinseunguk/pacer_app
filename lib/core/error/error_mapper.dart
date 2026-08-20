@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'failure.dart';
 
 const _unauthorized = 401;
+const _paymentRequired = 402;
 const _serverErrorFloor = 500;
 
 /// Converts transport errors into domain [Failure]s.
@@ -30,6 +31,14 @@ Failure mapDioException(DioException error) {
 
   if (status == _unauthorized) {
     return AuthFailure(parsed?.message ?? '다시 로그인해주세요.', parsed?.code);
+  }
+
+  // 402는 오류가 아니라 페이월로 가야 할 신호다.
+  if (status == _paymentRequired) {
+    return PaymentRequiredFailure(
+      parsed?.message ?? '이용권이 필요해요.',
+      code: parsed?.code,
+    );
   }
 
   if (status != null && status >= _serverErrorFloor) {
