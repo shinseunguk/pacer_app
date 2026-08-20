@@ -180,6 +180,9 @@ class _ProgressHeader extends StatelessWidget {
   /// 압박 면접은 진행바를 pressure 톤으로 칠한다 (시안 S20).
   final bool isPressure;
 
+  /// 도입 질문 구간 — 서버가 progress.current를 0으로 내려준다 (ADR 0006).
+  bool get isWarmUp => progress.current == 0;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppL10n.of(context);
@@ -196,19 +199,28 @@ class _ProgressHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            l10n.interviewProgress(progress.current, progress.total),
-            style: Theme.of(context).textTheme.bodySmall,
+            isWarmUp
+                ? l10n.interviewWarmUp
+                : l10n.interviewProgress(progress.current, progress.total),
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+              color: isWarmUp ? colors.text3 : null,
+            ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          PacerProgressBar(
-            value: progress.current,
-            max: progress.total,
-            segments: progress.total,
-            height: 5,
-            color: isPressure ? colors.pressure : null,
-            // 바가 페이지 배경 위에 바로 놓여 기본 트랙(surface2)이 배경에 묻힌다.
-            trackColor: isPressure ? colors.pressureSoft : colors.accentSoft,
-          ),
+          // 워밍업(자기소개·지원동기) 중에는 진행바를 그리지 않는다. 0/10으로
+          // 시작하면 아직 시작도 못 한 것처럼 보이는데, 실제로는 답하는 중이다.
+          if (!isWarmUp)
+            PacerProgressBar(
+              value: progress.current,
+              max: progress.total,
+              segments: progress.total,
+              height: 5,
+              color: isPressure ? colors.pressure : null,
+              // 바가 페이지 배경 위에 바로 놓여 기본 트랙(surface2)이 배경에 묻힌다.
+              trackColor: isPressure ? colors.pressureSoft : colors.accentSoft,
+            )
+          else
+            const SizedBox(height: 5),
         ],
       ),
     );

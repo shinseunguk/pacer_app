@@ -102,6 +102,7 @@
   "setupShowScore": "리포트에 점수 표시",
   "setupStart": "면접 시작",
   "interviewTitle": "면접 진행",
+  "interviewWarmUp": "워밍업 · 가볍게 시작해요",
   "interviewProgress": "질문 {current}/{total}",
   "@interviewProgress": {
     "placeholders": {

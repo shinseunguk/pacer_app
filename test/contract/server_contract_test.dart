@@ -189,22 +189,33 @@ void main() {
           jobSource: JobSource.paste,
           jobPostingText: '주요 업무: 결제 서버 API 개발',
           applicantInfo: '경력 3년 백엔드',
-          questionCount: 3,
+          questionCount: kMinQuestionCount,
         );
 
         final created = await repository.create(setup);
-        expect(created.progress.total, 3);
-        expect(created.firstQuestion.type, MessageType.baseQuestion);
+        expect(created.progress.total, kMinQuestionCount);
+        // 첫 질문은 자기소개(도입) — 문항 수에 포함되지 않으므로 진행도는 0이다.
+        expect(created.firstQuestion.type, MessageType.introQuestion);
+        expect(created.progress.current, 0);
         expect(created.firstQuestion.content, isNotEmpty);
 
         final events = await repository
-            .submitAnswer(created.sessionId, '결제 API의 응답 지연을 40% 줄인 경험이 있습니다.')
+            .submitAnswer(created.sessionId, '결제 서버를 3년 맡아온 백엔드 개발자입니다.')
             .toList();
         expect(events.whereType<TurnDelta>(), isNotEmpty);
         expect(events.last, isA<TurnDone>());
 
+        // 도입 질문 2개(자기소개·지원동기)를 지나야 직무 질문 1번이 시작된다.
+        final afterIntro = await repository.skip(created.sessionId);
+        expect(afterIntro.progress.current, 1);
+
+        final answered = await repository
+            .submitAnswer(created.sessionId, '결제 API의 응답 지연을 40% 줄인 경험이 있습니다.')
+            .toList();
+        expect(answered.last, isA<TurnDone>());
+
         final skipped = await repository.skip(created.sessionId);
-        expect(skipped.progress.total, 3);
+        expect(skipped.progress.total, kMinQuestionCount);
 
         final report = await repository.complete(created.sessionId);
         expect(report.overallScore, inInclusiveRange(0, 100));

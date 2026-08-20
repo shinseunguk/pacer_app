@@ -112,6 +112,7 @@ class _Bubble extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: switch (type) {
+          MessageType.introQuestion => context.colors.surface,
           MessageType.baseQuestion => context.colors.surface,
           MessageType.followUp => context.colors.surface2,
           MessageType.answer => context.colors.accent,

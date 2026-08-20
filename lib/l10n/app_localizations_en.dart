@@ -226,6 +226,9 @@ class AppL10nEn extends AppL10n {
   String get interviewTitle => 'Interview';
 
   @override
+  String get interviewWarmUp => 'Warm-up';
+
+  @override
   String interviewProgress(int current, int total) {
     return 'Question $current/$total';
   }

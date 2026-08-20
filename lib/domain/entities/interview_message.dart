@@ -1,5 +1,7 @@
 /// 발화 종류 (ERD: interview_messages.type).
 enum MessageType {
+  /// 자기소개·지원동기. 문항 수·진행도·평가에서 빠지는 워밍업이다 (ADR 0006).
+  introQuestion('intro_question'),
   baseQuestion('base_question'),
   followUp('follow_up'),
   answer('answer'),
@@ -17,7 +19,9 @@ enum MessageType {
   }
 
   bool get isInterviewer =>
-      this == MessageType.baseQuestion || this == MessageType.followUp;
+      this == MessageType.introQuestion ||
+      this == MessageType.baseQuestion ||
+      this == MessageType.followUp;
 }
 
 /// 질문별 피드백·모범답안 (대화 전문 재열람에서 노출).
