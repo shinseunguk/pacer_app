@@ -102,6 +102,7 @@
   "setupShowScore": "Show scores in the report",
   "setupStart": "Start interview",
   "interviewTitle": "Interview",
+  "interviewWarmUp": "Warm-up",
   "interviewProgress": "Question {current}/{total}",
   "@interviewProgress": {
     "placeholders": {

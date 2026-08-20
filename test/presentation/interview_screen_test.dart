@@ -111,6 +111,23 @@ void main() {
     expect(find.byType(LinearProgressIndicator), findsNothing);
   });
 
+  testWidgets('도입 질문 구간에는 진행바 대신 워밍업 라벨만 보여준다', (tester) async {
+    await pumpScreen(tester, detail: _detail(current: 0));
+
+    expect(find.text('워밍업 · 가볍게 시작해요'), findsOneWidget);
+    expect(find.text('질문 0/5'), findsNothing);
+    // 0/5로 채워진 빈 바는 "아직 시작도 못 했다"로 읽힌다 — 아예 그리지 않는다.
+    expect(find.byType(PacerProgressBar), findsNothing);
+  });
+
+  testWidgets('직무 질문이 시작되면 진행바와 n/N을 보여준다', (tester) async {
+    await pumpScreen(tester, detail: _detail(current: 1));
+
+    expect(find.text('질문 1/5'), findsOneWidget);
+    expect(find.text('워밍업 · 가볍게 시작해요'), findsNothing);
+    expect(progressBar(tester).value, 1);
+  });
+
   testWidgets('압박 면접은 진행바를 pressure 톤으로 칠한다', (tester) async {
     await pumpScreen(tester, detail: _detail(interviewType: 'pressure'));
 

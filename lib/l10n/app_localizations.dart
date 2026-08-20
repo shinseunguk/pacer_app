@@ -499,6 +499,12 @@ abstract class AppL10n {
   /// **'면접 진행'**
   String get interviewTitle;
 
+  /// No description provided for @interviewWarmUp.
+  ///
+  /// In ko, this message translates to:
+  /// **'워밍업 · 가볍게 시작해요'**
+  String get interviewWarmUp;
+
   /// No description provided for @interviewProgress.
   ///
   /// In ko, this message translates to:

@@ -221,6 +221,9 @@ class AppL10nKo extends AppL10n {
   String get interviewTitle => '면접 진행';
 
   @override
+  String get interviewWarmUp => '워밍업 · 가볍게 시작해요';
+
+  @override
   String interviewProgress(int current, int total) {
     return '질문 $current/$total';
   }
