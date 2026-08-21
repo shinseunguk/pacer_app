@@ -1212,6 +1212,54 @@ abstract class AppL10n {
   /// In ko, this message translates to:
   /// **'개인정보 처리방침'**
   String get paywallPrivacy;
+
+  /// No description provided for @reportLoadingTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'면접을 채점하고 있어요'**
+  String get reportLoadingTitle;
+
+  /// No description provided for @reportLoadingStep1.
+  ///
+  /// In ko, this message translates to:
+  /// **'대화를 처음부터 다시 읽고 있어요'**
+  String get reportLoadingStep1;
+
+  /// No description provided for @reportLoadingStep2.
+  ///
+  /// In ko, this message translates to:
+  /// **'항목별로 점수를 매기고 있어요'**
+  String get reportLoadingStep2;
+
+  /// No description provided for @reportLoadingStep3.
+  ///
+  /// In ko, this message translates to:
+  /// **'질문마다 모범답안을 정리하고 있어요'**
+  String get reportLoadingStep3;
+
+  /// No description provided for @reportLoadingStep4.
+  ///
+  /// In ko, this message translates to:
+  /// **'거의 다 됐어요'**
+  String get reportLoadingStep4;
+
+  /// No description provided for @reportLoadingNote.
+  ///
+  /// In ko, this message translates to:
+  /// **'꼼꼼히 보느라 1~2분 걸려요. 화면을 벗어나도 채점은 계속돼요.'**
+  String get reportLoadingNote;
+
+  /// No description provided for @profileEntitlement.
+  ///
+  /// In ko, this message translates to:
+  /// **'이용권'**
+  String get profileEntitlement;
+
+  /// No description provided for @profileEntitlementFree.
+  ///
+  /// In ko, this message translates to:
+  /// **'무료 체험 · {remaining}회 남음'**
+  String profileEntitlementFree(int remaining);
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

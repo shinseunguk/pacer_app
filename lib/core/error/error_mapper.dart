@@ -12,9 +12,11 @@ const _serverErrorFloor = 500;
 /// so the Korean message is taken straight from the response when present.
 Failure mapDioException(DioException error) {
   switch (error.type) {
-    case DioExceptionType.connectionTimeout:
     case DioExceptionType.sendTimeout:
     case DioExceptionType.receiveTimeout:
+      // 연결은 됐는데 응답이 늦은 것 — 네트워크를 의심하게 만들면 안 된다.
+      return const TimeoutFailure();
+    case DioExceptionType.connectionTimeout:
     case DioExceptionType.connectionError:
       return const NetworkFailure();
     case DioExceptionType.cancel:

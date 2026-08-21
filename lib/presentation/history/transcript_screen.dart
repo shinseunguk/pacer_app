@@ -7,6 +7,7 @@ import '../../core/theme/app_theme.dart';
 import '../../domain/entities/interview_report.dart';
 import '../../l10n/app_localizations.dart';
 import '../common/app_error_view.dart';
+import '../common/paragraph_text.dart';
 import '../interview/session/widgets/chat_bubble.dart';
 import '../providers/interview_providers.dart';
 
@@ -76,7 +77,7 @@ class _ReportSummary extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             const SizedBox(height: AppSpacing.sm),
-            Text(
+            ParagraphText(
               report.passReason,
               style: Theme.of(context).textTheme.bodySmall,
             ),
@@ -114,7 +115,7 @@ class _ModelAnswer extends StatelessWidget {
             ).textTheme.bodySmall?.copyWith(color: context.colors.accent),
           ),
           const SizedBox(height: AppSpacing.xs),
-          Text(answer, style: Theme.of(context).textTheme.bodyMedium),
+          ParagraphText(answer),
         ],
       ),
     );

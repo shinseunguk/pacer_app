@@ -261,5 +261,20 @@
   "paywallTermsCancel": "Cancel any time in Settings > Account > Subscriptions. You keep access until the current period ends.",
   "paywallTermsLinks": "By subscribing you agree to the Terms and Privacy Policy.",
   "paywallTerms": "Terms of Service",
-  "paywallPrivacy": "Privacy Policy"
+  "paywallPrivacy": "Privacy Policy",
+  "reportLoadingTitle": "Scoring your interview",
+  "reportLoadingStep1": "Re-reading the conversation",
+  "reportLoadingStep2": "Scoring each criterion",
+  "reportLoadingStep3": "Writing model answers",
+  "reportLoadingStep4": "Almost there",
+  "reportLoadingNote": "A careful read takes 1–2 minutes. Scoring continues if you leave.",
+  "profileEntitlement": "Plan",
+  "profileEntitlementFree": "Free trial · {remaining} left",
+  "@profileEntitlementFree": {
+    "placeholders": {
+      "remaining": {
+        "type": "int"
+      }
+    }
+  }
 }

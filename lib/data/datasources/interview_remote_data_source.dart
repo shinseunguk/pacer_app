@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import '../../core/network/api_paths.dart';
+import '../../core/network/dio_client.dart';
 import '../../domain/entities/interview_setup.dart';
 import '../models/interview_models.dart';
 import 'sse_parser.dart';
@@ -63,9 +64,11 @@ class InterviewRemoteDataSource {
     return ResumedInterviewModel.fromJson(response.data ?? const {});
   }
 
+  /// 평가는 LLM이 대화록 전체를 읽어야 해서 오래 걸린다 — 전용 상한을 준다.
   Future<CompleteInterviewModel> complete(String sessionId) async {
     final response = await _dio.post<Map<String, dynamic>>(
       ApiPaths.complete(sessionId),
+      options: Options(receiveTimeout: kReportTimeout),
     );
     return CompleteInterviewModel.fromJson(response.data ?? const {});
   }
