@@ -635,4 +635,55 @@ class AppL10nEn extends AppL10n {
   String profileEntitlementFree(int remaining) {
     return 'Free trial · $remaining left';
   }
+
+  @override
+  String get introSkip => 'Skip';
+
+  @override
+  String get introNext => 'Next';
+
+  @override
+  String get introStart => 'Get started';
+
+  @override
+  String get introBadge1 => 'AI interview coach';
+
+  @override
+  String get introTitle1 => 'Don\'t run\nthis alone';
+
+  @override
+  String get introBody1 =>
+      'Paste a job posting and Pacer runs a real interview tailored to that role.';
+
+  @override
+  String get introBadge2 => 'Tailored questions · follow-ups';
+
+  @override
+  String get introTitle2 => 'Straight from\nthe posting';
+
+  @override
+  String get introBody2 =>
+      'Questions are built from the posting, and follow-ups dig into your answers.';
+
+  @override
+  String get introBadge3 => 'Scores · growth';
+
+  @override
+  String get introTitle3 => 'A pace that\ngets faster';
+
+  @override
+  String get introBody3 =>
+      'Every answer is scored by criterion, and your progress shows up as a graph.';
+
+  @override
+  String get introArtQuestion => 'Which project stands out most?';
+
+  @override
+  String get introArtAnswer => 'I halved response time on the detail page…';
+
+  @override
+  String get introArtFollowUp => 'How did you find the bottleneck?';
+
+  @override
+  String get introArtFollowUpBadge => 'Follow-up';
 }

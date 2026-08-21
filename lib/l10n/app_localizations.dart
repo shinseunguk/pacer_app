@@ -1260,6 +1260,102 @@ abstract class AppL10n {
   /// In ko, this message translates to:
   /// **'무료 체험 · {remaining}회 남음'**
   String profileEntitlementFree(int remaining);
+
+  /// No description provided for @introSkip.
+  ///
+  /// In ko, this message translates to:
+  /// **'건너뛰기'**
+  String get introSkip;
+
+  /// No description provided for @introNext.
+  ///
+  /// In ko, this message translates to:
+  /// **'다음'**
+  String get introNext;
+
+  /// No description provided for @introStart.
+  ///
+  /// In ko, this message translates to:
+  /// **'시작하기'**
+  String get introStart;
+
+  /// No description provided for @introBadge1.
+  ///
+  /// In ko, this message translates to:
+  /// **'AI 면접 코치'**
+  String get introBadge1;
+
+  /// No description provided for @introTitle1.
+  ///
+  /// In ko, this message translates to:
+  /// **'면접, 혼자\n뛰지 마세요'**
+  String get introTitle1;
+
+  /// No description provided for @introBody1.
+  ///
+  /// In ko, this message translates to:
+  /// **'공고만 넣으면 그 회사·직무에 맞춘 실전 면접을 페이서가 함께 뜁니다.'**
+  String get introBody1;
+
+  /// No description provided for @introBadge2.
+  ///
+  /// In ko, this message translates to:
+  /// **'맞춤 질문 · 꼬리질문'**
+  String get introBadge2;
+
+  /// No description provided for @introTitle2.
+  ///
+  /// In ko, this message translates to:
+  /// **'공고 그대로,\n진짜 면접처럼'**
+  String get introTitle2;
+
+  /// No description provided for @introBody2.
+  ///
+  /// In ko, this message translates to:
+  /// **'채용공고를 붙여넣으면 맞춤 질문을 만들고, 답변에 따라 꼬리질문으로 깊게 파고들어요.'**
+  String get introBody2;
+
+  /// No description provided for @introBadge3.
+  ///
+  /// In ko, this message translates to:
+  /// **'정량 피드백 · 성장 추적'**
+  String get introBadge3;
+
+  /// No description provided for @introTitle3.
+  ///
+  /// In ko, this message translates to:
+  /// **'뛸수록\n빨라지는 페이스'**
+  String get introTitle3;
+
+  /// No description provided for @introBody3.
+  ///
+  /// In ko, this message translates to:
+  /// **'항목별로 점수를 매기고, 반복할수록 성장하는 그래프를 보여드려요.'**
+  String get introBody3;
+
+  /// No description provided for @introArtQuestion.
+  ///
+  /// In ko, this message translates to:
+  /// **'가장 기억에 남는 프로젝트는?'**
+  String get introArtQuestion;
+
+  /// No description provided for @introArtAnswer.
+  ///
+  /// In ko, this message translates to:
+  /// **'상품 상세 리뉴얼로 응답 속도를 절반으로…'**
+  String get introArtAnswer;
+
+  /// No description provided for @introArtFollowUp.
+  ///
+  /// In ko, this message translates to:
+  /// **'병목은 어떻게 찾으셨나요?'**
+  String get introArtFollowUp;
+
+  /// No description provided for @introArtFollowUpBadge.
+  ///
+  /// In ko, this message translates to:
+  /// **'꼬리질문'**
+  String get introArtFollowUpBadge;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

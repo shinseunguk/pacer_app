@@ -1,6 +1,7 @@
 /// Route paths. Keep in sync with the screen map (화면정의서 §1).
 abstract final class AppRoutes {
   static const splash = '/splash';
+  static const intro = '/intro';
   static const login = '/login';
   static const onboardingNickname = '/onboarding/nickname';
   static const onboardingConsent = '/onboarding/consent';

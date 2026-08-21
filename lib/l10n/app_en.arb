@@ -276,5 +276,21 @@
         "type": "int"
       }
     }
-  }
+  },
+  "introSkip": "Skip",
+  "introNext": "Next",
+  "introStart": "Get started",
+  "introBadge1": "AI interview coach",
+  "introTitle1": "Don't run\nthis alone",
+  "introBody1": "Paste a job posting and Pacer runs a real interview tailored to that role.",
+  "introBadge2": "Tailored questions · follow-ups",
+  "introTitle2": "Straight from\nthe posting",
+  "introBody2": "Questions are built from the posting, and follow-ups dig into your answers.",
+  "introBadge3": "Scores · growth",
+  "introTitle3": "A pace that\ngets faster",
+  "introBody3": "Every answer is scored by criterion, and your progress shows up as a graph.",
+  "introArtQuestion": "Which project stands out most?",
+  "introArtAnswer": "I halved response time on the detail page…",
+  "introArtFollowUp": "How did you find the bottleneck?",
+  "introArtFollowUpBadge": "Follow-up"
 }
