@@ -707,4 +707,75 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get profileUpsellCta => 'Start Pro · ₩9,900/month';
+
+  @override
+  String get historyGrowthTitle => 'Your progress';
+
+  @override
+  String get historyGrowthSubtitle => 'See the pace you\'re building';
+
+  @override
+  String get historyTabTrend => 'Trend';
+
+  @override
+  String get historyTabSkill => 'Skills';
+
+  @override
+  String get historyStreak => 'Streak';
+
+  @override
+  String historyStreakDays(int days) {
+    return '$days days';
+  }
+
+  @override
+  String get historyTotal => 'Interviews';
+
+  @override
+  String historyTotalCount(int count) {
+    return '$count';
+  }
+
+  @override
+  String get historyTrendTitle => 'Overall score trend';
+
+  @override
+  String historyTrendDelta(String delta) {
+    return 'Latest $delta';
+  }
+
+  @override
+  String get historyAverage => 'Average';
+
+  @override
+  String get historyBestGrade => 'Best grade';
+
+  @override
+  String get historyPassCount => 'Likely pass';
+
+  @override
+  String historyPassCountValue(int count) {
+    return '$count';
+  }
+
+  @override
+  String get historySkillTitle => 'Latest interview · by criterion';
+
+  @override
+  String historyWeakest(String label, int score) {
+    return 'Your weakest area is $label ($score).';
+  }
+
+  @override
+  String get historyGrowthEmptyTitle => 'Nothing here yet';
+
+  @override
+  String get historyGrowthEmptyBody =>
+      'Finish two interviews to see\nyour trend and weak spots.';
+
+  @override
+  String get historyGrowthEmptyCta => 'Start your first interview';
+
+  @override
+  String get historyListLabel => 'Interview history';
 }
