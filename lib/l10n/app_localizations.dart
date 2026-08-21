@@ -1398,6 +1398,126 @@ abstract class AppL10n {
   /// In ko, this message translates to:
   /// **'Pro 시작하기 · 월 9,900원'**
   String get profileUpsellCta;
+
+  /// No description provided for @historyGrowthTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'성장 기록'**
+  String get historyGrowthTitle;
+
+  /// No description provided for @historyGrowthSubtitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'뛸수록 빨라지는 페이스를 확인하세요'**
+  String get historyGrowthSubtitle;
+
+  /// No description provided for @historyTabTrend.
+  ///
+  /// In ko, this message translates to:
+  /// **'추이'**
+  String get historyTabTrend;
+
+  /// No description provided for @historyTabSkill.
+  ///
+  /// In ko, this message translates to:
+  /// **'역량'**
+  String get historyTabSkill;
+
+  /// No description provided for @historyStreak.
+  ///
+  /// In ko, this message translates to:
+  /// **'연속 연습'**
+  String get historyStreak;
+
+  /// No description provided for @historyStreakDays.
+  ///
+  /// In ko, this message translates to:
+  /// **'{days}일'**
+  String historyStreakDays(int days);
+
+  /// No description provided for @historyTotal.
+  ///
+  /// In ko, this message translates to:
+  /// **'총 면접'**
+  String get historyTotal;
+
+  /// No description provided for @historyTotalCount.
+  ///
+  /// In ko, this message translates to:
+  /// **'{count}회'**
+  String historyTotalCount(int count);
+
+  /// No description provided for @historyTrendTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'종합 점수 추이'**
+  String get historyTrendTitle;
+
+  /// No description provided for @historyTrendDelta.
+  ///
+  /// In ko, this message translates to:
+  /// **'최근 {delta}'**
+  String historyTrendDelta(String delta);
+
+  /// No description provided for @historyAverage.
+  ///
+  /// In ko, this message translates to:
+  /// **'평균 점수'**
+  String get historyAverage;
+
+  /// No description provided for @historyBestGrade.
+  ///
+  /// In ko, this message translates to:
+  /// **'최고 등급'**
+  String get historyBestGrade;
+
+  /// No description provided for @historyPassCount.
+  ///
+  /// In ko, this message translates to:
+  /// **'합격 예상'**
+  String get historyPassCount;
+
+  /// No description provided for @historyPassCountValue.
+  ///
+  /// In ko, this message translates to:
+  /// **'{count}회'**
+  String historyPassCountValue(int count);
+
+  /// No description provided for @historySkillTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'최근 면접 · 항목별'**
+  String get historySkillTitle;
+
+  /// No description provided for @historyWeakest.
+  ///
+  /// In ko, this message translates to:
+  /// **'가장 약한 항목은 {label}({score})이에요.'**
+  String historyWeakest(String label, int score);
+
+  /// No description provided for @historyGrowthEmptyTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'아직 기록이 없어요'**
+  String get historyGrowthEmptyTitle;
+
+  /// No description provided for @historyGrowthEmptyBody.
+  ///
+  /// In ko, this message translates to:
+  /// **'면접을 2회 이상 완주하면\n성장 추이와 약점 진단을 볼 수 있어요.'**
+  String get historyGrowthEmptyBody;
+
+  /// No description provided for @historyGrowthEmptyCta.
+  ///
+  /// In ko, this message translates to:
+  /// **'첫 면접 시작하기'**
+  String get historyGrowthEmptyCta;
+
+  /// No description provided for @historyListLabel.
+  ///
+  /// In ko, this message translates to:
+  /// **'면접 이력'**
+  String get historyListLabel;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

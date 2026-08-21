@@ -686,4 +686,74 @@ class AppL10nKo extends AppL10n {
 
   @override
   String get profileUpsellCta => 'Pro 시작하기 · 월 9,900원';
+
+  @override
+  String get historyGrowthTitle => '성장 기록';
+
+  @override
+  String get historyGrowthSubtitle => '뛸수록 빨라지는 페이스를 확인하세요';
+
+  @override
+  String get historyTabTrend => '추이';
+
+  @override
+  String get historyTabSkill => '역량';
+
+  @override
+  String get historyStreak => '연속 연습';
+
+  @override
+  String historyStreakDays(int days) {
+    return '$days일';
+  }
+
+  @override
+  String get historyTotal => '총 면접';
+
+  @override
+  String historyTotalCount(int count) {
+    return '$count회';
+  }
+
+  @override
+  String get historyTrendTitle => '종합 점수 추이';
+
+  @override
+  String historyTrendDelta(String delta) {
+    return '최근 $delta';
+  }
+
+  @override
+  String get historyAverage => '평균 점수';
+
+  @override
+  String get historyBestGrade => '최고 등급';
+
+  @override
+  String get historyPassCount => '합격 예상';
+
+  @override
+  String historyPassCountValue(int count) {
+    return '$count회';
+  }
+
+  @override
+  String get historySkillTitle => '최근 면접 · 항목별';
+
+  @override
+  String historyWeakest(String label, int score) {
+    return '가장 약한 항목은 $label($score)이에요.';
+  }
+
+  @override
+  String get historyGrowthEmptyTitle => '아직 기록이 없어요';
+
+  @override
+  String get historyGrowthEmptyBody => '면접을 2회 이상 완주하면\n성장 추이와 약점 진단을 볼 수 있어요.';
+
+  @override
+  String get historyGrowthEmptyCta => '첫 면접 시작하기';
+
+  @override
+  String get historyListLabel => '면접 이력';
 }

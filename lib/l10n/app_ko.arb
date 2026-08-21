@@ -299,5 +299,63 @@
   "profileUpsellBenefit1": "면접 무제한",
   "profileUpsellBenefit2": "5 · 10 · 15문항 선택",
   "profileUpsellBenefit3": "전체 리포트와 모범답안",
-  "profileUpsellCta": "Pro 시작하기 · 월 9,900원"
+  "profileUpsellCta": "Pro 시작하기 · 월 9,900원",
+  "historyGrowthTitle": "성장 기록",
+  "historyGrowthSubtitle": "뛸수록 빨라지는 페이스를 확인하세요",
+  "historyTabTrend": "추이",
+  "historyTabSkill": "역량",
+  "historyStreak": "연속 연습",
+  "historyStreakDays": "{days}일",
+  "@historyStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "historyTotal": "총 면접",
+  "historyTotalCount": "{count}회",
+  "@historyTotalCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historyTrendTitle": "종합 점수 추이",
+  "historyTrendDelta": "최근 {delta}",
+  "@historyTrendDelta": {
+    "placeholders": {
+      "delta": {
+        "type": "String"
+      }
+    }
+  },
+  "historyAverage": "평균 점수",
+  "historyBestGrade": "최고 등급",
+  "historyPassCount": "합격 예상",
+  "historyPassCountValue": "{count}회",
+  "@historyPassCountValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historySkillTitle": "최근 면접 · 항목별",
+  "historyWeakest": "가장 약한 항목은 {label}({score})이에요.",
+  "@historyWeakest": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "historyGrowthEmptyTitle": "아직 기록이 없어요",
+  "historyGrowthEmptyBody": "면접을 2회 이상 완주하면\n성장 추이와 약점 진단을 볼 수 있어요.",
+  "historyGrowthEmptyCta": "첫 면접 시작하기",
+  "historyListLabel": "면접 이력"
 }

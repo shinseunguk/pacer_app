@@ -299,5 +299,63 @@
   "profileUpsellBenefit1": "Unlimited interviews",
   "profileUpsellBenefit2": "5 · 10 · 15 questions",
   "profileUpsellBenefit3": "Full report and model answers",
-  "profileUpsellCta": "Start Pro · ₩9,900/month"
+  "profileUpsellCta": "Start Pro · ₩9,900/month",
+  "historyGrowthTitle": "Your progress",
+  "historyGrowthSubtitle": "See the pace you're building",
+  "historyTabTrend": "Trend",
+  "historyTabSkill": "Skills",
+  "historyStreak": "Streak",
+  "historyStreakDays": "{days} days",
+  "@historyStreakDays": {
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "historyTotal": "Interviews",
+  "historyTotalCount": "{count}",
+  "@historyTotalCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historyTrendTitle": "Overall score trend",
+  "historyTrendDelta": "Latest {delta}",
+  "@historyTrendDelta": {
+    "placeholders": {
+      "delta": {
+        "type": "String"
+      }
+    }
+  },
+  "historyAverage": "Average",
+  "historyBestGrade": "Best grade",
+  "historyPassCount": "Likely pass",
+  "historyPassCountValue": "{count}",
+  "@historyPassCountValue": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "historySkillTitle": "Latest interview · by criterion",
+  "historyWeakest": "Your weakest area is {label} ({score}).",
+  "@historyWeakest": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      },
+      "score": {
+        "type": "int"
+      }
+    }
+  },
+  "historyGrowthEmptyTitle": "Nothing here yet",
+  "historyGrowthEmptyBody": "Finish two interviews to see\nyour trend and weak spots.",
+  "historyGrowthEmptyCta": "Start your first interview",
+  "historyListLabel": "Interview history"
 }
