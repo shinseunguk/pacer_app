@@ -629,9 +629,6 @@ class AppL10nEn extends AppL10n {
       'A careful read takes 1–2 minutes. Scoring continues if you leave.';
 
   @override
-  String get profileEntitlement => 'Plan';
-
-  @override
   String profileEntitlementFree(int remaining) {
     return 'Free trial · $remaining left';
   }
@@ -686,4 +683,28 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get introArtFollowUpBadge => 'Follow-up';
+
+  @override
+  String get profilePlanFree => 'Free plan';
+
+  @override
+  String get profilePlanPro => 'Pacer Pro';
+
+  @override
+  String get profileEdit => 'Edit';
+
+  @override
+  String get profileUpsellTitle => 'Practice as much\nas you want';
+
+  @override
+  String get profileUpsellBenefit1 => 'Unlimited interviews';
+
+  @override
+  String get profileUpsellBenefit2 => '5 · 10 · 15 questions';
+
+  @override
+  String get profileUpsellBenefit3 => 'Full report and model answers';
+
+  @override
+  String get profileUpsellCta => 'Start Pro · ₩9,900/month';
 }

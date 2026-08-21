@@ -1249,12 +1249,6 @@ abstract class AppL10n {
   /// **'꼼꼼히 보느라 1~2분 걸려요. 화면을 벗어나도 채점은 계속돼요.'**
   String get reportLoadingNote;
 
-  /// No description provided for @profileEntitlement.
-  ///
-  /// In ko, this message translates to:
-  /// **'이용권'**
-  String get profileEntitlement;
-
   /// No description provided for @profileEntitlementFree.
   ///
   /// In ko, this message translates to:
@@ -1356,6 +1350,54 @@ abstract class AppL10n {
   /// In ko, this message translates to:
   /// **'꼬리질문'**
   String get introArtFollowUpBadge;
+
+  /// No description provided for @profilePlanFree.
+  ///
+  /// In ko, this message translates to:
+  /// **'무료 플랜'**
+  String get profilePlanFree;
+
+  /// No description provided for @profilePlanPro.
+  ///
+  /// In ko, this message translates to:
+  /// **'Pacer Pro'**
+  String get profilePlanPro;
+
+  /// No description provided for @profileEdit.
+  ///
+  /// In ko, this message translates to:
+  /// **'편집'**
+  String get profileEdit;
+
+  /// No description provided for @profileUpsellTitle.
+  ///
+  /// In ko, this message translates to:
+  /// **'횟수 걱정 없이\n마음껏 연습하세요'**
+  String get profileUpsellTitle;
+
+  /// No description provided for @profileUpsellBenefit1.
+  ///
+  /// In ko, this message translates to:
+  /// **'면접 무제한'**
+  String get profileUpsellBenefit1;
+
+  /// No description provided for @profileUpsellBenefit2.
+  ///
+  /// In ko, this message translates to:
+  /// **'5 · 10 · 15문항 선택'**
+  String get profileUpsellBenefit2;
+
+  /// No description provided for @profileUpsellBenefit3.
+  ///
+  /// In ko, this message translates to:
+  /// **'전체 리포트와 모범답안'**
+  String get profileUpsellBenefit3;
+
+  /// No description provided for @profileUpsellCta.
+  ///
+  /// In ko, this message translates to:
+  /// **'Pro 시작하기 · 월 9,900원'**
+  String get profileUpsellCta;
 }
 
 class _AppL10nDelegate extends LocalizationsDelegate<AppL10n> {

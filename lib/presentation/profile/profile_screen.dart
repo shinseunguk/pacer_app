@@ -52,7 +52,6 @@ class ProfileScreen extends ConsumerWidget {
             children: [
               PacerCard(
                 radius: 20,
-                onTap: () => context.push(AppRoutes.profileNickname),
                 child: Row(
                   children: [
                     Container(
@@ -90,16 +89,19 @@ class ProfileScreen extends ConsumerWidget {
                         ],
                       ),
                     ),
-                    Icon(
-                      Icons.chevron_right,
-                      size: 18,
-                      color: context.colors.text3,
+                    // 시안은 명시적인 '편집' 버튼을 둔다 — 카드 전체가 눌리는 것보다
+                    // 무엇이 바뀌는지 분명하다.
+                    TextButton.icon(
+                      onPressed: () => context.push(AppRoutes.profileNickname),
+                      icon: const Icon(Icons.edit_outlined, size: 15),
+                      label: Text(l10n.profileEdit),
                     ),
                   ],
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
               const _EntitlementRow(),
+              const _UpsellCard(),
             ],
           ),
         ),
@@ -150,11 +152,8 @@ class _EntitlementRow extends ConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    l10n.profileEntitlement,
-                    style: Theme.of(context).textTheme.labelSmall,
-                  ),
-                  const SizedBox(height: 2),
+                  _PlanBadge(isPro: isPro),
+                  const SizedBox(height: 6),
                   Text(
                     isPro ? l10n.homeProTitle : detail,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -182,4 +181,139 @@ class _EntitlementRow extends ConsumerWidget {
 String _formatDate(DateTime date) {
   final local = date.toLocal();
   return '${local.month}월 ${local.day}일';
+}
+
+class _PlanBadge extends StatelessWidget {
+  const _PlanBadge({required this.isPro});
+
+  final bool isPro;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppL10n.of(context);
+    final colors = context.colors;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 3),
+      decoration: BoxDecoration(
+        color: isPro ? colors.accentSoft : colors.surface2,
+        borderRadius: BorderRadius.circular(99),
+      ),
+      child: Text(
+        isPro ? l10n.profilePlanPro : l10n.profilePlanFree,
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+          color: isPro ? colors.accent : colors.text2,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+  }
+}
+
+/// 구독 유도 카드 (시안).
+///
+/// **무료 사용자에게만 보여준다.** 이미 구독한 사람에게 구독을 권하는 건 소음이고,
+/// 계정 화면을 열 때마다 그걸 보면 결제한 게 무색해진다.
+class _UpsellCard extends ConsumerWidget {
+  const _UpsellCard();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final entitlement = ref
+        .watch(entitlementProvider)
+        .maybeWhen(
+          data: (value) => value,
+          orElse: () => const Entitlement.unknown(),
+        );
+
+    if (entitlement.isPro) return const SizedBox.shrink();
+
+    final l10n = AppL10n.of(context);
+    final colors = context.colors;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: AppSpacing.md),
+      child: Pressable(
+        onTap: () => context.push(AppRoutes.paywall),
+        borderRadius: BorderRadius.circular(22),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [colors.accent, colors.accent2],
+            ),
+            borderRadius: BorderRadius.circular(22),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 9,
+                  vertical: 3,
+                ),
+                decoration: BoxDecoration(
+                  color: colors.onAccent.withValues(alpha: 0.22),
+                  borderRadius: BorderRadius.circular(99),
+                ),
+                child: Text(
+                  l10n.profilePlanPro,
+                  style: textTheme.labelSmall?.copyWith(
+                    color: colors.onAccent,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 11),
+              Text(
+                l10n.profileUpsellTitle,
+                style: textTheme.titleLarge?.copyWith(
+                  fontSize: 21,
+                  fontWeight: FontWeight.w800,
+                  height: 1.2,
+                  color: colors.onAccent,
+                ),
+              ),
+              const SizedBox(height: AppSpacing.md),
+              for (final benefit in [
+                l10n.profileUpsellBenefit1,
+                l10n.profileUpsellBenefit2,
+                l10n.profileUpsellBenefit3,
+              ])
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 7),
+                  child: Row(
+                    children: [
+                      Icon(Icons.check, size: 15, color: colors.onAccent),
+                      const SizedBox(width: 8),
+                      Text(
+                        benefit,
+                        style: textTheme.bodySmall?.copyWith(
+                          color: colors.onAccent.withValues(alpha: 0.92),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              const SizedBox(height: 9),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: () => context.push(AppRoutes.paywall),
+                  style: FilledButton.styleFrom(
+                    backgroundColor: colors.onAccent,
+                    foregroundColor: colors.accent2,
+                  ),
+                  child: Text(l10n.profileUpsellCta),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

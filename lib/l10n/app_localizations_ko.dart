@@ -611,9 +611,6 @@ class AppL10nKo extends AppL10n {
   String get reportLoadingNote => '꼼꼼히 보느라 1~2분 걸려요. 화면을 벗어나도 채점은 계속돼요.';
 
   @override
-  String get profileEntitlement => '이용권';
-
-  @override
   String profileEntitlementFree(int remaining) {
     return '무료 체험 · $remaining회 남음';
   }
@@ -665,4 +662,28 @@ class AppL10nKo extends AppL10n {
 
   @override
   String get introArtFollowUpBadge => '꼬리질문';
+
+  @override
+  String get profilePlanFree => '무료 플랜';
+
+  @override
+  String get profilePlanPro => 'Pacer Pro';
+
+  @override
+  String get profileEdit => '편집';
+
+  @override
+  String get profileUpsellTitle => '횟수 걱정 없이\n마음껏 연습하세요';
+
+  @override
+  String get profileUpsellBenefit1 => '면접 무제한';
+
+  @override
+  String get profileUpsellBenefit2 => '5 · 10 · 15문항 선택';
+
+  @override
+  String get profileUpsellBenefit3 => '전체 리포트와 모범답안';
+
+  @override
+  String get profileUpsellCta => 'Pro 시작하기 · 월 9,900원';
 }

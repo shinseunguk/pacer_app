@@ -90,7 +90,7 @@ void main() {
   testWidgets('무료면 남은 횟수를 보여주고 눌러서 구독으로 갈 수 있다', (tester) async {
     await pumpProfile(tester, _free(2));
 
-    expect(find.text('이용권'), findsOneWidget);
+    // '이용권' 라벨은 플랜 배지로 대체됐다 — 배지가 그 역할을 겸한다.
     expect(find.text('무료 체험 · 2회 남음'), findsOneWidget);
     expect(find.byIcon(Icons.chevron_right), findsWidgets);
   });
@@ -99,6 +99,39 @@ void main() {
     await pumpProfile(tester, _free(0));
 
     expect(find.text('무료 체험을 모두 사용했어요'), findsOneWidget);
+  });
+
+  testWidgets('무료면 플랜 배지와 업셀 카드를 보여준다', (tester) async {
+    await pumpProfile(tester, _free(2));
+
+    expect(find.text('무료 플랜'), findsOneWidget);
+    expect(find.text('횟수 걱정 없이\n마음껏 연습하세요'), findsOneWidget);
+    expect(find.text('면접 무제한'), findsOneWidget);
+  });
+
+  testWidgets('구독자에게는 업셀을 띄우지 않는다', (tester) async {
+    // 이미 결제한 사람에게 구독을 권하면 결제한 게 무색해진다.
+    await pumpProfile(
+      tester,
+      const Entitlement(
+        plan: SubscriptionPlan.pro,
+        isPro: true,
+        expiresAt: null,
+        autoRenewing: true,
+        freeInterviewsUsed: 2,
+        freeInterviewsRemaining: 0,
+      ),
+    );
+
+    expect(find.text('Pacer Pro'), findsOneWidget); // 배지만
+    expect(find.text('면접 무제한'), findsNothing);
+    expect(find.textContaining('마음껏 연습하세요'), findsNothing);
+  });
+
+  testWidgets('편집 버튼으로 닉네임 수정에 들어간다', (tester) async {
+    await pumpProfile(tester, _free(2));
+
+    expect(find.text('편집'), findsOneWidget);
   });
 
   testWidgets('구독자는 Pro와 갱신일을 보여준다', (tester) async {
