@@ -608,4 +608,31 @@ class AppL10nEn extends AppL10n {
 
   @override
   String get paywallPrivacy => 'Privacy Policy';
+
+  @override
+  String get reportLoadingTitle => 'Scoring your interview';
+
+  @override
+  String get reportLoadingStep1 => 'Re-reading the conversation';
+
+  @override
+  String get reportLoadingStep2 => 'Scoring each criterion';
+
+  @override
+  String get reportLoadingStep3 => 'Writing model answers';
+
+  @override
+  String get reportLoadingStep4 => 'Almost there';
+
+  @override
+  String get reportLoadingNote =>
+      'A careful read takes 1–2 minutes. Scoring continues if you leave.';
+
+  @override
+  String get profileEntitlement => 'Plan';
+
+  @override
+  String profileEntitlementFree(int remaining) {
+    return 'Free trial · $remaining left';
+  }
 }

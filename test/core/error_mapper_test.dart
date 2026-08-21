@@ -41,11 +41,10 @@ void main() {
     expect(failure.code, 'UNAUTHORIZED');
   });
 
-  test('연결 오류·타임아웃은 NetworkFailure', () {
+  test('연결 오류는 NetworkFailure', () {
     for (final type in [
       DioExceptionType.connectionError,
       DioExceptionType.connectionTimeout,
-      DioExceptionType.receiveTimeout,
     ]) {
       final failure = mapDioException(
         DioException(requestOptions: RequestOptions(path: '/'), type: type),
@@ -61,4 +60,33 @@ void main() {
     expect(failure.message, isNotEmpty);
     expect(failure.code, isNull);
   });
+  group('타임아웃과 네트워크 오류를 나눈다', () {
+    DioException withType(DioExceptionType type) => DioException(
+      requestOptions: RequestOptions(path: '/interviews/1/complete'),
+      type: type,
+    );
+
+    test('응답 지연은 네트워크 오류가 아니다', () {
+      // 리포트 생성은 90초 넘게 걸린다. "네트워크를 확인하세요"라고 하면
+      // 사용자가 와이파이를 껐다 켜며 엉뚱한 데를 본다.
+      final failure = mapDioException(
+        withType(DioExceptionType.receiveTimeout),
+      );
+
+      expect(failure, isA<TimeoutFailure>());
+      expect(failure.message, contains('오래 걸리고'));
+    });
+
+    test('연결 자체가 안 되면 네트워크 오류다', () {
+      expect(
+        mapDioException(withType(DioExceptionType.connectionError)),
+        isA<NetworkFailure>(),
+      );
+      expect(
+        mapDioException(withType(DioExceptionType.connectionTimeout)),
+        isA<NetworkFailure>(),
+      );
+    });
+  });
+
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../common/app_spinner.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -11,8 +10,10 @@ import '../../../domain/entities/interview_report.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../common/app_error_view.dart';
 import '../../common/motion.dart';
+import '../../common/paragraph_text.dart';
 import '../../providers/interview_providers.dart';
 import 'widgets/radar_chart.dart';
+import 'widgets/report_loading_view.dart';
 import 'widgets/report_feedback.dart';
 import 'widgets/score_ring.dart';
 import '../../providers/user_providers.dart';
@@ -34,7 +35,7 @@ class ReportScreen extends ConsumerWidget {
       appBar: AppBar(title: Text(l10n.reportTitle)),
       body: SafeArea(
         child: report.when(
-          loading: () => const Center(child: AppSpinner(size: 28)),
+          loading: () => const ReportLoadingView(),
           error: (error, _) => AppErrorView(
             error: error,
             onRetry: () => ref.invalidate(interviewReportProvider(sessionId)),
@@ -70,13 +71,7 @@ class _ReportBody extends ConsumerWidget {
           ),
         ),
         const SizedBox(height: AppSpacing.sm),
-        RiseIn(
-          order: 3,
-          child: Text(
-            report.passReason,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
-        ),
+        RiseIn(order: 3, child: ParagraphText(report.passReason)),
         if (report.showScore) ...[
           const SizedBox(height: AppSpacing.lg),
           RiseIn(

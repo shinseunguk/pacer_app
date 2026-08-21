@@ -591,4 +591,30 @@ class AppL10nKo extends AppL10n {
 
   @override
   String get paywallPrivacy => '개인정보 처리방침';
+
+  @override
+  String get reportLoadingTitle => '면접을 채점하고 있어요';
+
+  @override
+  String get reportLoadingStep1 => '대화를 처음부터 다시 읽고 있어요';
+
+  @override
+  String get reportLoadingStep2 => '항목별로 점수를 매기고 있어요';
+
+  @override
+  String get reportLoadingStep3 => '질문마다 모범답안을 정리하고 있어요';
+
+  @override
+  String get reportLoadingStep4 => '거의 다 됐어요';
+
+  @override
+  String get reportLoadingNote => '꼼꼼히 보느라 1~2분 걸려요. 화면을 벗어나도 채점은 계속돼요.';
+
+  @override
+  String get profileEntitlement => '이용권';
+
+  @override
+  String profileEntitlementFree(int remaining) {
+    return '무료 체험 · $remaining회 남음';
+  }
 }

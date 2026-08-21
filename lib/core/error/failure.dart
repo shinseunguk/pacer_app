@@ -13,9 +13,19 @@ sealed class Failure implements Exception {
   String toString() => '$runtimeType(code: $code, message: $message)';
 }
 
-/// No connection / timeout — retrying usually helps.
+/// No connection — retrying usually helps.
 class NetworkFailure extends Failure {
   const NetworkFailure([super.message = '네트워크 연결을 확인해주세요.']);
+}
+
+/// 응답이 상한 안에 오지 않음.
+///
+/// [NetworkFailure]와 나눈 이유: 연결은 멀쩡한데 서버가 오래 걸리는 경우가 있다.
+/// "네트워크를 확인하세요"라고 하면 사용자가 와이파이를 껐다 켜며 엉뚱한 데를 본다.
+class TimeoutFailure extends Failure {
+  const TimeoutFailure([
+    super.message = '시간이 오래 걸리고 있어요. 잠시 후 다시 시도해주세요.',
+  ]);
 }
 
 /// 4xx/5xx response carrying the server's `{ error: { code, message } }` body.
