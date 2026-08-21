@@ -280,50 +280,43 @@ class _SkillBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            if (RadarChart.canRender(scores.length))
-              RadarChart(
-                size: 172,
-                entries: [
-                  for (final score in scores)
-                    RadarEntry(
-                      label: criterionLabel(l10n, score.criterion),
-                      score: score.score,
-                    ),
-                ],
-              ),
-            Expanded(
-              child: Column(
-                children: [
-                  for (final score in scores)
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 9),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            criterionLabel(l10n, score.criterion),
-                            style: textTheme.bodySmall?.copyWith(
-                              color: colors.text2,
-                            ),
-                          ),
-                          Text(
-                            '${score.score}',
-                            style: textTheme.bodyMedium?.copyWith(
-                              fontWeight: FontWeight.w700,
-                              fontFeatures: kNumberFeatures,
-                              color: _toneOf(score.score, colors),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                ],
-              ),
+        // 레이더 라벨이 바깥으로 뻗어 옆에 목록을 두면 겹친다.
+        // 휴대폰 폭에서는 위아래로 나누는 편이 둘 다 읽힌다.
+        if (RadarChart.canRender(scores.length))
+          Center(
+            child: RadarChart(
+              size: 210,
+              entries: [
+                for (final score in scores)
+                  RadarEntry(
+                    label: criterionLabel(l10n, score.criterion),
+                    score: score.score,
+                  ),
+              ],
             ),
-          ],
-        ),
+          ),
+        const SizedBox(height: AppSpacing.md),
+        for (final score in scores)
+          Padding(
+            padding: const EdgeInsets.only(bottom: 9),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  criterionLabel(l10n, score.criterion),
+                  style: textTheme.bodySmall?.copyWith(color: colors.text2),
+                ),
+                Text(
+                  '${score.score}',
+                  style: textTheme.bodyMedium?.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontFeatures: kNumberFeatures,
+                    color: _toneOf(score.score, colors),
+                  ),
+                ),
+              ],
+            ),
+          ),
         const SizedBox(height: AppSpacing.md),
         Divider(color: colors.line, height: 1),
         const SizedBox(height: AppSpacing.md),
