@@ -617,4 +617,52 @@ class AppL10nKo extends AppL10n {
   String profileEntitlementFree(int remaining) {
     return '무료 체험 · $remaining회 남음';
   }
+
+  @override
+  String get introSkip => '건너뛰기';
+
+  @override
+  String get introNext => '다음';
+
+  @override
+  String get introStart => '시작하기';
+
+  @override
+  String get introBadge1 => 'AI 면접 코치';
+
+  @override
+  String get introTitle1 => '면접, 혼자\n뛰지 마세요';
+
+  @override
+  String get introBody1 => '공고만 넣으면 그 회사·직무에 맞춘 실전 면접을 페이서가 함께 뜁니다.';
+
+  @override
+  String get introBadge2 => '맞춤 질문 · 꼬리질문';
+
+  @override
+  String get introTitle2 => '공고 그대로,\n진짜 면접처럼';
+
+  @override
+  String get introBody2 => '채용공고를 붙여넣으면 맞춤 질문을 만들고, 답변에 따라 꼬리질문으로 깊게 파고들어요.';
+
+  @override
+  String get introBadge3 => '정량 피드백 · 성장 추적';
+
+  @override
+  String get introTitle3 => '뛸수록\n빨라지는 페이스';
+
+  @override
+  String get introBody3 => '항목별로 점수를 매기고, 반복할수록 성장하는 그래프를 보여드려요.';
+
+  @override
+  String get introArtQuestion => '가장 기억에 남는 프로젝트는?';
+
+  @override
+  String get introArtAnswer => '상품 상세 리뉴얼로 응답 속도를 절반으로…';
+
+  @override
+  String get introArtFollowUp => '병목은 어떻게 찾으셨나요?';
+
+  @override
+  String get introArtFollowUpBadge => '꼬리질문';
 }
