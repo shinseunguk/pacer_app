@@ -268,7 +268,6 @@
   "reportLoadingStep3": "Writing model answers",
   "reportLoadingStep4": "Almost there",
   "reportLoadingNote": "A careful read takes 1–2 minutes. Scoring continues if you leave.",
-  "profileEntitlement": "Plan",
   "profileEntitlementFree": "Free trial · {remaining} left",
   "@profileEntitlementFree": {
     "placeholders": {
@@ -292,5 +291,13 @@
   "introArtQuestion": "Which project stands out most?",
   "introArtAnswer": "I halved response time on the detail page…",
   "introArtFollowUp": "How did you find the bottleneck?",
-  "introArtFollowUpBadge": "Follow-up"
+  "introArtFollowUpBadge": "Follow-up",
+  "profilePlanFree": "Free plan",
+  "profilePlanPro": "Pacer Pro",
+  "profileEdit": "Edit",
+  "profileUpsellTitle": "Practice as much\nas you want",
+  "profileUpsellBenefit1": "Unlimited interviews",
+  "profileUpsellBenefit2": "5 · 10 · 15 questions",
+  "profileUpsellBenefit3": "Full report and model answers",
+  "profileUpsellCta": "Start Pro · ₩9,900/month"
 }
